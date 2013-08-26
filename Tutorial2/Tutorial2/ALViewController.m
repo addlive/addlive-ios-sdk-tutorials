@@ -180,6 +180,10 @@
 
 @end
 
+/**
+ * Please note that in one of the next releases, all the methods within the ALServiceListener 
+ * protocol will be marked as optional. The warning about the missing methods can be ignored.
+ */
 @implementation VideoFrameResizeCtrl
 {
     NSMutableDictionary* _mapping;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F26A550A17CB888E003BD5CF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26A550917CB888E003BD5CF /* AddLive.framework */; };
 		F2B1F50817CB5A430070F804 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F50717CB5A430070F804 /* UIKit.framework */; };
 		F2B1F50A17CB5A430070F804 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F50917CB5A430070F804 /* Foundation.framework */; };
 		F2B1F50C17CB5A430070F804 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F50B17CB5A430070F804 /* CoreGraphics.framework */; };
@@ -31,10 +32,10 @@
 		F2B1F55017CB5D6C0070F804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F53817CB5D580070F804 /* QuartzCore.framework */; };
 		F2B1F55117CB5D6C0070F804 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F53917CB5D580070F804 /* Security.framework */; };
 		F2B1F55217CB5D6C0070F804 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F53A17CB5D580070F804 /* SystemConfiguration.framework */; };
-		F2B1F55617CB6BB00070F804 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F55517CB6BB00070F804 /* AddLive.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F26A550917CB888E003BD5CF /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		F2B1F50417CB5A430070F804 /* Tutorial2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B1F50717CB5A430070F804 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F2B1F50917CB5A430070F804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -52,7 +53,6 @@
 		F2B1F52017CB5A430070F804 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F2B1F52317CB5A430070F804 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ALViewController_iPhone.xib; sourceTree = "<group>"; };
 		F2B1F52617CB5A430070F804 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ALViewController_iPad.xib; sourceTree = "<group>"; };
-		F2B1F52D17CB5B580070F804 /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		F2B1F52F17CB5D580070F804 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F2B1F53017CB5D580070F804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F2B1F53117CB5D580070F804 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -65,7 +65,6 @@
 		F2B1F53817CB5D580070F804 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F2B1F53917CB5D580070F804 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F2B1F53A17CB5D580070F804 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		F2B1F55517CB6BB00070F804 /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddLive.framework; path = ../../../adl/adl_ios_build/api/AddLive.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +87,7 @@
 				F2B1F50817CB5A430070F804 /* UIKit.framework in Frameworks */,
 				F2B1F50A17CB5A430070F804 /* Foundation.framework in Frameworks */,
 				F2B1F50C17CB5A430070F804 /* CoreGraphics.framework in Frameworks */,
-				F2B1F55617CB6BB00070F804 /* AddLive.framework in Frameworks */,
+				F26A550A17CB888E003BD5CF /* AddLive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +114,7 @@
 		F2B1F50617CB5A430070F804 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F2B1F55517CB6BB00070F804 /* AddLive.framework */,
+				F26A550917CB888E003BD5CF /* AddLive.framework */,
 				F2B1F52F17CB5D580070F804 /* AudioToolbox.framework */,
 				F2B1F53017CB5D580070F804 /* AVFoundation.framework */,
 				F2B1F53117CB5D580070F804 /* CoreMedia.framework */,
@@ -128,7 +127,6 @@
 				F2B1F53817CB5D580070F804 /* QuartzCore.framework */,
 				F2B1F53917CB5D580070F804 /* Security.framework */,
 				F2B1F53A17CB5D580070F804 /* SystemConfiguration.framework */,
-				F2B1F52D17CB5B580070F804 /* AddLive.framework */,
 				F2B1F50717CB5A430070F804 /* UIKit.framework */,
 				F2B1F50917CB5A430070F804 /* Foundation.framework */,
 				F2B1F50B17CB5A430070F804 /* CoreGraphics.framework */,
@@ -377,6 +375,7 @@
 				F2B1F52C17CB5A430070F804 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
