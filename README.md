@@ -3,6 +3,7 @@
 This repository contains several objectve-C project showcasing the basics
 of the AddLive iOS SDK functionality.
 
+For more details please refer to AddLive home page: http://www.addlive.com.
 
 ## Tutorial 1 - platform init
 
