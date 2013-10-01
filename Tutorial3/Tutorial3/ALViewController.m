@@ -8,6 +8,22 @@
 
 #import "ALViewController.h"
 
+/**
+ * Class that passes the video sink configuration changes to all ALVideoViews rendering particular sink.
+ */
+@interface VideoFrameResizeCtrl:NSObject<ALServiceListener>
+
+/**
+ * VideoFrameSizeChanged event handler
+ */
+- (void) videoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
+
+/**
+ * Defines mapping between sink and view rendering it.
+ */
+- (void) setMappingWithSinkId:(NSString*) sinkId andView:(ALVideoView*) view;
+@end
+
 @interface ALViewController ()
 
 {
@@ -15,6 +31,7 @@
     NSArray*              _cams;
     NSNumber*             _selectedCam;
     NSString*             _localVideoSinkId;
+    VideoFrameResizeCtrl* _resizeCtr;
     BOOL                  _paused;
     BOOL                  _settingCam;
 }
@@ -69,13 +86,23 @@
         [self handleError:err where:@"platformInit"];
         return;
     }
-    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
-                                            initWithSelector:@selector(onCams:devs:)
-                                            withObject:self]];
-
+    self.localPreviewVV.service = _alService;
+    self.localPreviewVV.mirror = YES;
+    _resizeCtr = [[VideoFrameResizeCtrl alloc] init];
+    [_alService addServiceListener:_resizeCtr
+                         responder:[[ALResponder alloc]
+                                    initWithSelector:@selector(onListenerAdded:)
+                                    withObject:self]];
 }
 
 
+- (void) onListenerAdded:(ALError*) err
+{
+    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
+                                            initWithSelector:@selector(onCams:devs:)
+                                            withObject:self]];
+}
+     
 - (void) onCams:(ALError*)err devs:(NSArray*)devs
 {
     NSLog(@"Got camera devices");
@@ -99,21 +126,23 @@
                   withSinkId:(NSString*) sinkId
 {
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
-    [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
-    [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
     _localVideoSinkId = [sinkId copy];
     _settingCam = NO;
-}
-
-- (void) onRenderStarted:(ALError*) err {
-    if(err) {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-    } else {
-        NSLog(@"Rendering started");
+    [_resizeCtr setMappingWithSinkId:sinkId
+                             andView:_localPreviewVV];
+    ALError *renderErr  = [self.localPreviewVV attachToSink:sinkId];
+    if(renderErr.err_code != kNoError)
+    {
+        [self handleError:renderErr where:@"attachToSink"];
+    }
+    renderErr = [self.localPreviewVV resume];
+    if(renderErr.err_code != kNoError)
+    {
+        [self handleError:renderErr where:@"resume render"];
     }
 }
-      
+
+     
 - (void) handleError:(ALError*)err where:(NSString*)where
 {
     NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
@@ -128,7 +157,7 @@
 - (void) pause
 {
     NSLog(@"Application will pause");
-    [self.localPreviewVV stop:nil];
+    [self.localPreviewVV pause];
     [_alService stopLocalVideo:nil];
     _paused = YES;
 }
@@ -137,10 +166,10 @@
     if(!_paused)
         return;
     NSLog(@"Application will resume");
+    [self.localPreviewVV resume];
     [_alService startLocalVideo:[[ALResponder alloc]
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                  withObject:self]];
-    _paused = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,4 +180,36 @@
 
 @end
 
+/**
+ * Please note that in one of the next releases, all the methods within the ALServiceListener 
+ * protocol will be marked as optional. The warning about the missing methods can be ignored.
+ */
+@implementation VideoFrameResizeCtrl
+{
+    NSMutableDictionary* _mapping;
+}
+
+- (id) init
+{
+    _mapping = [[NSMutableDictionary alloc] init];
+    return self;
+}
+
+- (void) videoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
+{
+    NSLog(@"Got video frame size changed: %@ -> %dx%d", event.sinkId, event.width, event.height);
+    ALVideoView* view = [_mapping objectForKey:event.sinkId];
+    if(view)
+    {
+        NSLog(@"Setting new resolution");
+        [view resolutionChanged:event.width height:event.height];
+    }
+}
+
+- (void) setMappingWithSinkId:(NSString*) sinkId andView:(ALVideoView*) view
+{
+    [_mapping setObject:view forKey:sinkId];
+}
+
+@end
 

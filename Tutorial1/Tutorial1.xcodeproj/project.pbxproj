@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2956E9017FABBF4005EF5CE /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2956E8F17FABBF4005EF5CE /* AddLive.framework */; };
 		F2B1F49217CB48490070F804 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F48F17CB48490070F804 /* libresolv.dylib */; };
 		F2B1F49317CB48490070F804 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F49017CB48490070F804 /* libstdc++.dylib */; };
 		F2B1F49417CB48490070F804 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F49117CB48490070F804 /* libz.dylib */; };
@@ -19,7 +20,6 @@
 		F2B1F4F417CB4B260070F804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F48317CB47F50070F804 /* QuartzCore.framework */; };
 		F2B1F4F517CB4B260070F804 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F48417CB47F50070F804 /* Security.framework */; };
 		F2B1F4F617CB4B260070F804 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F48517CB47F50070F804 /* SystemConfiguration.framework */; };
-		F2B1F4FA17CB51A80070F804 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F4F917CB51A80070F804 /* AddLive.framework */; };
 		F2B3221317CB4263001B50BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B3221217CB4263001B50BC /* UIKit.framework */; };
 		F2B3221517CB4263001B50BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B3221417CB4263001B50BC /* Foundation.framework */; };
 		F2B3221717CB4263001B50BC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B3221617CB4263001B50BC /* CoreGraphics.framework */; };
@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F2956E8F17FABBF4005EF5CE /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		F2B1F47D17CB47F50070F804 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F2B1F47E17CB47F50070F804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F2B1F47F17CB47F50070F804 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -47,8 +48,7 @@
 		F2B1F48F17CB48490070F804 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		F2B1F49017CB48490070F804 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		F2B1F49117CB48490070F804 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		F2B1F4F917CB51A80070F804 /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
-		F2B3220F17CB4263001B50BC /* Tutorial1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2B3220F17CB4263001B50BC /* Tutorial1_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial1_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B3221217CB4263001B50BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F2B3221417CB4263001B50BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F2B3221617CB4263001B50BC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,6 +78,7 @@
 				F2B1F4EE17CB4B260070F804 /* AudioToolbox.framework in Frameworks */,
 				F2B1F4EF17CB4B260070F804 /* AVFoundation.framework in Frameworks */,
 				F2B1F4F017CB4B260070F804 /* CoreMedia.framework in Frameworks */,
+				F2956E9017FABBF4005EF5CE /* AddLive.framework in Frameworks */,
 				F2B1F4F117CB4B260070F804 /* CoreVideo.framework in Frameworks */,
 				F2B1F4F217CB4B260070F804 /* MessageUI.framework in Frameworks */,
 				F2B1F4F317CB4B260070F804 /* OpenGLES.framework in Frameworks */,
@@ -87,7 +88,6 @@
 				F2B3221317CB4263001B50BC /* UIKit.framework in Frameworks */,
 				F2B3221517CB4263001B50BC /* Foundation.framework in Frameworks */,
 				F2B3221717CB4263001B50BC /* CoreGraphics.framework in Frameworks */,
-				F2B1F4FA17CB51A80070F804 /* AddLive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +106,7 @@
 		F2B3221017CB4263001B50BC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F2B3220F17CB4263001B50BC /* Tutorial1.app */,
+				F2B3220F17CB4263001B50BC /* Tutorial1_2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,7 +114,7 @@
 		F2B3221117CB4263001B50BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F2B1F4F917CB51A80070F804 /* AddLive.framework */,
+				F2956E8F17FABBF4005EF5CE /* AddLive.framework */,
 				F2B1F48F17CB48490070F804 /* libresolv.dylib */,
 				F2B1F49017CB48490070F804 /* libstdc++.dylib */,
 				F2B1F49117CB48490070F804 /* libz.dylib */,
@@ -165,9 +165,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F2B3220E17CB4263001B50BC /* Tutorial1 */ = {
+		F2B3220E17CB4263001B50BC /* Tutorial1_2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2B3223517CB4263001B50BC /* Build configuration list for PBXNativeTarget "Tutorial1" */;
+			buildConfigurationList = F2B3223517CB4263001B50BC /* Build configuration list for PBXNativeTarget "Tutorial1_2" */;
 			buildPhases = (
 				F2B3220B17CB4263001B50BC /* Sources */,
 				F2B3220C17CB4263001B50BC /* Frameworks */,
@@ -177,9 +177,9 @@
 			);
 			dependencies = (
 			);
-			name = Tutorial1;
+			name = Tutorial1_2;
 			productName = Tutorial1;
-			productReference = F2B3220F17CB4263001B50BC /* Tutorial1.app */;
+			productReference = F2B3220F17CB4263001B50BC /* Tutorial1_2.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -204,7 +204,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F2B3220E17CB4263001B50BC /* Tutorial1 */,
+				F2B3220E17CB4263001B50BC /* Tutorial1_2 */,
 			);
 		};
 /* End PBXProject section */
@@ -329,8 +329,10 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/AddLive_iOS_SDK\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/AddLive_iOS_SDK\\\"",
+					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1/Tutorial1",
+					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
@@ -345,8 +347,10 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/AddLive_iOS_SDK\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/AddLive_iOS_SDK\\\"",
+					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1/Tutorial1",
+					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
@@ -368,7 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2B3223517CB4263001B50BC /* Build configuration list for PBXNativeTarget "Tutorial1" */ = {
+		F2B3223517CB4263001B50BC /* Build configuration list for PBXNativeTarget "Tutorial1_2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F2B3223617CB4263001B50BC /* Debug */,

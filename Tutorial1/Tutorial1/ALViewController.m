@@ -11,6 +11,19 @@
 #define RED [UIColor colorWithRed:225 green:0 blue:0 alpha:1.0]
 #define GREEN [UIColor colorWithRed:0 green:255 blue:0 alpha:1.0]
 
+
+/**
+ * Interface defining application constants. In our case it is just the 
+ * Application id and API key.
+ */
+@interface Consts : NSObject
+
++ (NSNumber*) APP_ID;
+
++ (NSString*) API_KEY;
+
+@end
+
 @interface ALViewController ()
 
 @end
@@ -40,6 +53,9 @@
     // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
 
+    initOptions.applicationId = Consts.APP_ID;
+    initOptions.apiKey = Consts.API_KEY;
+    
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [self.alService initPlatform:initOptions
                        responder:responder];
@@ -93,3 +109,18 @@
 }
 
 @end
+
+@implementation Consts
+
++ (NSNumber*) APP_ID {
+    // TODO update this to use some real value
+    return @1;
+}
+
++ (NSString*) API_KEY {
+    // TODO update this to use some real value
+    return @"SomeApiKey";
+}
+
+@end
+
