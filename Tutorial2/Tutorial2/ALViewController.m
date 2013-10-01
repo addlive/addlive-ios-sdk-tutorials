@@ -8,6 +8,19 @@
 
 #import "ALViewController.h"
 
+/**
+ * Interface defining application constants. In our case it is just the
+ * Application id and API key.
+ */
+@interface Consts : NSObject
+
++ (NSNumber*) APP_ID;
+
++ (NSString*) API_KEY;
+
+@end
+
+
 @interface ALViewController ()
 
 {
@@ -57,6 +70,9 @@
     ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
                                                        withObject:self];
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
+    initOptions.applicationId = Consts.APP_ID;
+    initOptions.apiKey = Consts.API_KEY;
+
     [_alService initPlatform:initOptions
                        responder:responder];
 }
@@ -147,6 +163,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+@end
+
+@implementation Consts
+
++ (NSNumber*) APP_ID {
+    // TODO update this to use some real value
+    return @1;
+}
+
++ (NSString*) API_KEY {
+    // TODO update this to use some real value
+    return @"SomeApiKey";
 }
 
 @end

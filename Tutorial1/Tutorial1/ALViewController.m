@@ -53,7 +53,13 @@
     // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
 
+    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
+    
+    // Set the apiKey to let the SDK automatically authenticate all connection requests.
+    // Please note that such an approach reduces slightly the security. It is always a good idea
+    // not to pass the API key to the client side and implement a server side component that
+    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
