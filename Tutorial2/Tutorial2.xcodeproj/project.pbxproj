@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F2956E9417FABE84005EF5CE /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2956E9317FABE84005EF5CE /* AddLive.framework */; };
+		F2453D16182C2F67008207AD /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2453D15182C2F66008207AD /* AddLive.framework */; };
 		F2B1F50817CB5A430070F804 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F50717CB5A430070F804 /* UIKit.framework */; };
 		F2B1F50A17CB5A430070F804 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F50917CB5A430070F804 /* Foundation.framework */; };
 		F2B1F50C17CB5A430070F804 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F50B17CB5A430070F804 /* CoreGraphics.framework */; };
@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F2956E9317FABE84005EF5CE /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
+		F2453D15182C2F66008207AD /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		F2B1F50417CB5A430070F804 /* Tutorial2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2B1F50717CB5A430070F804 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F2B1F50917CB5A430070F804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,7 +78,7 @@
 				F2B1F54A17CB5D6C0070F804 /* CoreVideo.framework in Frameworks */,
 				F2B1F54B17CB5D6C0070F804 /* libresolv.dylib in Frameworks */,
 				F2B1F54C17CB5D6C0070F804 /* libstdc++.dylib in Frameworks */,
-				F2956E9417FABE84005EF5CE /* AddLive.framework in Frameworks */,
+				F2453D16182C2F67008207AD /* AddLive.framework in Frameworks */,
 				F2B1F54D17CB5D6C0070F804 /* libz.dylib in Frameworks */,
 				F2B1F54E17CB5D6C0070F804 /* MessageUI.framework in Frameworks */,
 				F2B1F54F17CB5D6C0070F804 /* OpenGLES.framework in Frameworks */,
@@ -114,7 +114,7 @@
 		F2B1F50617CB5A430070F804 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F2956E9317FABE84005EF5CE /* AddLive.framework */,
+				F2453D15182C2F66008207AD /* AddLive.framework */,
 				F2B1F52F17CB5D580070F804 /* AudioToolbox.framework */,
 				F2B1F53017CB5D580070F804 /* AVFoundation.framework */,
 				F2B1F53117CB5D580070F804 /* CoreMedia.framework */,
@@ -330,13 +330,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/../../../adl/adl_ios_build/api\\\"",
+					"\\\\\\\"$(SRCROOT)/../../../adl/adl_ios_build/api\\\\\\\"",
 					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial2",
+					/Users/tkozak/Work/adl/adl_ios_build_v20/api,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial2/Tutorial2-Prefix.pch";
 				INFOPLIST_FILE = "Tutorial2/Tutorial2-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -347,13 +349,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/../../../adl/adl_ios_build/api\\\"",
+					"\\\\\\\"$(SRCROOT)/../../../adl/adl_ios_build/api\\\\\\\"",
 					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial2",
+					/Users/tkozak/Work/adl/adl_ios_build_v20/api,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial2/Tutorial2-Prefix.pch";
 				INFOPLIST_FILE = "Tutorial2/Tutorial2-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

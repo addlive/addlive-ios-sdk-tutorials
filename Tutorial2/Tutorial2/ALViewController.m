@@ -84,6 +84,7 @@
     {
         [self handleError:err where:@"platformInit"];
         return;
+        
     }
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
@@ -91,10 +92,14 @@
 
 }
 
-
 - (void) onCams:(ALError*)err devs:(NSArray*)devs
 {
+    if (err) {
+        NSLog(@"Got an error with getVideoCaptureDeviceNames: %@", err );
+        return;
+    }
     NSLog(@"Got camera devices");
+    
     _cams = [devs copy];
     _selectedCam  = [NSNumber numberWithInt:0];
     ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];

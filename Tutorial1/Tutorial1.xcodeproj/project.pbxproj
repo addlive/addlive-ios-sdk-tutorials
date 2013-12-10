@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F2956E9017FABBF4005EF5CE /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2956E8F17FABBF4005EF5CE /* AddLive.framework */; };
+		F25E1DB6182936F70051B16B /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F25E1DB5182936F70051B16B /* AddLive.framework */; };
 		F2B1F49217CB48490070F804 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F48F17CB48490070F804 /* libresolv.dylib */; };
 		F2B1F49317CB48490070F804 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F49017CB48490070F804 /* libstdc++.dylib */; };
 		F2B1F49417CB48490070F804 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B1F49117CB48490070F804 /* libz.dylib */; };
@@ -35,7 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F2956E8F17FABBF4005EF5CE /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
+		F25E1DB5182936F70051B16B /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		F2B1F47D17CB47F50070F804 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F2B1F47E17CB47F50070F804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		F2B1F47F17CB47F50070F804 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -78,7 +78,7 @@
 				F2B1F4EE17CB4B260070F804 /* AudioToolbox.framework in Frameworks */,
 				F2B1F4EF17CB4B260070F804 /* AVFoundation.framework in Frameworks */,
 				F2B1F4F017CB4B260070F804 /* CoreMedia.framework in Frameworks */,
-				F2956E9017FABBF4005EF5CE /* AddLive.framework in Frameworks */,
+				F25E1DB6182936F70051B16B /* AddLive.framework in Frameworks */,
 				F2B1F4F117CB4B260070F804 /* CoreVideo.framework in Frameworks */,
 				F2B1F4F217CB4B260070F804 /* MessageUI.framework in Frameworks */,
 				F2B1F4F317CB4B260070F804 /* OpenGLES.framework in Frameworks */,
@@ -114,7 +114,7 @@
 		F2B3221117CB4263001B50BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F2956E8F17FABBF4005EF5CE /* AddLive.framework */,
+				F25E1DB5182936F70051B16B /* AddLive.framework */,
 				F2B1F48F17CB48490070F804 /* libresolv.dylib */,
 				F2B1F49017CB48490070F804 /* libstdc++.dylib */,
 				F2B1F49117CB48490070F804 /* libz.dylib */,
@@ -330,9 +330,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/AddLive_iOS_SDK\\\"",
+					"\\\\\\\"$(SRCROOT)/AddLive_iOS_SDK\\\\\\\"",
 					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1/Tutorial1",
 					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1",
+					/Users/tkozak/Work/adl/adl_ios_build/api,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
@@ -348,9 +349,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/AddLive_iOS_SDK\\\"",
+					"\\\\\\\"$(SRCROOT)/AddLive_iOS_SDK\\\\\\\"",
 					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1/Tutorial1",
 					"/Users/tkozak/Work/OSource/addlive-ios-sdk-tutorials/Tutorial1",
+					/Users/tkozak/Work/adl/adl_ios_build/api,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
