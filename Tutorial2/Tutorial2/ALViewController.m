@@ -20,16 +20,23 @@
 
 @end
 
+@interface LoggingALServiceListener:NSObject<ALServiceListener>
+
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
+
+@end
 
 @interface ALViewController ()
 
 {
-    ALService*            _alService;
-    NSArray*              _cams;
-    NSNumber*             _selectedCam;
-    NSString*             _localVideoSinkId;
-    BOOL                  _paused;
-    BOOL                  _settingCam;
+    ALService*                _alService;
+    NSArray*                  _cams;
+    NSNumber*                 _selectedCam;
+    NSString*                 _localVideoSinkId;
+    BOOL                      _paused;
+    BOOL                      _settingCam;
+    BOOL                      _localPreviewStarted;
+    LoggingALServiceListener* _listener;
 }
 @end
 
@@ -37,9 +44,11 @@
 
 - (void)viewDidLoad
 {
+    
     _paused = NO;
     _settingCam = NO;
     [super viewDidLoad];
+    _listener = [[LoggingALServiceListener alloc] init];
     [self initAddLive];
 }
 
@@ -58,6 +67,23 @@
                                                                  withObject:self]];
 }
 
+- (IBAction)onToggleVideo:(id) sender {
+    if(_localPreviewStarted) {
+        NSLog(@"Stopping local video");
+        [_localPreviewVV stop:nil];
+        [_alService stopLocalVideo:nil];
+        _localPreviewStarted = NO;
+    } else {
+        NSLog(@"Starting local video");
+        ResultBlock onVideoStarted = ^(ALError *err, id sinkId) {
+            [_localPreviewVV setSinkId:sinkId];
+            [_localPreviewVV start:nil];
+            _localPreviewStarted = YES;
+        };
+        [_alService startLocalVideo:[ALResponder responderWithBlock:onVideoStarted]];
+    }
+}
+
 - (void) onCameraToggled
 {
     _settingCam = NO;
@@ -72,7 +98,6 @@
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
     initOptions.applicationId = Consts.APP_ID;
     initOptions.apiKey = Consts.API_KEY;
-
     [_alService initPlatform:initOptions
                        responder:responder];
 }
@@ -84,12 +109,11 @@
     {
         [self handleError:err where:@"platformInit"];
         return;
-        
     }
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
-
+    [_alService addServiceListener:_listener responder:nil];
 }
 
 - (void) onCams:(ALError*)err devs:(NSArray*)devs
@@ -132,6 +156,7 @@
               err.err_message, err.err_code);
     } else {
         NSLog(@"Rendering started");
+        _localPreviewStarted = YES;
     }
 }
       
@@ -182,6 +207,14 @@
 + (NSString*) API_KEY {
     // TODO update this to use some real value
     return @"SomeApiKey";
+}
+
+@end
+
+
+@implementation LoggingALServiceListener
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event {
+    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
 }
 
 @end

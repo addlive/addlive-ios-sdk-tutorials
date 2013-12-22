@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AddLive/AddLiveAPI.h>
 @interface ALViewController : UIViewController
-@property (weak, nonatomic) IBOutlet ALVideoView2 *localPreviewVV;
+@property (weak, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (weak, nonatomic) IBOutlet UILabel *errorLbl;
 @property (weak, nonatomic) IBOutlet UILabel *errorContentLbl;
 
@@ -18,5 +18,6 @@
 - (void) pause;
 - (void) resume;
 - (IBAction)onToggleCam:(id)sender;
+- (IBAction)onToggleVideo:(id)sender;
 
 @end
