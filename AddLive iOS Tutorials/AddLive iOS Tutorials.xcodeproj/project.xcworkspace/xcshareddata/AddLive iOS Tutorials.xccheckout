@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B3520FB0-FB2F-4AEA-B33A-91448E79F7EE</string>
+	<string>8665242B-E47A-4866-ACA9-DE25C025EAAD</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Tutorial1</string>
+	<string>AddLive iOS Tutorials</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>303CF1CD-A519-42B9-9A11-C8CF44064470</key>
+		<key>E22FC764-A096-492B-B7EA-9579A2B9C12C</key>
 		<string>ssh://github.com/addlive/addlive-ios-sdk-tutorials.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Tutorial1/Tutorial1.xcodeproj/project.xcworkspace</string>
+	<string>AddLive iOS Tutorials/AddLive iOS Tutorials.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>303CF1CD-A519-42B9-9A11-C8CF44064470</key>
+		<key>E22FC764-A096-492B-B7EA-9579A2B9C12C</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>303CF1CD-A519-42B9-9A11-C8CF44064470</string>
+	<string>E22FC764-A096-492B-B7EA-9579A2B9C12C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>303CF1CD-A519-42B9-9A11-C8CF44064470</string>
+			<string>E22FC764-A096-492B-B7EA-9579A2B9C12C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>addlive-ios-sdk-tutorials</string>
 		</dict>
