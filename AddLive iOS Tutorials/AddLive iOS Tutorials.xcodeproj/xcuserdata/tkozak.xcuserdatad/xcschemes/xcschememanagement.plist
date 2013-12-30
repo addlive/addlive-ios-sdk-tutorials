@@ -24,9 +24,24 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Tutorial4.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>F23FFAB218721A4C00F30444</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F23FFAD118721A4D00F30444</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>F27EDA2B1871F70300273A80</key>
 		<dict>
 			<key>primary</key>
