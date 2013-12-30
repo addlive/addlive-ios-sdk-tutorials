@@ -18,11 +18,18 @@
 
 + (NSString*) API_KEY;
 
++ (NSString*) SCOPE_ID;
+
 @end
 
-@interface LoggingALServiceListener:NSObject<ALServiceListener>
+@interface MyServiceListener:NSObject<ALServiceListener>
+
+- (id) initWithRemoteVideoView:(ALVideoView*) view;
 
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
+
+- (void) onUserEvent:(ALUserStateChangedEvent *)event;
+
 
 @end
 
@@ -36,7 +43,8 @@
     BOOL                      _paused;
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
-    LoggingALServiceListener* _listener;
+    MyServiceListener*        _listener;
+    BOOL                      _connecting;
 }
 @end
 
@@ -48,46 +56,51 @@
     _paused = NO;
     _settingCam = NO;
     [super viewDidLoad];
-    _listener = [[LoggingALServiceListener alloc] init];
+    _listener = [[MyServiceListener alloc] initWithRemoteVideoView:_remoteVV];
     [self initAddLive];
+    _connecting = NO;
 }
 
-
-- (IBAction)onToggleCam:(id)sender
-{
-    NSLog(@"Got cam toggle");
-    if(_settingCam)
+- (IBAction)connect:(id)sender {
+    if(_connecting) {
         return;
-    unsigned int nextIdx = (_selectedCam.unsignedIntValue + 1) % _cams.count;
-    ALDevice* dev =[_cams objectAtIndex:nextIdx];
-    _selectedCam = [NSNumber numberWithUnsignedInt:nextIdx];
-    _settingCam = YES;
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCameraToggled)
-                                                                 withObject:self]];
-}
-
-- (IBAction)onToggleVideo:(id) sender {
-    if(_localPreviewStarted) {
-        NSLog(@"Stopping local video");
-        [_localPreviewVV stop:nil];
-        [_alService stopLocalVideo:nil];
-        _localPreviewStarted = NO;
-    } else {
-        NSLog(@"Starting local video");
-        ResultBlock onVideoStarted = ^(ALError *err, id sinkId) {
-            [_localPreviewVV setSinkId:sinkId];
-            [_localPreviewVV start:nil];
-            _localPreviewStarted = YES;
-        };
-        [_alService startLocalVideo:[ALResponder responderWithBlock:onVideoStarted]];
     }
+    _connecting = YES;
+    _stateLbl.text = @"Connecting...";
+    ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
+    descr.scopeId = Consts.SCOPE_ID;
+    descr.url = [NSString stringWithFormat:@"dev01.addlive.com:8004/%@", Consts.SCOPE_ID];
+    descr.autopublishAudio = YES;
+    descr.autopublishVideo = YES;
+    descr.authDetails.userId = rand() % 1000;
+    descr.authDetails.expires = time(0) + (60 * 60);
+    descr.authDetails.salt = @"Super random string";
+    
+    ResultBlock onConn = ^(ALError* err, id nothing) {
+        _connecting = NO;
+        if([self handleErrorMaybe:err where:@"Connect"]) {
+            return;
+        }
+        NSLog(@"Successfully connected");
+        _stateLbl.text = @"Connected";
+        _connectBtn.hidden = YES;
+        _disconnectBtn.hidden = NO;
+    };
+    [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
 
-- (void) onCameraToggled
-{
-    _settingCam = NO;
+- (IBAction)disconnect:(id)sender {
+    ResultBlock onDisconn = ^(ALError* err, id nothing) {
+        NSLog(@"Successfully disconnected");
+        _stateLbl.text = @"Disconnected";
+        _connectBtn.hidden = NO;
+        _disconnectBtn.hidden = YES;
+        [_remoteVV stop:nil];
+    };
+    [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
 }
+
+
 
 
 - (void) initAddLive
@@ -100,6 +113,7 @@
     initOptions.apiKey = Consts.API_KEY;
     [_alService initPlatform:initOptions
                        responder:responder];
+    _stateLbl.text = @"Platform init";
 }
 
 - (void) onPlatformReady:(ALError*) err
@@ -114,6 +128,7 @@
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
     [_alService addServiceListener:_listener responder:nil];
+    [_remoteVV setupWithService:_alService withSink:@""];
 }
 
 - (void) onCams:(ALError*)err devs:(NSArray*)devs
@@ -125,7 +140,7 @@
     NSLog(@"Got camera devices");
     
     _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:0];
+    _selectedCam  = [NSNumber numberWithInt:1];
     ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
     [_alService setVideoCaptureDevice:dev.id
                             responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
@@ -157,17 +172,23 @@
     } else {
         NSLog(@"Rendering started");
         _localPreviewStarted = YES;
+        _stateLbl.text = @"Platform Ready";
+        _connectBtn.hidden = NO;
     }
 }
       
-- (void) handleErrorMaybe:(ALError*)err where:(NSString*)where
+- (BOOL) handleErrorMaybe:(ALError*)err where:(NSString*)where
 {
+    if(!err) {
+        return NO;
+    }
     NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
                      where, err.err_message, err.err_code];
     NSLog(@"%@", msg);
     self.errorLbl.hidden = NO;
     self.errorContentLbl.text = msg;
     self.errorContentLbl.hidden = NO;
+    return YES;
 }
 
 
@@ -206,16 +227,45 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    return @"SomeApiKey";
+    return @"";
+}
+
++ (NSString*) SCOPE_ID {
+    return @"iOS";
 }
 
 @end
 
 
-@implementation LoggingALServiceListener
+@implementation MyServiceListener {
+    ALVideoView* _videoView;
+}
+
+- (id) initWithRemoteVideoView:(ALVideoView*) view {
+    self = [super init];
+    if(self) {
+        _videoView = view;
+    }
+    return self;
+}
+
+- (void) onUserEvent:(ALUserStateChangedEvent *)event {
+    NSLog(@"Got user event: %@", event);
+    if(event.isConnected) {
+        ResultBlock onStopped = ^(ALError* err, id nothing){
+            [_videoView setSinkId:event.videoSinkId];
+            [_videoView start:nil];
+        };
+        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
+    } else {
+        [_videoView stop:nil];
+    }
+}
+
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event {
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
 }
+
 
 @end
 

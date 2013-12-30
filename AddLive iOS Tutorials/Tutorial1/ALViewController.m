@@ -75,7 +75,7 @@
     NSLog(@"Got platform ready");
     if(err)
     {
-        [self handleError:err where:@"platformInit"];
+        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
     NSLog(@"Calling getVersion");
@@ -90,7 +90,7 @@
     NSLog(@"Got version");
     if(err)
     {
-        [self handleError:err where:@"getVersion"];
+        [self handleErrorMaybe:err where:@"getVersion"];
         return;
     }
     self.versionLbl.text = version;
@@ -98,7 +98,7 @@
 
 }
 
-- (void) handleError:(ALError*)err where:(NSString*)where
+- (void) handleErrorMaybe:(ALError*)err where:(NSString*)where
 {
     NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
                      where, err.err_message, err.err_code];
@@ -114,6 +114,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)disconnect:(id)sender {
+}
+
+- (IBAction)connect:(id)sender {
+}
 @end
 
 @implementation Consts
