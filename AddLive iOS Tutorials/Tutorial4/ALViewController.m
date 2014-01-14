@@ -70,7 +70,6 @@
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
-    descr.url = [NSString stringWithFormat:@"dev01.addlive.com:8004/%@", Consts.SCOPE_ID];
     descr.autopublishAudio = YES;
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;

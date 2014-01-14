@@ -14,8 +14,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *versionLbl;
 @property (weak, nonatomic) IBOutlet UILabel *errorLbl;
 @property (weak, nonatomic) IBOutlet UILabel *errorContentLbl;
-- (IBAction)disconnect:(id)sender;
-- (IBAction)connect:(id)sender;
 
-@property ALService* alService;
 @end

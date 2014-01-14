@@ -28,7 +28,9 @@
 
 @end
 
-@implementation ALViewController
+@implementation ALViewController {
+    ALService* _alService;
+}
 
 - (void)viewDidLoad
 {
@@ -44,7 +46,7 @@
 - (void) initAddLive
 {
     // 1. Allocate the ALService
-    self.alService = [ALService alloc];
+    _alService = [ALService alloc];
     
     // 2. Prepare the responder
     ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
@@ -63,7 +65,7 @@
     initOptions.apiKey = Consts.API_KEY;
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
-    [self.alService initPlatform:initOptions
+    [_alService initPlatform:initOptions
                        responder:responder];
 }
 
@@ -79,7 +81,7 @@
         return;
     }
     NSLog(@"Calling getVersion");
-    [self.alService getVersion:[[ALResponder alloc] initWithSelector:@selector(onVersion:version:) withObject:self]];
+    [_alService getVersion:[[ALResponder alloc] initWithSelector:@selector(onVersion:version:) withObject:self]];
 }
 
 /**
@@ -94,6 +96,15 @@
         return;
     }
     self.versionLbl.text = version;
+    self.versionLbl.textColor = GREEN;
+    [self performSelector:@selector(disposePlatform) withObject:nil afterDelay:2.0];
+
+}
+
+- (void) disposePlatform {
+    NSLog(@"Disposing platform");
+    [_alService releasePlatform];
+    self.versionLbl.text = @"Platform released";
     self.versionLbl.textColor = GREEN;
 
 }
@@ -114,11 +125,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)disconnect:(id)sender {
-}
-
-- (IBAction)connect:(id)sender {
-}
 @end
 
 @implementation Consts

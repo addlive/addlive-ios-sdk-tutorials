@@ -30,6 +30,9 @@
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
+- (void) onConnectionLost:(ALConnectionLostEvent *)event;
+
+- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
@@ -227,7 +230,7 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    return @"";
+    return @"AddLiveSuperSecret";
 }
 
 + (NSString*) SCOPE_ID {
@@ -266,6 +269,13 @@
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
 }
 
+- (void) onConnectionLost:(ALConnectionLostEvent *)event {
+    NSLog(@"Got connection lost");
+}
+
+- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event {
+    NSLog(@"On Session reconnected");
+}
 
 @end
 

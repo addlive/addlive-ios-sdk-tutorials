@@ -3,7 +3,7 @@
 //  Tutorial4
 //
 //  Created by Tadeusz Kozak on 30/12/13.
-//  Copyright (c) 2013 AddLive. All rights reserved.
+//  Copyright (c) 2013 AddLive. All rights resexrved.
 //
 
 #import <UIKit/UIKit.h>

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F27EDA6A1871F77000273A80"
-               BuildableName = "Tutorial1.app"
-               BlueprintName = "Tutorial1"
+               BlueprintIdentifier = "F23FFAB218721A4C00F30444"
+               BuildableName = "Tutorial4.app"
+               BlueprintName = "Tutorial4"
                ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,43 +28,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F27EDAF61872074800273A80"
-               BuildableName = "Tutorial2Tests.xctest"
-               BlueprintName = "Tutorial2Tests"
-               ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F27EDB3A18720A3200273A80"
-               BuildableName = "Tutorial3Tests.xctest"
-               BlueprintName = "Tutorial3Tests"
-               ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F23FFAD118721A4D00F30444"
-               BuildableName = "Tutorial4Tests.xctest"
-               BlueprintName = "Tutorial4Tests"
-               ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F27EDA6A1871F77000273A80"
-            BuildableName = "Tutorial1.app"
-            BlueprintName = "Tutorial1"
+            BlueprintIdentifier = "F23FFAB218721A4C00F30444"
+            BuildableName = "Tutorial4.app"
+            BlueprintName = "Tutorial4"
             ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -81,23 +51,13 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F27EDA6A1871F77000273A80"
-            BuildableName = "Tutorial1.app"
-            BlueprintName = "Tutorial1"
+            BlueprintIdentifier = "F23FFAB218721A4C00F30444"
+            BuildableName = "Tutorial4.app"
+            BlueprintName = "Tutorial4"
             ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "MallocScribble"
-            value = ""
-            isEnabled = "YES">
-         </AdditionalOption>
-         <AdditionalOption
-            key = "MallocStackLogging"
-            value = ""
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -109,9 +69,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F27EDA6A1871F77000273A80"
-            BuildableName = "Tutorial1.app"
-            BlueprintName = "Tutorial1"
+            BlueprintIdentifier = "F23FFAB218721A4C00F30444"
+            BuildableName = "Tutorial4.app"
+            BlueprintName = "Tutorial4"
             ReferencedContainer = "container:AddLive iOS Tutorials.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
