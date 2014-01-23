@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2250B97189169340089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		F2250B98189169400089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		F2250B991891694C0089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		F23FFAB418721A4D00F30444 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		F23FFAB518721A4D00F30444 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		F23FFAB618721A4D00F30444 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -19,7 +22,6 @@
 		F23FFACD18721A4D00F30444 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23FFACC18721A4D00F30444 /* Images.xcassets */; };
 		F23FFAE618721A7500F30444 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F23FFAE718721A7500F30444 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
-		F23FFAE818721A7500F30444 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
 		F23FFAE918721A7500F30444 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
 		F23FFAEA18721A7500F30444 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
 		F23FFAEB18721A7500F30444 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
@@ -50,7 +52,6 @@
 		F27EDAAF1871F8BE00273A80 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
 		F27EDAB01871F8BE00273A80 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
 		F27EDAB11871F8BE00273A80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
-		F27EDACF1872067800273A80 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
 		F27EDAD11872068200273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
 		F27EDAD31872068D00273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDAD91872074700273A80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
@@ -65,7 +66,6 @@
 		F27EDAF21872074800273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAF11872074800273A80 /* Images.xcassets */; };
 		F27EDB0B1872076D00273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDB0C1872078B00273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
-		F27EDB0D1872078B00273A80 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
 		F27EDB0E1872078B00273A80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
 		F27EDB0F1872078B00273A80 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
 		F27EDB101872078B00273A80 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
@@ -88,7 +88,6 @@
 		F27EDB3618720A3200273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB3518720A3200273A80 /* Images.xcassets */; };
 		F27EDB4F18720A7600273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDB5018720A7600273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
-		F27EDB5118720A7600273A80 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
 		F27EDB5218720A7600273A80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
 		F27EDB5318720A7600273A80 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
 		F27EDB5418720A7600273A80 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
@@ -99,6 +98,7 @@
 		F27EDB5918720A7600273A80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
 		F27EDB5A18720A7600273A80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
 		F27EDB5B18720A7600273A80 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
+		F28731E0188D3D8E006803C6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,6 +167,8 @@
 		F27EDB3218720A3100273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
 		F27EDB3318720A3200273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDB3518720A3200273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F28731DD188D3D53006803C6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		F28731DF188D3D8E006803C6 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,9 +176,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2250B991891694C0089714A /* libc++.dylib in Frameworks */,
 				F23FFAE618721A7500F30444 /* libresolv.dylib in Frameworks */,
 				F23FFAE718721A7500F30444 /* libz.dylib in Frameworks */,
-				F23FFAE818721A7500F30444 /* libstdc++.6.dylib in Frameworks */,
 				F23FFAE918721A7500F30444 /* AudioToolbox.framework in Frameworks */,
 				F23FFAEA18721A7500F30444 /* AVFoundation.framework in Frameworks */,
 				F23FFAEB18721A7500F30444 /* CoreMedia.framework in Frameworks */,
@@ -197,9 +199,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F28731E0188D3D8E006803C6 /* libc++.dylib in Frameworks */,
 				F27EDAD31872068D00273A80 /* libresolv.dylib in Frameworks */,
 				F27EDAD11872068200273A80 /* libz.dylib in Frameworks */,
-				F27EDACF1872067800273A80 /* libstdc++.6.dylib in Frameworks */,
 				F27EDAAA1871F8BE00273A80 /* AudioToolbox.framework in Frameworks */,
 				F27EDAAB1871F8BE00273A80 /* AVFoundation.framework in Frameworks */,
 				F27EDAAC1871F8BE00273A80 /* CoreMedia.framework in Frameworks */,
@@ -220,9 +222,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2250B97189169340089714A /* libc++.dylib in Frameworks */,
 				F27EDB0B1872076D00273A80 /* libresolv.dylib in Frameworks */,
 				F27EDB0C1872078B00273A80 /* libz.dylib in Frameworks */,
-				F27EDB0D1872078B00273A80 /* libstdc++.6.dylib in Frameworks */,
 				F27EDB0E1872078B00273A80 /* AudioToolbox.framework in Frameworks */,
 				F27EDB0F1872078B00273A80 /* AVFoundation.framework in Frameworks */,
 				F27EDB101872078B00273A80 /* CoreMedia.framework in Frameworks */,
@@ -243,9 +245,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2250B98189169400089714A /* libc++.dylib in Frameworks */,
 				F27EDB4F18720A7600273A80 /* libresolv.dylib in Frameworks */,
 				F27EDB5018720A7600273A80 /* libz.dylib in Frameworks */,
-				F27EDB5118720A7600273A80 /* libstdc++.6.dylib in Frameworks */,
 				F27EDB5218720A7600273A80 /* AudioToolbox.framework in Frameworks */,
 				F27EDB5318720A7600273A80 /* AVFoundation.framework in Frameworks */,
 				F27EDB5418720A7600273A80 /* CoreMedia.framework in Frameworks */,
@@ -317,6 +319,8 @@
 		F27EDA2E1871F70300273A80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F28731DF188D3D8E006803C6 /* libc++.dylib */,
+				F28731DD188D3D53006803C6 /* libstdc++.dylib */,
 				F27EDAD21872068D00273A80 /* libresolv.dylib */,
 				F27EDAD01872068200273A80 /* libz.dylib */,
 				F27EDACE1872067800273A80 /* libstdc++.6.dylib */,
@@ -714,6 +718,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -738,6 +743,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -832,7 +838,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -855,7 +861,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -877,6 +883,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -900,6 +907,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -919,6 +927,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -942,6 +951,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -965,6 +975,7 @@
 				F23FFAE218721A4D00F30444 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F27EDA271871F70300273A80 /* Build configuration list for PBXProject "AddLive iOS Tutorials" */ = {
 			isa = XCConfigurationList;
