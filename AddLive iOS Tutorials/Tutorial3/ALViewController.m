@@ -24,15 +24,13 @@
 
 @interface MyServiceListener:NSObject<ALServiceListener>
 
-- (id) initWithRemoteVideoView:(ALVideoView*) view;
+- (id) initWithRemoteVideoView:(ALVideoView2*) view;
 
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
-
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
@@ -72,39 +70,33 @@
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
-    descr.url = [NSString stringWithFormat:@"dev01.addlive.com:8004/%@", Consts.SCOPE_ID];
     descr.autopublishAudio = YES;
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);
     descr.authDetails.salt = @"Super random string";
     
-    ResultBlock onConn = ^(ALError* err, id nothing) {
-        _connecting = NO;
-        if([self handleErrorMaybe:err where:@"Connect"]) {
-            return;
-        }
-        NSLog(@"Successfully connected");
-        _stateLbl.text = @"Connected";
-        _connectBtn.hidden = YES;
-        _disconnectBtn.hidden = NO;
-    };
-    [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
+    [_alService connect:descr responder:[ALResponder responderWithSelector:@selector(onConnected:) object:self]];
+}
+
+- (void) onConnected:(ALError*) err {
+    _connecting = NO;
+    if([self handleErrorMaybe:err where:@"Connect"]) {
+        return;
+    }
+    NSLog(@"Successfully connected");
+    _stateLbl.text = @"Connected";
+    _connectBtn.hidden = YES;
+    _disconnectBtn.hidden = NO;
 }
 
 - (IBAction)disconnect:(id)sender {
-    ResultBlock onDisconn = ^(ALError* err, id nothing) {
-        NSLog(@"Successfully disconnected");
-        _stateLbl.text = @"Disconnected";
-        _connectBtn.hidden = NO;
-        _disconnectBtn.hidden = YES;
-        [_remoteVV stop:nil];
-    };
-    [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
+    [_alService disconnect:Consts.SCOPE_ID responder:nil];
+    _stateLbl.text = @"Disconnected";
+    _connectBtn.hidden = NO;
+    _disconnectBtn.hidden = YES;
+    [_remoteVV stop:nil];
 }
-
-
-
 
 - (void) initAddLive
 {
@@ -230,7 +222,7 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    return @"";
+    return @"AddLiveSuperSecret";
 }
 
 + (NSString*) SCOPE_ID {
@@ -241,10 +233,11 @@
 
 
 @implementation MyServiceListener {
-    ALVideoView* _videoView;
+    ALVideoView2* _videoView;
+    ALUserStateChangedEvent* _eventTmp;
 }
 
-- (id) initWithRemoteVideoView:(ALVideoView*) view {
+- (id) initWithRemoteVideoView:(ALVideoView2*) view {
     self = [super init];
     if(self) {
         _videoView = view;
@@ -255,14 +248,17 @@
 - (void) onUserEvent:(ALUserStateChangedEvent *)event {
     NSLog(@"Got user event: %@", event);
     if(event.isConnected) {
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:event.videoSinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
+        _eventTmp = event;
+        [_videoView stop:[ALResponder responderWithSelector:@selector(onRenderStopped:) object:self]];
     } else {
         [_videoView stop:nil];
     }
+}
+
+- (void) onRenderStopped:(ALError*) err {
+    [_videoView setSinkId:_eventTmp.videoSinkId];
+    [_videoView start:nil];
+    _eventTmp = nil;
 }
 
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event {
@@ -271,11 +267,10 @@
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event {
     NSLog(@"Got connection lost");
+    
+    // TODO set a timeout and manually retry to connect.
 }
 
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event {
-    NSLog(@"On Session reconnected");
-}
 
 @end
 
