@@ -36,6 +36,14 @@ a hardcoded id.
 
 This tutorial covers basic use of the [ALService monitorSpeakrsActivity] API. 
 
+
+## Tutorial 5 - TBD
+
+## Tutorial 6 - AVAudioPlayer
+
+This tutorial shows how to use AVFoundation AVAudioPlayer class in the presence
+of the AddLive SDK.
+
 ## License
 
 All code examples provided within this repository are available under the
