@@ -11,7 +11,6 @@
 #define RED [UIColor colorWithRed:225 green:0 blue:0 alpha:1.0]
 #define GREEN [UIColor colorWithRed:0 green:255 blue:0 alpha:1.0]
 
-
 /**
  * Interface defining application constants. In our case it is just the 
  * Application id and API key.
@@ -66,7 +65,7 @@
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
-                       responder:responder];
+                   responder:responder];
 }
 
 /**
@@ -101,14 +100,24 @@
 
 }
 
-- (void) disposePlatform {
+/**
+ * Releases the AddLive SDK.
+ * Please note that the releasePlatform method CANNOT be called from within 
+ * AddLive result handler or event handler.
+ */
+- (void) disposePlatform
+{
     NSLog(@"Disposing platform");
     [_alService releasePlatform];
     self.versionLbl.text = @"Platform released";
+    [self.versionLbl sizeToFit];
+    self.versionLbl.center = self.view.center;
     self.versionLbl.textColor = GREEN;
-
 }
 
+/**
+ * Handles the possible error coming from the sdk
+ */
 - (void) handleErrorMaybe:(ALError*)err where:(NSString*)where
 {
     NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
@@ -129,12 +138,14 @@
 
 @implementation Consts
 
-+ (NSNumber*) APP_ID {
++ (NSNumber*) APP_ID
+{
     // TODO update this to use some real value
     return @1;
 }
 
-+ (NSString*) API_KEY {
++ (NSString*) API_KEY
+{
     // TODO update this to use some real value
     return @"";
 }
