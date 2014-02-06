@@ -75,14 +75,13 @@
         _localPreviewStarted = NO;
     } else {
         NSLog(@"Starting local video");
-        [_alService startLocalVideo:[ALResponder responderWithSelector:@selector(onVideoStarted:sinkId:) object:self]];
+        ResultBlock onVideoStarted = ^(ALError *err, id sinkId) {
+            [_localPreviewVV setSinkId:sinkId];
+            [_localPreviewVV start:nil];
+            _localPreviewStarted = YES;
+        };
+        [_alService startLocalVideo:[ALResponder responderWithBlock:onVideoStarted]];
     }
-}
-
-- (void) onVideoStarted:(ALError*) err sinkId:(NSString*)sinkId {
-    [_localPreviewVV setSinkId:sinkId];
-    [_localPreviewVV start:nil];
-    _localPreviewStarted = YES;
 }
 
 - (void) onCameraToggled

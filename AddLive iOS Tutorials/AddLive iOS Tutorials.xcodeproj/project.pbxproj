@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2250B97189169340089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		F2250B98189169400089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		F2250B991891694C0089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		F23FFAB418721A4D00F30444 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		F23FFAB518721A4D00F30444 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		F23FFAB618721A4D00F30444 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		F23FFABC18721A4D00F30444 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F23FFABA18721A4D00F30444 /* InfoPlist.strings */; };
+		F23FFABE18721A4D00F30444 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFABD18721A4D00F30444 /* main.m */; };
+		F23FFAC218721A4D00F30444 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFAC118721A4D00F30444 /* ALAppDelegate.m */; };
+		F23FFAC518721A4D00F30444 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */; };
+		F23FFAC818721A4D00F30444 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */; };
+		F23FFACB18721A4D00F30444 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFACA18721A4D00F30444 /* ALViewController.m */; };
+		F23FFACD18721A4D00F30444 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23FFACC18721A4D00F30444 /* Images.xcassets */; };
+		F23FFAE618721A7500F30444 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		F23FFAE718721A7500F30444 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		F23FFAE918721A7500F30444 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		F23FFAEA18721A7500F30444 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		F23FFAEB18721A7500F30444 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		F23FFAEC18721A7500F30444 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		F23FFAED18721A7500F30444 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		F23FFAEE18721A7500F30444 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		F23FFAEF18721A7500F30444 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		F23FFAF018721A7500F30444 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		F23FFAF118721A7500F30444 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		F23FFAF218721A7500F30444 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
 		F27EDA6C1871F77000273A80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		F27EDA6D1871F77000273A80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		F27EDA6E1871F77000273A80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -73,12 +98,22 @@
 		F27EDB5918720A7600273A80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
 		F27EDB5A18720A7600273A80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
 		F27EDB5B18720A7600273A80 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
-		F2F0E04D1892B63500E354A8 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
-		F2F0E04E1892B64200E354A8 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
-		F2F0E04F1892B64E00E354A8 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDACE1872067800273A80 /* libstdc++.6.dylib */; };
+		F28731E0188D3D8E006803C6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F23FFAB318721A4C00F30444 /* Tutorial4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial4.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23FFAB918721A4D00F30444 /* Tutorial4-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial4-Info.plist"; sourceTree = "<group>"; };
+		F23FFABB18721A4D00F30444 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F23FFABD18721A4D00F30444 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F23FFABF18721A4D00F30444 /* Tutorial4-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial4-Prefix.pch"; sourceTree = "<group>"; };
+		F23FFAC018721A4D00F30444 /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		F23FFAC118721A4D00F30444 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		F23FFAC418721A4D00F30444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		F23FFAC718721A4D00F30444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		F23FFAC918721A4D00F30444 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
+		F23FFACA18721A4D00F30444 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
+		F23FFACC18721A4D00F30444 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F27EDA2F1871F70300273A80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F27EDA311871F70300273A80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F27EDA331871F70300273A80 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -137,11 +172,34 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F23FFAB018721A4C00F30444 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2250B991891694C0089714A /* libc++.dylib in Frameworks */,
+				F23FFAE618721A7500F30444 /* libresolv.dylib in Frameworks */,
+				F23FFAE718721A7500F30444 /* libz.dylib in Frameworks */,
+				F23FFAE918721A7500F30444 /* AudioToolbox.framework in Frameworks */,
+				F23FFAEA18721A7500F30444 /* AVFoundation.framework in Frameworks */,
+				F23FFAEB18721A7500F30444 /* CoreMedia.framework in Frameworks */,
+				F23FFAEC18721A7500F30444 /* CoreVideo.framework in Frameworks */,
+				F23FFAED18721A7500F30444 /* MessageUI.framework in Frameworks */,
+				F23FFAEE18721A7500F30444 /* OpenGLES.framework in Frameworks */,
+				F23FFAEF18721A7500F30444 /* QuartzCore.framework in Frameworks */,
+				F23FFAF018721A7500F30444 /* SystemConfiguration.framework in Frameworks */,
+				F23FFAF118721A7500F30444 /* Security.framework in Frameworks */,
+				F23FFAF218721A7500F30444 /* AddLive.framework in Frameworks */,
+				F23FFAB418721A4D00F30444 /* Foundation.framework in Frameworks */,
+				F23FFAB518721A4D00F30444 /* CoreGraphics.framework in Frameworks */,
+				F23FFAB618721A4D00F30444 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F27EDA681871F77000273A80 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2F0E04D1892B63500E354A8 /* libstdc++.6.dylib in Frameworks */,
+				F28731E0188D3D8E006803C6 /* libc++.dylib in Frameworks */,
 				F27EDAD31872068D00273A80 /* libresolv.dylib in Frameworks */,
 				F27EDAD11872068200273A80 /* libz.dylib in Frameworks */,
 				F27EDAAA1871F8BE00273A80 /* AudioToolbox.framework in Frameworks */,
@@ -164,7 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2F0E04E1892B64200E354A8 /* libstdc++.6.dylib in Frameworks */,
+				F2250B97189169340089714A /* libc++.dylib in Frameworks */,
 				F27EDB0B1872076D00273A80 /* libresolv.dylib in Frameworks */,
 				F27EDB0C1872078B00273A80 /* libz.dylib in Frameworks */,
 				F27EDB0E1872078B00273A80 /* AudioToolbox.framework in Frameworks */,
@@ -187,7 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2F0E04F1892B64E00E354A8 /* libstdc++.6.dylib in Frameworks */,
+				F2250B98189169400089714A /* libc++.dylib in Frameworks */,
 				F27EDB4F18720A7600273A80 /* libresolv.dylib in Frameworks */,
 				F27EDB5018720A7600273A80 /* libz.dylib in Frameworks */,
 				F27EDB5218720A7600273A80 /* AudioToolbox.framework in Frameworks */,
@@ -209,12 +267,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F23FFAB718721A4D00F30444 /* Tutorial4 */ = {
+			isa = PBXGroup;
+			children = (
+				F23FFAC018721A4D00F30444 /* ALAppDelegate.h */,
+				F23FFAC118721A4D00F30444 /* ALAppDelegate.m */,
+				F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */,
+				F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */,
+				F23FFAC918721A4D00F30444 /* ALViewController.h */,
+				F23FFACA18721A4D00F30444 /* ALViewController.m */,
+				F23FFACC18721A4D00F30444 /* Images.xcassets */,
+				F23FFAB818721A4D00F30444 /* Supporting Files */,
+			);
+			path = Tutorial4;
+			sourceTree = "<group>";
+		};
+		F23FFAB818721A4D00F30444 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F23FFAB918721A4D00F30444 /* Tutorial4-Info.plist */,
+				F23FFABA18721A4D00F30444 /* InfoPlist.strings */,
+				F23FFABD18721A4D00F30444 /* main.m */,
+				F23FFABF18721A4D00F30444 /* Tutorial4-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F27EDA231871F70300273A80 = {
 			isa = PBXGroup;
 			children = (
 				F27EDA6F1871F77000273A80 /* Tutorial1 */,
 				F27EDADC1872074700273A80 /* Tutorial2 */,
 				F27EDB2018720A3100273A80 /* Tutorial3 */,
+				F23FFAB718721A4D00F30444 /* Tutorial4 */,
 				F27EDA2E1871F70300273A80 /* Frameworks */,
 				F27EDA2D1871F70300273A80 /* Products */,
 			);
@@ -226,6 +311,7 @@
 				F27EDA6B1871F77000273A80 /* Tutorial1.app */,
 				F27EDAD81872074700273A80 /* Tutorial2.app */,
 				F27EDB1C18720A3100273A80 /* Tutorial3.app */,
+				F23FFAB318721A4C00F30444 /* Tutorial4.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -337,6 +423,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F23FFAB218721A4C00F30444 /* Tutorial4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F23FFAE018721A4D00F30444 /* Build configuration list for PBXNativeTarget "Tutorial4" */;
+			buildPhases = (
+				F23FFAAF18721A4C00F30444 /* Sources */,
+				F23FFAB018721A4C00F30444 /* Frameworks */,
+				F23FFAB118721A4C00F30444 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial4;
+			productName = Tutorial4;
+			productReference = F23FFAB318721A4C00F30444 /* Tutorial4.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F27EDA6A1871F77000273A80 /* Tutorial1 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F27EDA981871F77100273A80 /* Build configuration list for PBXNativeTarget "Tutorial1" */;
@@ -414,11 +517,23 @@
 				F27EDA6A1871F77000273A80 /* Tutorial1 */,
 				F27EDAD71872074700273A80 /* Tutorial2 */,
 				F27EDB1B18720A3100273A80 /* Tutorial3 */,
+				F23FFAB218721A4C00F30444 /* Tutorial4 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F23FFAB118721A4C00F30444 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F23FFAC818721A4D00F30444 /* Main_iPad.storyboard in Resources */,
+				F23FFACD18721A4D00F30444 /* Images.xcassets in Resources */,
+				F23FFAC518721A4D00F30444 /* Main_iPhone.storyboard in Resources */,
+				F23FFABC18721A4D00F30444 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F27EDA691871F77000273A80 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -455,6 +570,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F23FFAAF18721A4C00F30444 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F23FFABE18721A4D00F30444 /* main.m in Sources */,
+				F23FFACB18721A4D00F30444 /* ALViewController.m in Sources */,
+				F23FFAC218721A4D00F30444 /* ALAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F27EDA671871F77000273A80 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,6 +613,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F23FFABA18721A4D00F30444 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F23FFABB18721A4D00F30444 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F23FFAC418721A4D00F30444 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F23FFAC718721A4D00F30444 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
 		F27EDA721871F77100273A80 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -563,6 +712,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F23FFAE118721A4D00F30444 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial4/Tutorial4-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Tutorial4/Tutorial4-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F23FFAE218721A4D00F30444 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial4/Tutorial4-Prefix.pch";
+				INFOPLIST_FILE = "Tutorial4/Tutorial4-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		F27EDA5F1871F70300273A80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -643,7 +838,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -666,7 +861,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -688,7 +883,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -712,7 +907,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -732,7 +927,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -756,7 +951,7 @@
 				ARCHS = armv7;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
@@ -773,6 +968,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F23FFAE018721A4D00F30444 /* Build configuration list for PBXNativeTarget "Tutorial4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F23FFAE118721A4D00F30444 /* Debug */,
+				F23FFAE218721A4D00F30444 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F27EDA271871F70300273A80 /* Build configuration list for PBXProject "AddLive iOS Tutorials" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
