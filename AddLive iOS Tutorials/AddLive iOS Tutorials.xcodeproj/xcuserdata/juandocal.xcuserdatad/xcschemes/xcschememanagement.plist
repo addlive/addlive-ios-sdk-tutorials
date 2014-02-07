@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>Tutorial7.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -38,6 +43,16 @@
 			<true/>
 		</dict>
 		<key>AA1135FE18A1B922001BFA6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AADDB2F118A431BF00298780</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AADDB31018A431BF00298780</key>
 		<dict>
 			<key>primary</key>
 			<true/>
