@@ -9,14 +9,6 @@
 #import "ALViewController.h"
 
 /**
- * Defining values to set the screenshare dimensions properly
- */
-
-#define remoteVideoWidth 300
-#define remoteVideoHeight 225
-#define remoteVideoLeft 10
-
-/**
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
  */
@@ -298,6 +290,15 @@
     // New event flag
     BOOL            _newScreen;
     
+    // Remote video width before setting properly the dimensions
+    int             _remoteVideoWidth;
+    
+    // Remote video height before setting properly the dimensions
+    int             _remoteVideoHeight;
+    
+    // Remote video left before setting properly the dimensions
+    int             _remoteVideoLeft;
+    
     // Remote video width after setting properly the dimensions
     float           _videoWidth;
     
@@ -368,6 +369,22 @@
         // Set to yes the new event flag
         _newScreen = YES;
     }
+    
+    /**
+     * Defining values to set the scrollview content size properly
+     */
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        _remoteVideoWidth = 728;
+        _remoteVideoHeight = 584;
+        _remoteVideoLeft = 20;
+    }
+    else
+    {
+        _remoteVideoWidth = 300;
+        _remoteVideoHeight = 225;
+        _remoteVideoLeft = 10;
+    }
 }
 
 /**
@@ -381,8 +398,8 @@
     if(_newScreen)
     {
         // Get and set the correct dimensions
-        [self fitDimensions:event.width and:event.height to:remoteVideoWidth and:remoteVideoHeight];
-        _videoView.frame = CGRectMake(remoteVideoLeft + _left, _videoView.frame.origin.y, _videoWidth, _videoHeight);
+        [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
+        _videoView.frame = CGRectMake(_remoteVideoLeft + _left, _videoView.frame.origin.y, _videoWidth, _videoHeight);
         
         // Stop the previous one and start the new one
         ResultBlock onStopped = ^(ALError* err, id nothing){

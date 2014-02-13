@@ -1,8 +1,8 @@
 //
 //  ALViewController.m
-//  Tutorial5
+//  Tutorial8
 //
-//  Created by Juan Docal on 05.02.14.
+//  Created by Juan Docal on 08.02.14.
 //  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
@@ -12,7 +12,6 @@
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
  */
-
 @interface Consts : NSObject
 
 + (NSNumber*) APP_ID;
@@ -29,30 +28,37 @@
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
+- (void) onSpeechActivity:(ALSpeechActivityEvent *)event;
+
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
 
 - (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
-@interface ALViewController () <UIScrollViewDelegate>
+@interface ALViewController ()
 
 {
     ALService*                _alService;
     NSArray*                  _cams;
     NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
+    NSString*                 _currentVideoSinkerId;
+    NSString*                 _currentVideoUserId;
     BOOL                      _paused;
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
     MyServiceListener*        _listener;
     BOOL                      _connecting;
-    UIView*                   _container;
-	NSMutableDictionary*      _alUserIdToVideoView;
+    ALVideoView*              _remoteVideoView;
+    NSMutableDictionary*      _videoSinkIdDictionary;
+    NSMutableDictionary*      _speechActivityDictionary;
+    NSMutableDictionary*      _speechUserIdDictionary;
+    NSThread*                 _checkConnectionThread;
     int                       _remoteVideoWidth;
     int                       _remoteVideoHeight;
-    int                       _remoteVideoMargin;
-    int                       _screenWidth;
+    int                       _remoteVideoMarginX;
+    int                       _remoteVideoMarginY;
 }
 @end
 
@@ -60,160 +66,166 @@
 
 - (void)viewDidLoad
 {
+    _paused = NO;
+    _settingCam = NO;
     [super viewDidLoad];
     
     /**
-     * Defining values to set the scrollview content size properly
+     * Defining values to set the scrollview content size properly.
      */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         _remoteVideoWidth = 480;
-        _remoteVideoHeight = 512;
-        _remoteVideoMargin = 144;
-        _screenWidth = 768;
+        _remoteVideoHeight = 640;
+        _remoteVideoMarginX = 205;
+        _remoteVideoMarginY = 86;
     }
     else
     {
-        _remoteVideoWidth = 227;
-        _remoteVideoHeight = 261;
-        _remoteVideoMargin = 46;
-        _screenWidth = 320;
+        _remoteVideoWidth = 239;
+        _remoteVideoHeight = 320;
+        _remoteVideoMarginX = 73;
+        _remoteVideoMarginY = 107;
     }
     
-	_alUserIdToVideoView = [[NSMutableDictionary alloc] init];
-    
-    _paused = NO;
-    _settingCam = NO;
-    [super viewDidLoad];
     _listener = [[MyServiceListener alloc] init];
     [self initAddLive];
     _connecting = NO;
     
-    self.pageControl.numberOfPages = 0;
-    self.pageControl.currentPage = 0;
-    self.scrollView.delegate = self;
+    // Setting the frame for the remoteVideoView (iPad or iPhone).
+    CGRect frame;
+    frame.origin.x = _remoteVideoMarginX;
+    frame.origin.y = _remoteVideoMarginY;
+    frame.size.width = _remoteVideoWidth;
+    frame.size.height = _remoteVideoHeight;
     
-    // Notification triggered when an user join the session
+    // Initializing the remoteVideoView.
+    _remoteVideoView = [[ALVideoView alloc] initWithFrame:frame];
+    _remoteVideoView.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.view addSubview:_remoteVideoView];
+    
+    // Notification triggered when an user join the session.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveNotification:)
                                                  name:@"onUserJoined"
                                                object:nil];
     
-    // Notification triggered when an user disjoin the session
+    // Notification triggering the speech activity.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveNotification:)
-                                                 name:@"onUserDisjoined"
+                                                 name:@"onSpeechActivity"
                                                object:nil];
 }
 
 /**
- * Sets the current page when scrolling
- */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGFloat pageWidth = self.scrollView.frame.size.width;
-    float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
-    NSInteger page = lround(fractionalPage);
-    self.pageControl.currentPage = page;
-}
-
-/**
- * Receives the onUserEvent notifications
+ * Receives the onUserEvent notifications.
  */
 - (void) receiveNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
     
-    // When user joined
+    // When user joined.
     if ([[notification name] isEqualToString:@"onUserJoined"])
     {
-        // 1. Details of the event sent by the event onUserEvent defined in the ALServiceListener
+        // Details of the event sent by the event onUserEvent defined in the ALServiceListener.
         ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:@"event"];
         
-        // 2. etting userId of the user joining the session from the ALUserStateChangedEvent
-        NSNumber* userIdNumber = [NSNumber numberWithLongLong:eventDetails.userId];
+        ResultBlock onMonitorSpeech = ^(ALError* err, id nothing){
+            if(err)
+            {
+                NSLog(@"Failed to onMonitorSpeech due to: %@ (ERR_CODE:%d)",
+                      err.err_message, err.err_code);
+                return;
+            }
+        };
+        // Add the new user videoSinkId to the historical so we can set it up as a video feeder when speaking.
+        [_videoSinkIdDictionary setObject:eventDetails.videoSinkId forKey:[NSString stringWithFormat:@"%lld", eventDetails.userId]];
         
-        // 3. Getting videoSinkId of the user joining the session from the ALUserStateChangedEvent
-        NSString* videoSinkId = [[NSString alloc] initWithFormat:@"%@", eventDetails.videoSinkId];
+        // Controls monitoring of speech activity within given scope.
+        [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:true responder:[ALResponder responderWithBlock:onMonitorSpeech]];
         
-        // 4. Initializing the ALVideoView and setting it's corresponding frame property inside the scrollview
-        ALVideoView *videoView = [[ALVideoView alloc] initWithFrame:[self updateVideoFrame:[_alUserIdToVideoView count]]];
-        videoView.backgroundColor = [UIColor grayColor];
-        
-        // 5. Setting up the ALVideoView with the service and the videoSinkId of the user joining
-        [videoView setupWithService:_alService withSink:videoSinkId withMirror:YES];
-        
-        // 6. Starting the chat and setting the responder
-        [videoView start:[ALResponder responderWithSelector:@selector(onRemoteRenderStarted:) object:self]];
-        
-        // 7. Adding the ALVideoView we created to the scrollView object
-        [self.scrollView addSubview: videoView];
-        
-        // 8. Saving that ALVideoView into a NSMutableDictionary for further processing (Disconnecting, etc)
-        [_alUserIdToVideoView setObject:videoView forKey:userIdNumber];
-        
-        // 9. Setting up the new contentSize
-        [self.scrollView setContentSize:CGSizeMake(MAX(1, [_alUserIdToVideoView count]) * self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
-        
-        // 10. Moving to the joining user ALVideoView
-        [self.scrollView setContentOffset:CGPointMake(_screenWidth * ([_alUserIdToVideoView count] - 1), 0) animated:YES];
-        
-        // 11. Setting the new number of pages
-        self.pageControl.numberOfPages = [_alUserIdToVideoView count];
-        
-        // 12. Setting the new current page
-        self.pageControl.currentPage = [_alUserIdToVideoView count] - 1;
+        // If it's the first time.
+        if(!_currentVideoSinkerId)
+        {
+            // Set the values.
+            _currentVideoSinkerId = [NSString stringWithFormat:@"%@", eventDetails.videoSinkId];
+            _currentVideoUserId = [NSString stringWithFormat:@"%lld", eventDetails.userId];
+            
+            // Start the video.
+            [_remoteVideoView setupWithService:_alService withSink:_currentVideoSinkerId withMirror:YES];
+            [_remoteVideoView start:[ALResponder responderWithSelector:@selector(onRemoteRenderStarted:) object:self]];
+        }
     }
-    
-    // When user disjoined
-    else if ([[notification name] isEqualToString:@"onUserDisjoined"])
+    else if([[notification name] isEqualToString:@"onSpeechActivity"])
     {
-        // 1. We get the details of the event sent by the event onUserEvent defined in the ALServiceListener
-        ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:@"event"];
+        // Details of the event sent by the event onSpeechActivity defined in the ALServiceListener.
+        ALSpeechActivityEvent* event = [userInfo objectForKey:@"event"];
         
-        // 2. Getting userId of the user joining the session from the ALUserStateChangedEvent
-        NSNumber* userIdNumber = [NSNumber numberWithLongLong:eventDetails.userId];
-        
-        // 3. Getting ALVideoView of the disconnected user
-        ALVideoView* videoView = [_alUserIdToVideoView objectForKey:userIdNumber];
-        
-        // 4. Stopping the chat and setting the responder
-        [videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
-                                                   withObject:self]];
-        
-        // 5. Removing the object from it's view
-        [videoView removeFromSuperview];
-        
-        // 6. Removing the object from the NSMutableDictionary
-        [_alUserIdToVideoView removeObjectForKey:userIdNumber];
-        
-        // 7. Setting the new ALVideoView frames
-        int idx = 0;
-        for (ALVideoView* videoView in [_alUserIdToVideoView allValues])
-		{
-			[videoView setFrame:[self updateVideoFrame:idx]];
-            idx++;
-		}
-        
-        // 8. Moving to the joining user ALVideoView
-        [self.scrollView setContentSize:CGSizeMake(MAX(1, [_alUserIdToVideoView count]) * self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
-        
-        // 9. Setting the new number of pages
-        self.pageControl.numberOfPages = [_alUserIdToVideoView count];
+        // Getting the values for each user.
+        for(int index = 0; index < [[event.speechActivity valueForKey:@"activity"] count]; index++)
+        {
+            // If it's not myself.
+            if([[event.speechActivity valueForKey:@"userId"][index] integerValue] != -1)
+            {
+                // Get the current activity value.
+                int activityValue = [[event.speechActivity valueForKey:@"activity"][index] integerValue];
+                
+                // Get the previous activity value.
+                int prevActivityValue = [[_speechActivityDictionary objectForKey:[event.speechActivity valueForKey:@"userId"][index]] integerValue];
+                
+                // Accumulate the activity to set the video of the user with more activity (this is restart it each 2 seconds).
+                activityValue = activityValue + prevActivityValue;
+                
+                // Save the values.
+                [_speechActivityDictionary setObject:[NSNumber numberWithInt:activityValue] forKey:[event.speechActivity valueForKey:@"userId"][index]];
+                [_speechUserIdDictionary setObject:[event.speechActivity valueForKey:@"userId"][index] forKey:[NSString stringWithFormat:@"%d", activityValue]];
+            }
+        }
     }
 }
 
 /**
- * Setting the ALVideoViews frame according to the device
+ * Method to update the allowed user sending video (in this case just the one feeding the remoteVideoView).
  */
-- (CGRect)updateVideoFrame:(int)idx
+- (void)updateAllowedSenders
 {
-    CGRect frame;
-    frame.origin.x = (_screenWidth * idx) + _remoteVideoMargin;
-    frame.origin.y = 0;
-    frame.size.width = _remoteVideoWidth;
-    frame.size.height = _remoteVideoHeight;
-    return frame;
+    ResultBlock onAllowedSenders = ^(ALError* err, id nothing){
+        if (err)
+        {
+            NSLog(@"Got an error with updateAllowedSenders onAllowedSenders due to: %@ (ERR_CODE:%d)",
+                  err.err_message, err.err_code);
+            return;
+        }
+        NSLog(@"onAllowedSenders");
+    };
+    
+    // We need to send the Array of userIds of those users sending video (in this case just the one feeding the remoteVideoView).
+    NSNumber *speakingUserId = [NSNumber numberWithInt:[_currentVideoUserId intValue]];
+    NSArray *userIds = [[NSArray alloc] initWithObjects:speakingUserId, nil];
+    [_alService setAllowedSenders:Consts.SCOPE_ID mediaType:@"video" userIds:userIds responder:[ALResponder responderWithBlock:onAllowedSenders]];
+}
+
+/**
+ * Method to update the remoteVideoView with user speaking.
+ */
+- (void)startVideoWithTheCurrentSpeaker
+{
+    ResultBlock onStopped = ^(ALError* err, id nothing){
+        if (err)
+        {
+            NSLog(@"Got an error with startVideoWithTheCurrentSpeaker onStopped due to: %@ (ERR_CODE:%d)",
+                  err.err_message, err.err_code);
+            return;
+        }
+        // We change the sinkId to the one of the user speaking.
+        [_remoteVideoView setSinkId:_currentVideoSinkerId];
+        
+        // We start the video with the new sink previously setted.
+        [_remoteVideoView start:[ALResponder responderWithSelector:@selector(onRemoteRenderStarted:) object:self]];
+    };
+    // We stop the current video playing and called the responder onStopped when finishing stopping.
+    [_remoteVideoView stop:[ALResponder responderWithBlock:onStopped]];
 }
 
 /**
@@ -245,6 +257,17 @@
         _stateLbl.text = @"Connected";
         _connectBtn.hidden = YES;
         _disconnectBtn.hidden = NO;
+        
+        _videoSinkIdDictionary = [[NSMutableDictionary alloc] init];
+        _speechActivityDictionary = [[NSMutableDictionary alloc] init];
+        _speechUserIdDictionary = [[NSMutableDictionary alloc] init];
+        _currentVideoSinkerId = nil;
+        _remoteVideoView.hidden = NO;
+        
+        _checkConnectionThread = [[NSThread alloc] initWithTarget:self
+                                                         selector:@selector(checkActivity)
+                                                           object:nil];
+        [_checkConnectionThread start];
     };
     [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
@@ -259,16 +282,8 @@
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
         _disconnectBtn.hidden = YES;
-        self.pageControl.numberOfPages = 0;
-        self.pageControl.currentPage = 0;
-        for (ALVideoView* videoView in [_alUserIdToVideoView allValues])
-		{
-			[videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
-                                                       withObject:self]];
-			[videoView removeFromSuperview];
-		}
-        [_alUserIdToVideoView removeAllObjects];
-        [self.scrollView setContentSize:self.scrollView.bounds.size];
+        [_remoteVideoView stop:nil];
+        _remoteVideoView.hidden = YES;
     };
     [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
 }
@@ -372,7 +387,7 @@
 }
 
 /**
- * Responder method called when the local render starts
+ * Responder method called when the render starts
  */
 - (void) onRenderStarted:(ALError*) err
 {
@@ -405,23 +420,6 @@
     else
     {
         NSLog(@"Remote Rendering started");
-    }
-}
-
-/**
- * Responder method called when the remote render stops
- */
-- (void) onRemoteRenderStopped:(ALError*) err
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    else
-    {
-        NSLog(@"Remote Rendering stopped");
     }
 }
 
@@ -470,6 +468,62 @@
     _paused = NO;
 }
 
+/**
+ * Thread to select the current speaking user (each 2 seconds).
+ */
+#pragma mark - Reconnection Thread
+- (void)checkActivity
+{
+    while (_connectBtn.hidden)
+    {
+        [NSThread sleepForTimeInterval:2.0];
+        
+        // If there is some activity.
+        if([_speechActivityDictionary count] > 0)
+        {
+            // Getting the max activity during those 2 seconds.
+            NSString *maxString = [[_speechActivityDictionary allValues] valueForKeyPath:@"@max.intValue"];
+            
+            // Getting the user with that max activity.
+            NSString *userId = [_speechUserIdDictionary objectForKey:[NSString stringWithFormat:@"%d", [maxString intValue]]];
+            
+            // Restarting the dictionary saving those activities values.
+            _speechActivityDictionary = [[NSMutableDictionary alloc] init];
+            
+            // If it's a different user as the one feeding video right now.
+            if(![_currentVideoUserId isEqualToString:[NSString stringWithFormat:@"%@", userId]] && [maxString intValue] > 0)
+            {
+                // Get his userId.
+                _currentVideoUserId = [NSString stringWithFormat:@"%@", userId];
+                
+                // Get his sinkerId.
+                _currentVideoSinkerId = [NSString stringWithFormat:@"%@", [_videoSinkIdDictionary objectForKey:[NSString stringWithFormat:@"%@", userId]]];
+                
+                // Change video feed calling the method in the main thread.
+                dispatch_block_t methodToStartVideoInMain = ^{
+                    [self updateAllowedSenders];
+                    [self startVideoWithTheCurrentSpeaker];
+                };
+                
+                if ([NSThread isMainThread])
+                {
+                    methodToStartVideoInMain();
+                }
+                else
+                {
+                    dispatch_sync(dispatch_get_main_queue(), methodToStartVideoInMain);
+                }
+            }
+        }
+        // If there is none activity.
+        else
+        {
+            _currentVideoSinkerId = nil;
+            _currentVideoUserId = nil;
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -499,6 +553,7 @@
 
 @end
 
+
 @implementation MyServiceListener
 
 /**
@@ -507,20 +562,23 @@
  */
 - (void) onUserEvent:(ALUserStateChangedEvent *)event
 {
+    NSLog(@"Got user event: %@", event);
     if(event.isConnected)
     {
-        NSLog(@"Got user connected: %@", event);
         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
         [userInfo setObject:event forKey:@"event"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserJoined" object:self userInfo:userInfo];
     }
-    else
-    {
-        NSLog(@"Got user disconnected: %@", event);
-        NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-        [userInfo setObject:event forKey:@"event"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserDisjoined" object:self userInfo:userInfo];
-    }
+}
+
+/**
+ * Method will be called to report the speech activivity within a particular session.
+ */
+- (void) onSpeechActivity:(ALSpeechActivityEvent *)event
+{
+    NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setObject:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onSpeechActivity" object:self userInfo:userInfo];
 }
 
 /**
