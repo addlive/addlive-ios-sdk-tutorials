@@ -1,0 +1,3 @@
+REVIEWBOARD_URL = "http://reviews.addlive-vpn.com"
+REPOSITORY = "iOS Tutorials"
+BRANCH = "master"
