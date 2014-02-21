@@ -29,15 +29,20 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>Tutorial7.xcscheme</key>
+		<key>Tutorial6.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>Tutorial8.xcscheme</key>
+		<key>Tutorial7.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+		<key>Tutorial8.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -58,6 +63,26 @@
 			<true/>
 		</dict>
 		<key>AA578E3118A692C90063E390</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AACB243B18B7E7C800F64D3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AACB245A18B7E7C900F64D3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AACB247218B7E81500F64D3A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AACB249118B7E81600F64D3A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
