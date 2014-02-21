@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial Eight View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ALViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ALTutorialEightViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nR8-QG-suP"/>
                         <viewControllerLayoutGuide type="bottom" id="54z-aQ-6a2"/>

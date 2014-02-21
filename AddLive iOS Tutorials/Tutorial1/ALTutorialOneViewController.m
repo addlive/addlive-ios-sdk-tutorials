@@ -1,12 +1,12 @@
 //
-//  ALViewController.m
+//  ALTutorialOneViewController.m
 //  Tutorial1
 //
 //  Created by Tadeusz Kozak on 8/26/13.
 //  Copyright (c) 2013 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialOneViewController.h"
 
 #define RED [UIColor colorWithRed:225 green:0 blue:0 alpha:1.0]
 #define GREEN [UIColor colorWithRed:0 green:255 blue:0 alpha:1.0]
@@ -23,11 +23,11 @@
 
 @end
 
-@interface ALViewController ()
+@interface ALTutorialOneViewController ()
 
 @end
 
-@implementation ALViewController {
+@implementation ALTutorialOneViewController {
     ALService* _alService;
 }
 

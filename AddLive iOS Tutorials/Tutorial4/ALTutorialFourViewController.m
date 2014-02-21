@@ -1,18 +1,17 @@
 //
-//  ALViewController.m
-//  Tutorial7
+//  ALTutorialFourViewController.m
+//  Tutorial2
 //
-//  Created by Juan Docal on 06.02.14.
-//  Copyright (c) 2014 AddLive. All rights reserved.
+//  Created by Tadeusz Kozak on 8/26/13.
+//  Copyright (c) 2013 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialFourViewController.h"
 
 /**
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
  */
-
 @interface Consts : NSObject
 
 + (NSNumber*) APP_ID;
@@ -31,13 +30,12 @@
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
-- (void) onConnectionLost:(ALConnectionLostEvent *)event;
-
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
+- (void) onSpeechActivity:(ALSpeechActivityEvent *)event;
 
 @end
 
-@interface ALViewController ()
+@interface ALTutorialFourViewController ()
+
 {
     ALService*                _alService;
     NSArray*                  _cams;
@@ -48,17 +46,13 @@
     BOOL                      _localPreviewStarted;
     MyServiceListener*        _listener;
     BOOL                      _connecting;
-    UIView*                   _container;
-	NSMutableDictionary*      _alUserIdToVideoView;
 }
 @end
 
-@implementation ALViewController
+@implementation ALTutorialFourViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
     _paused = NO;
     _settingCam = NO;
     [super viewDidLoad];
@@ -88,14 +82,14 @@
     
     ResultBlock onConn = ^(ALError* err, id nothing) {
         _connecting = NO;
-        if([self handleErrorMaybe:err where:@"Connect"])
-        {
+        if([self handleErrorMaybe:err where:@"Connect"]) {
             return;
         }
         NSLog(@"Successfully connected");
         _stateLbl.text = @"Connected";
         _connectBtn.hidden = YES;
         _disconnectBtn.hidden = NO;
+        [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:YES responder:nil];
     };
     [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
@@ -141,8 +135,8 @@
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
-                   responder:responder];
-    
+                       responder:responder];
+
     _stateLbl.text = @"Platform init";
 }
 
@@ -171,8 +165,7 @@
 {
     if (err)
     {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
+        NSLog(@"Got an error with getVideoCaptureDeviceNames: %@", err );
         return;
     }
     NSLog(@"Got camera devices");
@@ -201,12 +194,6 @@
  */
 - (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
 {
-    if(err)
-    {
-        NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
     [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
     [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
@@ -223,7 +210,6 @@
     {
         NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
-        return;
     }
     else
     {
@@ -252,6 +238,31 @@
     return YES;
 }
 
+/**
+ * Stops the render.
+ */
+- (void) pause
+{
+    NSLog(@"Application will pause");
+    [self.localPreviewVV stop:nil];
+    [_alService stopLocalVideo:nil];
+    _paused = YES;
+}
+
+/**
+ * Starts the render.
+ */
+- (void) resume
+{
+    if(!_paused)
+        return;
+    NSLog(@"Application will resume");
+    [_alService startLocalVideo:[[ALResponder alloc]
+                                 initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+                                 withObject:self]];
+    _paused = NO;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -265,48 +276,25 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
-    return @486;
+    return @1;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"MOmJ";
+    return @"";
 }
 
 @end
 
 
-@implementation MyServiceListener
-{
-    // Remote video object
-    ALVideoView*    _videoView;
-    
-    // New event flag
-    BOOL            _newScreen;
-    
-    // Remote video width before setting properly the dimensions
-    int             _remoteVideoWidth;
-    
-    // Remote video height before setting properly the dimensions
-    int             _remoteVideoHeight;
-    
-    // Remote video left before setting properly the dimensions
-    int             _remoteVideoLeft;
-    
-    // Remote video width after setting properly the dimensions
-    float           _videoWidth;
-    
-    // Remote video height after setting properly the dimensions
-    float           _videoHeight;
-    
-    // Remote video left after setting properly the dimensions
-    float           _left;
+@implementation MyServiceListener {
+    ALVideoView* _videoView;
 }
 
 /**
@@ -315,7 +303,8 @@
 - (id) initWithRemoteVideoView:(ALVideoView*) view
 {
     self = [super init];
-    if(self) {
+    if(self)
+    {
         _videoView = view;
     }
     return self;
@@ -325,27 +314,13 @@
  * Listener to capture an user event. (user joining media scope, user leaving media scope,
  * user publishing or stop publishing any of possible media streams.)
  */
-
 - (void) onUserEvent:(ALUserStateChangedEvent *)event
 {
     NSLog(@"Got user event: %@", event);
-    
-    // If the coming event is screen sharing or video
-    if(event.isConnected || event.screenPublished)
+    if(event.isConnected)
     {
-        NSString *sinkId;
-        
-        // Get the correct sinkId for each case
-        if(event.screenPublished){
-            sinkId = event.screenSinkId;
-        }
-        else{
-            sinkId = event.videoSinkId;
-        }
-        
-        // Stop the previous one and start the new one
         ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:sinkId];
+            [_videoView setSinkId:event.videoSinkId];
             [_videoView start:nil];
         };
         [_videoView stop:[ALResponder responderWithBlock:onStopped]];
@@ -357,103 +332,20 @@
 }
 
 /**
- * Notifies about media streaming status change for given remote user.
- */
-- (void) onMediaStreamEvent:(ALUserStateChangedEvent*) event
-{
-    NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
-    
-    // If the coming event is either video or screensharing
-    if(event.screenPublished || event.videoPublished){
-        
-        // Set to yes the new event flag
-        _newScreen = YES;
-    }
-    
-    /**
-     * Defining values to set the scrollview content size properly
-     */
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        _remoteVideoWidth = 728;
-        _remoteVideoHeight = 584;
-        _remoteVideoLeft = 20;
-    }
-    else
-    {
-        _remoteVideoWidth = 300;
-        _remoteVideoHeight = 225;
-        _remoteVideoLeft = 10;
-    }
-}
-
-/**
  * Event describing a change of a resolution in a video feed produced by given video sink.
  */
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
 {
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
-    
-    // If it is a new event
-    if(_newScreen)
-    {
-        // Get and set the correct dimensions
-        [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
-        _videoView.frame = CGRectMake(_remoteVideoLeft + _left, _videoView.frame.origin.y, _videoWidth, _videoHeight);
-        
-        // Stop the previous one and start the new one
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:event.sinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
-        
-        // Set to no the new event flag
-        _newScreen = NO;
-    }
 }
 
-/**
- * Event describing a lost connection.
- */
-- (void) onConnectionLost:(ALConnectionLostEvent *)event
+- (void) onSpeechActivity:(ALSpeechActivityEvent *)event
 {
-    NSLog(@"Got connection lost");
+    // TODO select video depending on the active speaker.
+    NSLog(@"Got speech activity event: %@", event);
 }
 
-/**
- * Event describing a reconnection.
- */
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
-{
-    NSLog(@"On Session reconnected");
-}
-
-/**
- * Method to get the current dimensions from the coming width and height onVideoFrameSizeChanged
- */
-- (void)fitDimensions:(int)srcW and:(int)srcH to:(int)targetW and:(int)targetH
-{
-    float srcAR = srcW / srcH;
-    float targetAR = targetW / targetH;
-    float width = 0.0;
-    
-    if (srcW < targetW && srcH < targetH) {
-        _videoWidth = srcW;
-        _videoHeight = srcH;
-        _left = (targetW - srcW) / 2;
-    }
-    if (srcAR < targetAR) {
-        // match height
-        _videoWidth = srcW * targetH / srcH;
-        _videoHeight = targetH;
-        _left = (targetW - width) / 4;
-    } else {
-        // match width
-        _videoWidth = targetW;
-        _videoHeight = targetW * srcH / srcW;
-        _left = 0;
-    }
-}
 
 @end
+
+

@@ -1,17 +1,17 @@
 //
-//  ALViewController.h
-//  Tutorial3
+//  ALTutorialSevenViewController.h
+//  Tutorial7
 //
-//  Created by Tadeusz Kozak on 8/26/13.
-//  Copyright (c) 2013 AddLive. All rights reserved.
+//  Created by Juan Docal on 06.02.14.
+//  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <AddLive/AddLiveAPI.h>
 
-@interface ALViewController : UIViewController
+@interface ALTutorialSevenViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet ALVideoView *localPreviewVV;
+@property (strong, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (weak, nonatomic) IBOutlet ALVideoView *remoteVV;
 @property (weak, nonatomic) IBOutlet UILabel *errorLbl;
 @property (weak, nonatomic) IBOutlet UILabel *errorContentLbl;

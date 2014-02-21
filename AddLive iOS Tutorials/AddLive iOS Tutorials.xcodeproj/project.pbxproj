@@ -15,7 +15,6 @@
 		AA1135EF18A1B922001BFA6A /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1135EE18A1B922001BFA6A /* ALAppDelegate.m */; };
 		AA1135F218A1B922001BFA6A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1135F018A1B922001BFA6A /* Main_iPhone.storyboard */; };
 		AA1135F518A1B922001BFA6A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1135F318A1B922001BFA6A /* Main_iPad.storyboard */; };
-		AA1135F818A1B922001BFA6A /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1135F718A1B922001BFA6A /* ALViewController.m */; };
 		AA1135FA18A1B922001BFA6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1135F918A1B922001BFA6A /* Images.xcassets */; };
 		AA11361C18A1C688001BFA6A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		AA11361D18A1C697001BFA6A /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
@@ -29,6 +28,7 @@
 		AA11362518A1C6F9001BFA6A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
 		AA11362618A1C708001BFA6A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
 		AA11362718A1C70C001BFA6A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AA23A11E18B6BBE200323957 /* ALTutorialFourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */; };
 		AA578E1418A692C80063E390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		AA578E1518A692C80063E390 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		AA578E1618A692C80063E390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -37,7 +37,6 @@
 		AA578E2218A692C80063E390 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA578E2118A692C80063E390 /* ALAppDelegate.m */; };
 		AA578E2518A692C80063E390 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA578E2318A692C80063E390 /* Main_iPhone.storyboard */; };
 		AA578E2818A692C80063E390 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA578E2618A692C80063E390 /* Main_iPad.storyboard */; };
-		AA578E2B18A692C80063E390 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA578E2A18A692C80063E390 /* ALViewController.m */; };
 		AA578E2D18A692C80063E390 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA578E2C18A692C80063E390 /* Images.xcassets */; };
 		AA578E4718A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
 		AA578E4818A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
@@ -57,6 +56,12 @@
 		AA578E5618A6939F0063E390 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
 		AA578E5718A693A60063E390 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		AA578E5818A693AF0063E390 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		AA9AFD1D18B6B56F001E90BA /* ALTutorialOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */; };
+		AA9AFD2018B6B87E001E90BA /* ALTutorialTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */; };
+		AA9AFD2318B6BA3C001E90BA /* ALTutorialThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */; };
+		AACB243118B7DE2200F64D3A /* ALTutorialFiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */; };
+		AACB243418B7DF6B00F64D3A /* ALTutorialSevenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */; };
+		AACB243718B7E05C00F64D3A /* ALTutorialEightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */; };
 		AADDB2F318A431BF00298780 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		AADDB2F418A431BF00298780 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		AADDB2F518A431BF00298780 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -65,7 +70,6 @@
 		AADDB30118A431BF00298780 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AADDB30018A431BF00298780 /* ALAppDelegate.m */; };
 		AADDB30418A431BF00298780 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADDB30218A431BF00298780 /* Main_iPhone.storyboard */; };
 		AADDB30718A431BF00298780 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADDB30518A431BF00298780 /* Main_iPad.storyboard */; };
-		AADDB30A18A431BF00298780 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADDB30918A431BF00298780 /* ALViewController.m */; };
 		AADDB30C18A431BF00298780 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AADDB30B18A431BF00298780 /* Images.xcassets */; };
 		AADDB33318A4325500298780 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
 		AADDB33418A4325D00298780 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
@@ -90,7 +94,6 @@
 		F23FFAC218721A4D00F30444 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFAC118721A4D00F30444 /* ALAppDelegate.m */; };
 		F23FFAC518721A4D00F30444 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */; };
 		F23FFAC818721A4D00F30444 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */; };
-		F23FFACB18721A4D00F30444 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFACA18721A4D00F30444 /* ALViewController.m */; };
 		F23FFACD18721A4D00F30444 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23FFACC18721A4D00F30444 /* Images.xcassets */; };
 		F23FFAE618721A7500F30444 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F23FFAE718721A7500F30444 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
@@ -111,7 +114,6 @@
 		F27EDA7A1871F77100273A80 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDA791871F77100273A80 /* ALAppDelegate.m */; };
 		F27EDA7D1871F77100273A80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDA7B1871F77100273A80 /* Main_iPhone.storyboard */; };
 		F27EDA801871F77100273A80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDA7E1871F77100273A80 /* Main_iPad.storyboard */; };
-		F27EDA831871F77100273A80 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDA821871F77100273A80 /* ALViewController.m */; };
 		F27EDA851871F77100273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDA841871F77100273A80 /* Images.xcassets */; };
 		F27EDAA11871F86900273A80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
 		F27EDAAA1871F8BE00273A80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
@@ -132,7 +134,6 @@
 		F27EDAE71872074800273A80 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDAE61872074800273A80 /* ALAppDelegate.m */; };
 		F27EDAEA1872074800273A80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAE81872074800273A80 /* Main_iPhone.storyboard */; };
 		F27EDAED1872074800273A80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAEB1872074800273A80 /* Main_iPad.storyboard */; };
-		F27EDAF01872074800273A80 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDAEF1872074800273A80 /* ALViewController.m */; };
 		F27EDAF21872074800273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAF11872074800273A80 /* Images.xcassets */; };
 		F27EDB0B1872076D00273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDB0C1872078B00273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
@@ -153,7 +154,6 @@
 		F27EDB2B18720A3100273A80 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDB2A18720A3100273A80 /* ALAppDelegate.m */; };
 		F27EDB2E18720A3100273A80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB2C18720A3100273A80 /* Main_iPhone.storyboard */; };
 		F27EDB3118720A3100273A80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB2F18720A3100273A80 /* Main_iPad.storyboard */; };
-		F27EDB3418720A3200273A80 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDB3318720A3200273A80 /* ALViewController.m */; };
 		F27EDB3618720A3200273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB3518720A3200273A80 /* Images.xcassets */; };
 		F27EDB4F18720A7600273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDB5018720A7600273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
@@ -179,9 +179,9 @@
 		AA1135EE18A1B922001BFA6A /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		AA1135F118A1B922001BFA6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		AA1135F418A1B922001BFA6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		AA1135F618A1B922001BFA6A /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		AA1135F718A1B922001BFA6A /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		AA1135F918A1B922001BFA6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AA23A11C18B6BBE200323957 /* ALTutorialFourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFourViewController.h; sourceTree = "<group>"; };
+		AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFourViewController.m; sourceTree = "<group>"; };
 		AA578E1318A692C80063E390 /* Tutorial8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA578E1918A692C80063E390 /* Tutorial8-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial8-Info.plist"; sourceTree = "<group>"; };
 		AA578E1B18A692C80063E390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -191,10 +191,20 @@
 		AA578E2118A692C80063E390 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		AA578E2418A692C80063E390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		AA578E2718A692C80063E390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		AA578E2918A692C80063E390 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		AA578E2A18A692C80063E390 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		AA578E2C18A692C80063E390 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA578E4618A6931D0063E390 /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
+		AA9AFD1B18B6B56F001E90BA /* ALTutorialOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialOneViewController.h; sourceTree = "<group>"; };
+		AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialOneViewController.m; sourceTree = "<group>"; };
+		AA9AFD1E18B6B87E001E90BA /* ALTutorialTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialTwoViewController.h; sourceTree = "<group>"; };
+		AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialTwoViewController.m; sourceTree = "<group>"; };
+		AA9AFD2118B6BA3C001E90BA /* ALTutorialThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialThreeViewController.h; sourceTree = "<group>"; };
+		AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialThreeViewController.m; sourceTree = "<group>"; };
+		AACB242F18B7DE2200F64D3A /* ALTutorialFiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFiveViewController.h; sourceTree = "<group>"; };
+		AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFiveViewController.m; sourceTree = "<group>"; };
+		AACB243218B7DF6B00F64D3A /* ALTutorialSevenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialSevenViewController.h; sourceTree = "<group>"; };
+		AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialSevenViewController.m; sourceTree = "<group>"; };
+		AACB243518B7E05C00F64D3A /* ALTutorialEightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialEightViewController.h; sourceTree = "<group>"; };
+		AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialEightViewController.m; sourceTree = "<group>"; };
 		AADDB2F218A431BF00298780 /* Tutorial7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADDB2F818A431BF00298780 /* Tutorial7-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial7-Info.plist"; sourceTree = "<group>"; };
 		AADDB2FA18A431BF00298780 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -204,8 +214,6 @@
 		AADDB30018A431BF00298780 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		AADDB30318A431BF00298780 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		AADDB30618A431BF00298780 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		AADDB30818A431BF00298780 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		AADDB30918A431BF00298780 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		AADDB30B18A431BF00298780 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F23FFAB318721A4C00F30444 /* Tutorial4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23FFAB918721A4D00F30444 /* Tutorial4-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial4-Info.plist"; sourceTree = "<group>"; };
@@ -216,8 +224,6 @@
 		F23FFAC118721A4D00F30444 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F23FFAC418721A4D00F30444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F23FFAC718721A4D00F30444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F23FFAC918721A4D00F30444 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F23FFACA18721A4D00F30444 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F23FFACC18721A4D00F30444 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F27EDA2F1871F70300273A80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F27EDA311871F70300273A80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -232,8 +238,6 @@
 		F27EDA791871F77100273A80 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F27EDA7C1871F77100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F27EDA7F1871F77100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F27EDA811871F77100273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F27EDA821871F77100273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDA841871F77100273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F27EDAA01871F86900273A80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -256,8 +260,6 @@
 		F27EDAE61872074800273A80 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F27EDAE91872074800273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F27EDAEC1872074800273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F27EDAEE1872074800273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F27EDAEF1872074800273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDAF11872074800273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F27EDB1C18720A3100273A80 /* Tutorial3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F27EDB2218720A3100273A80 /* Tutorial3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial3-Info.plist"; sourceTree = "<group>"; };
@@ -268,8 +270,6 @@
 		F27EDB2A18720A3100273A80 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F27EDB2D18720A3100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F27EDB3018720A3100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F27EDB3218720A3100273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F27EDB3318720A3200273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDB3518720A3200273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F28731DD188D3D53006803C6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		F28731DF188D3D8E006803C6 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -446,8 +446,8 @@
 				AA1135EE18A1B922001BFA6A /* ALAppDelegate.m */,
 				AA1135F018A1B922001BFA6A /* Main_iPhone.storyboard */,
 				AA1135F318A1B922001BFA6A /* Main_iPad.storyboard */,
-				AA1135F618A1B922001BFA6A /* ALViewController.h */,
-				AA1135F718A1B922001BFA6A /* ALViewController.m */,
+				AACB242F18B7DE2200F64D3A /* ALTutorialFiveViewController.h */,
+				AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */,
 				AA1135F918A1B922001BFA6A /* Images.xcassets */,
 				AA1135E518A1B922001BFA6A /* Supporting Files */,
 			);
@@ -472,8 +472,8 @@
 				AA578E2118A692C80063E390 /* ALAppDelegate.m */,
 				AA578E2318A692C80063E390 /* Main_iPhone.storyboard */,
 				AA578E2618A692C80063E390 /* Main_iPad.storyboard */,
-				AA578E2918A692C80063E390 /* ALViewController.h */,
-				AA578E2A18A692C80063E390 /* ALViewController.m */,
+				AACB243518B7E05C00F64D3A /* ALTutorialEightViewController.h */,
+				AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */,
 				AA578E2C18A692C80063E390 /* Images.xcassets */,
 				AA578E1818A692C80063E390 /* Supporting Files */,
 			);
@@ -498,8 +498,8 @@
 				AADDB30018A431BF00298780 /* ALAppDelegate.m */,
 				AADDB30218A431BF00298780 /* Main_iPhone.storyboard */,
 				AADDB30518A431BF00298780 /* Main_iPad.storyboard */,
-				AADDB30818A431BF00298780 /* ALViewController.h */,
-				AADDB30918A431BF00298780 /* ALViewController.m */,
+				AACB243218B7DF6B00F64D3A /* ALTutorialSevenViewController.h */,
+				AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */,
 				AADDB30B18A431BF00298780 /* Images.xcassets */,
 				AADDB2F718A431BF00298780 /* Supporting Files */,
 			);
@@ -524,8 +524,8 @@
 				F23FFAC118721A4D00F30444 /* ALAppDelegate.m */,
 				F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */,
 				F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */,
-				F23FFAC918721A4D00F30444 /* ALViewController.h */,
-				F23FFACA18721A4D00F30444 /* ALViewController.m */,
+				AA23A11C18B6BBE200323957 /* ALTutorialFourViewController.h */,
+				AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */,
 				F23FFACC18721A4D00F30444 /* Images.xcassets */,
 				F23FFAB818721A4D00F30444 /* Supporting Files */,
 			);
@@ -605,8 +605,8 @@
 				F27EDA791871F77100273A80 /* ALAppDelegate.m */,
 				F27EDA7B1871F77100273A80 /* Main_iPhone.storyboard */,
 				F27EDA7E1871F77100273A80 /* Main_iPad.storyboard */,
-				F27EDA811871F77100273A80 /* ALViewController.h */,
-				F27EDA821871F77100273A80 /* ALViewController.m */,
+				AA9AFD1B18B6B56F001E90BA /* ALTutorialOneViewController.h */,
+				AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */,
 				F27EDA841871F77100273A80 /* Images.xcassets */,
 				F27EDA701871F77100273A80 /* Supporting Files */,
 			);
@@ -631,8 +631,8 @@
 				F27EDAE61872074800273A80 /* ALAppDelegate.m */,
 				F27EDAE81872074800273A80 /* Main_iPhone.storyboard */,
 				F27EDAEB1872074800273A80 /* Main_iPad.storyboard */,
-				F27EDAEE1872074800273A80 /* ALViewController.h */,
-				F27EDAEF1872074800273A80 /* ALViewController.m */,
+				AA9AFD1E18B6B87E001E90BA /* ALTutorialTwoViewController.h */,
+				AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */,
 				F27EDAF11872074800273A80 /* Images.xcassets */,
 				F27EDADD1872074700273A80 /* Supporting Files */,
 			);
@@ -657,8 +657,8 @@
 				F27EDB2A18720A3100273A80 /* ALAppDelegate.m */,
 				F27EDB2C18720A3100273A80 /* Main_iPhone.storyboard */,
 				F27EDB2F18720A3100273A80 /* Main_iPad.storyboard */,
-				F27EDB3218720A3100273A80 /* ALViewController.h */,
-				F27EDB3318720A3200273A80 /* ALViewController.m */,
+				AA9AFD2118B6BA3C001E90BA /* ALTutorialThreeViewController.h */,
+				AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */,
 				F27EDB3518720A3200273A80 /* Images.xcassets */,
 				F27EDB2118720A3100273A80 /* Supporting Files */,
 			);
@@ -918,8 +918,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1135EB18A1B922001BFA6A /* main.m in Sources */,
-				AA1135F818A1B922001BFA6A /* ALViewController.m in Sources */,
 				AA1135EF18A1B922001BFA6A /* ALAppDelegate.m in Sources */,
+				AACB243118B7DE2200F64D3A /* ALTutorialFiveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,8 +927,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACB243718B7E05C00F64D3A /* ALTutorialEightViewController.m in Sources */,
 				AA578E1E18A692C80063E390 /* main.m in Sources */,
-				AA578E2B18A692C80063E390 /* ALViewController.m in Sources */,
 				AA578E2218A692C80063E390 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -937,8 +937,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACB243418B7DF6B00F64D3A /* ALTutorialSevenViewController.m in Sources */,
 				AADDB2FD18A431BF00298780 /* main.m in Sources */,
-				AADDB30A18A431BF00298780 /* ALViewController.m in Sources */,
 				AADDB30118A431BF00298780 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -947,8 +947,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA23A11E18B6BBE200323957 /* ALTutorialFourViewController.m in Sources */,
 				F23FFABE18721A4D00F30444 /* main.m in Sources */,
-				F23FFACB18721A4D00F30444 /* ALViewController.m in Sources */,
 				F23FFAC218721A4D00F30444 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -958,7 +958,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27EDA761871F77100273A80 /* main.m in Sources */,
-				F27EDA831871F77100273A80 /* ALViewController.m in Sources */,
+				AA9AFD1D18B6B56F001E90BA /* ALTutorialOneViewController.m in Sources */,
 				F27EDA7A1871F77100273A80 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -968,7 +968,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27EDAE31872074700273A80 /* main.m in Sources */,
-				F27EDAF01872074800273A80 /* ALViewController.m in Sources */,
+				AA9AFD2018B6B87E001E90BA /* ALTutorialTwoViewController.m in Sources */,
 				F27EDAE71872074800273A80 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -978,7 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27EDB2718720A3100273A80 /* main.m in Sources */,
-				F27EDB3418720A3200273A80 /* ALViewController.m in Sources */,
+				AA9AFD2318B6BA3C001E90BA /* ALTutorialThreeViewController.m in Sources */,
 				F27EDB2B18720A3100273A80 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1165,7 +1165,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial5/Tutorial5-Prefix.pch";
@@ -1189,7 +1189,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial5/Tutorial5-Prefix.pch";
@@ -1209,7 +1209,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial8/Tutorial8-Prefix.pch";
@@ -1232,7 +1232,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial8/Tutorial8-Prefix.pch";
@@ -1253,7 +1253,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial7/Tutorial7-Prefix.pch";
@@ -1279,7 +1279,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial7/Tutorial7-Prefix.pch";
@@ -1301,7 +1301,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial4/Tutorial4-Prefix.pch";
@@ -1326,7 +1326,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial4/Tutorial4-Prefix.pch";
@@ -1422,8 +1422,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Desktop/V3/addlive-ios-sdk-tutorials-3/AddLive\\ iOS\\ Tutorials",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
@@ -1447,8 +1446,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Desktop/V3/addlive-ios-sdk-tutorials-3/AddLive\\ iOS\\ Tutorials",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
@@ -1512,7 +1510,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial3/Tutorial3-Prefix.pch";
@@ -1536,7 +1534,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial3/Tutorial3-Prefix.pch";

@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial Two View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ALViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ALTutorialTwoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cvF-Z6-jsq"/>
                         <viewControllerLayoutGuide type="bottom" id="j5m-hf-1Vp"/>
@@ -42,7 +42,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleCam:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2hx-YG-wPa"/>
+                                    <action selector="onToggleCam:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UBr-eX-Kke"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="42" translatesAutoresizingMaskIntoConstraints="NO" id="RWn-lH-iMh">
@@ -76,16 +76,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleVideo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BbP-k4-Q4n"/>
+                                    <action selector="onToggleVideo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="w9b-wU-tvq"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="errorContentLbl" destination="RWn-lH-iMh" id="DoB-f1-TZF"/>
-                        <outlet property="errorLbl" destination="fSN-hR-pmX" id="h2q-eP-Lhz"/>
-                        <outlet property="localPreviewVV" destination="em9-uo-SFu" id="YjF-DL-zRO"/>
+                        <outlet property="errorContentLbl" destination="RWn-lH-iMh" id="Wps-QC-4uj"/>
+                        <outlet property="errorLbl" destination="fSN-hR-pmX" id="BMg-xT-702"/>
+                        <outlet property="localPreviewVV" destination="em9-uo-SFu" id="faZ-hL-hoK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

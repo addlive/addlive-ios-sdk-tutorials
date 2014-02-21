@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial One View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ALViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ALTutorialOneViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dkb-ZC-TLh"/>
                         <viewControllerLayoutGuide type="bottom" id="ktt-BD-XVT"/>
@@ -75,9 +75,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="errorContentLbl" destination="vxj-a3-opY" id="UVO-Jd-bmZ"/>
-                        <outlet property="errorLbl" destination="h2e-Q7-5Cs" id="zN2-r0-jG6"/>
-                        <outlet property="versionLbl" destination="cSz-WC-zh5" id="RVN-Sx-V37"/>
+                        <outlet property="errorContentLbl" destination="vxj-a3-opY" id="1BP-oJ-4uc"/>
+                        <outlet property="errorLbl" destination="h2e-Q7-5Cs" id="UFM-85-kHF"/>
+                        <outlet property="versionLbl" destination="cSz-WC-zh5" id="J2h-rH-E4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

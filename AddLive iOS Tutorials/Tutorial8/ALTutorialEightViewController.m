@@ -1,12 +1,12 @@
 //
-//  ALViewController.m
+//  ALTutorialEightViewController.m
 //  Tutorial8
 //
 //  Created by Juan Docal on 08.02.14.
 //  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialEightViewController.h"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -36,7 +36,7 @@
 
 @end
 
-@interface ALViewController ()
+@interface ALTutorialEightViewController ()
 
 {
     ALService*                _alService;
@@ -62,7 +62,7 @@
 }
 @end
 
-@implementation ALViewController
+@implementation ALTutorialEightViewController
 
 - (void)viewDidLoad
 {
@@ -537,18 +537,18 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
-    return @486;
+    return @1;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"MOmJ";
+    return @"";
 }
 
 @end

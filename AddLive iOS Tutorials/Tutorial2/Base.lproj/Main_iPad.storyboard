@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial Two View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ALViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ALTutorialTwoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c9N-9B-NeE"/>
                         <viewControllerLayoutGuide type="bottom" id="x0E-CO-1Ml"/>
@@ -67,7 +67,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleCam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4nD-gW-y42"/>
+                                    <action selector="onToggleCam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E2g-wb-VuX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxr-Zw-N0Y">
@@ -77,16 +77,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mAc-jm-LGf"/>
+                                    <action selector="onToggleVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DeJ-42-ISM"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="errorContentLbl" destination="h5P-gc-p1x" id="OvY-5B-9Fh"/>
-                        <outlet property="errorLbl" destination="nm8-Vb-twa" id="O4O-cA-B0v"/>
-                        <outlet property="localPreviewVV" destination="Qvc-h6-AtK" id="tbj-27-xnb"/>
+                        <outlet property="errorContentLbl" destination="h5P-gc-p1x" id="aOn-GB-MkP"/>
+                        <outlet property="errorLbl" destination="nm8-Vb-twa" id="KrV-y2-rvy"/>
+                        <outlet property="localPreviewVV" destination="Qvc-h6-AtK" id="yun-Ue-le1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

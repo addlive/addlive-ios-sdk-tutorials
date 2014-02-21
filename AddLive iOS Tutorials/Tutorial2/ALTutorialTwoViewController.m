@@ -1,12 +1,12 @@
 //
-//  ALViewController.m
+//  ALTutorialTwoViewController.m
 //  Tutorial2
 //
 //  Created by Tadeusz Kozak on 8/26/13.
 //  Copyright (c) 2013 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialTwoViewController.h"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -26,7 +26,7 @@
 
 @end
 
-@interface ALViewController ()
+@interface ALTutorialTwoViewController ()
 
 {
     ALService*                _alService;
@@ -40,7 +40,7 @@
 }
 @end
 
-@implementation ALViewController
+@implementation ALTutorialTwoViewController
 
 - (void)viewDidLoad
 {

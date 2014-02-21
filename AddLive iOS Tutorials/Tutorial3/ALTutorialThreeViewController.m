@@ -1,12 +1,12 @@
 //
 //  ALViewController.m
-//  Tutorial2
+//  Tutorial3
 //
 //  Created by Tadeusz Kozak on 8/26/13.
 //  Copyright (c) 2013 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialThreeViewController.h"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -30,11 +30,13 @@
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
-- (void) onSpeechActivity:(ALSpeechActivityEvent *)event;
+- (void) onConnectionLost:(ALConnectionLostEvent *)event;
+
+- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
-@interface ALViewController ()
+@interface ALTutorialThreeViewController ()
 
 {
     ALService*                _alService;
@@ -49,7 +51,7 @@
 }
 @end
 
-@implementation ALViewController
+@implementation ALTutorialThreeViewController
 
 - (void)viewDidLoad
 {
@@ -82,14 +84,14 @@
     
     ResultBlock onConn = ^(ALError* err, id nothing) {
         _connecting = NO;
-        if([self handleErrorMaybe:err where:@"Connect"]) {
+        if([self handleErrorMaybe:err where:@"Connect"])
+        {
             return;
         }
         NSLog(@"Successfully connected");
         _stateLbl.text = @"Connected";
         _connectBtn.hidden = YES;
         _disconnectBtn.hidden = NO;
-        [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:YES responder:nil];
     };
     [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
@@ -136,7 +138,7 @@
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
                        responder:responder];
-
+    
     _stateLbl.text = @"Platform init";
 }
 
@@ -165,7 +167,8 @@
 {
     if (err)
     {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames: %@", err );
+        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
+              err.err_message, err.err_code);
         return;
     }
     NSLog(@"Got camera devices");
@@ -194,6 +197,12 @@
  */
 - (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
 {
+    if(err)
+    {
+        NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
+              err.err_message, err.err_code);
+        return;
+    }
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
     [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
     [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
@@ -210,6 +219,7 @@
     {
         NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
+        return;
     }
     else
     {
@@ -255,7 +265,9 @@
 - (void) resume
 {
     if(!_paused)
+    {
         return;
+    }
     NSLog(@"Application will resume");
     [_alService startLocalVideo:[[ALResponder alloc]
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
@@ -276,24 +288,25 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
-    return @486;
+    return @1;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"MOmJ";
+    return @"";
 }
 
 @end
 
 
-@implementation MyServiceListener {
+@implementation MyServiceListener
+{
     ALVideoView* _videoView;
 }
 
@@ -303,15 +316,14 @@
 - (id) initWithRemoteVideoView:(ALVideoView*) view
 {
     self = [super init];
-    if(self)
-    {
+    if(self) {
         _videoView = view;
     }
     return self;
 }
 
 /**
- * Listener to capture an user event. (user joining media scope, user leaving media scope,
+ * Listener to capture an user event. (user joining media scope, user leaving media scope, 
  * user publishing or stop publishing any of possible media streams.)
  */
 - (void) onUserEvent:(ALUserStateChangedEvent *)event
@@ -339,12 +351,21 @@
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
 }
 
-- (void) onSpeechActivity:(ALSpeechActivityEvent *)event
+/**
+ * Event describing a lost connection.
+ */
+- (void) onConnectionLost:(ALConnectionLostEvent *)event
 {
-    // TODO select video depending on the active speaker.
-    NSLog(@"Got speech activity event: %@", event);
+    NSLog(@"Got connection lost");
 }
 
+/**
+ * Event describing a reconnection.
+ */
+- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
+{
+    NSLog(@"On Session reconnected");
+}
 
 @end
 

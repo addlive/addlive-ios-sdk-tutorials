@@ -1,5 +1,5 @@
 //
-//  ALViewController.h
+//  ALTutorialFiveViewController.h
 //  Tutorial5
 //
 //  Created by Juan Docal on 05.02.14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AddLive/AddLiveAPI.h>
 
-@interface ALViewController : UIViewController
+@interface ALTutorialFiveViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (strong, nonatomic) IBOutlet UILabel *stateLbl;

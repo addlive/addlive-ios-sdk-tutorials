@@ -1,12 +1,12 @@
 //
-//  ALViewController.m
+//  ALTutorialFiveViewController.m
 //  Tutorial5
 //
 //  Created by Juan Docal on 05.02.14.
 //  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialFiveViewController.h"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -35,7 +35,7 @@
 
 @end
 
-@interface ALViewController () <UIScrollViewDelegate>
+@interface ALTutorialFiveViewController () <UIScrollViewDelegate>
 
 {
     ALService*                _alService;
@@ -56,7 +56,7 @@
 }
 @end
 
-@implementation ALViewController
+@implementation ALTutorialFiveViewController
 
 - (void)viewDidLoad
 {
@@ -483,18 +483,18 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
-    return @486;
+    return @1;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"MOmJ";
+    return @"";
 }
 
 @end
