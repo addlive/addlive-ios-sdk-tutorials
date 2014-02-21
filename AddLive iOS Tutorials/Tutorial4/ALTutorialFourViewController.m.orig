@@ -91,16 +91,23 @@
         _stateLbl.text = @"Connected";
         _connectBtn.hidden = YES;
         _disconnectBtn.hidden = NO;
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
         [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:YES responder:nil];
+=======
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
     };
     [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
 
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
 /**
  * Button action to start disconnecting.
  */
 - (IBAction)disconnect:(id)sender
 {
+=======
+- (IBAction)disconnect:(id)sender {
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
     ResultBlock onDisconn = ^(ALError* err, id nothing) {
         NSLog(@"Successfully disconnected");
         _stateLbl.text = @"Disconnected";
@@ -111,9 +118,15 @@
     [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
 }
 
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
 /**
  * Initializes the AddLive SDK.
  */
+=======
+
+
+
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
 - (void) initAddLive
 {
     // 1. Allocate the ALService
@@ -299,11 +312,15 @@
     ALVideoView* _videoView;
 }
 
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
 /**
  * Method to init the remote view within it's view.
  */
 - (id) initWithRemoteVideoView:(ALVideoView*) view
 {
+=======
+- (id) initWithRemoteVideoView:(ALVideoView*) view {
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
     self = [super init];
     if(self)
     {
@@ -319,20 +336,29 @@
 - (void) onUserEvent:(ALUserStateChangedEvent *)event
 {
     NSLog(@"Got user event: %@", event);
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
     if(event.isConnected)
     {
+=======
+    if(event.isConnected) {
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
         ResultBlock onStopped = ^(ALError* err, id nothing){
             [_videoView setSinkId:event.videoSinkId];
             [_videoView start:nil];
         };
         [_videoView stop:[ALResponder responderWithBlock:onStopped]];
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
     }
     else
     {
+=======
+    } else {
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
         [_videoView stop:nil];
     }
 }
 
+<<<<<<< HEAD:AddLive iOS Tutorials/Tutorial4/ALTutorialFourViewController.m
 /**
  * Event describing a change of a resolution in a video feed produced by given video sink.
  */
@@ -345,6 +371,14 @@
 {
     // TODO select video depending on the active speaker.
     NSLog(@"Got speech activity event: %@", event);
+=======
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event {
+    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
+}
+
+- (void) onConnectionLost:(ALConnectionLostEvent *)event {
+    NSLog(@"Got connection lost");
+>>>>>>> master:AddLive iOS Tutorials/Tutorial3/ALViewController.m
 }
 
 - (void) onSessionReconnected:(ALSessionReconnectedEvent *)event {
