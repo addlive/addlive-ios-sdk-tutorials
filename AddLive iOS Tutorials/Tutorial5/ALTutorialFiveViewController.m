@@ -190,10 +190,10 @@
         // 7. Setting the new ALVideoView frames
         int idx = 0;
         for (ALVideoView* videoView in [_alUserIdToVideoView allValues])
-		{
-			[videoView setFrame:[self updateVideoFrame:idx]];
+        {
+            [videoView setFrame:[self updateVideoFrame:idx]];
             idx++;
-		}
+        }
         
         // 8. Moving to the joining user ALVideoView
         [self.scrollView setContentSize:CGSizeMake(MAX(1, [_alUserIdToVideoView count]) * self.scrollView.frame.size.width, self.scrollView.frame.size.height)];

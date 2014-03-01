@@ -130,20 +130,9 @@
     {
         // Details of the event sent by the event onUserEvent defined in the ALServiceListener.
         ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:@"event"];
-        
-        ResultBlock onMonitorSpeech = ^(ALError* err, id nothing){
-            if(err)
-            {
-                NSLog(@"Failed to onMonitorSpeech due to: %@ (ERR_CODE:%d)",
-                      err.err_message, err.err_code);
-                return;
-            }
-        };
+      
         // Add the new user videoSinkId to the historical so we can set it up as a video feeder when speaking.
         [_videoSinkIdDictionary setObject:eventDetails.videoSinkId forKey:[NSString stringWithFormat:@"%lld", eventDetails.userId]];
-        
-        // Controls monitoring of speech activity within given scope.
-        [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:true responder:[ALResponder responderWithBlock:onMonitorSpeech]];
         
         // If it's the first time.
         if(!_currentVideoSinkerId)
@@ -263,7 +252,18 @@
         _speechUserIdDictionary = [[NSMutableDictionary alloc] init];
         _currentVideoSinkerId = nil;
         _remoteVideoView.hidden = NO;
-        
+      
+        ResultBlock onMonitorSpeech = ^(ALError* err, id nothing){
+          if(err)
+          {
+            NSLog(@"Failed to onMonitorSpeech due to: %@ (ERR_CODE:%d)",
+                err.err_message, err.err_code);
+            return;
+          }
+        };
+      
+        [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:true responder:[ALResponder responderWithBlock:onMonitorSpeech]];
+      
         _checkConnectionThread = [[NSThread alloc] initWithTarget:self
                                                          selector:@selector(checkActivity)
                                                            object:nil];
