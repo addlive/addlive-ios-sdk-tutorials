@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial Two View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ALViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ALTutorialTwoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cvF-Z6-jsq"/>
                         <viewControllerLayoutGuide type="bottom" id="j5m-hf-1Vp"/>
@@ -42,7 +42,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleCam:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2hx-YG-wPa"/>
+                                    <action selector="onToggleCam:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="UBr-eX-Kke"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="42" translatesAutoresizingMaskIntoConstraints="NO" id="RWn-lH-iMh">
@@ -63,29 +63,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="(C) AddLive 2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyU-7c-5tx">
-                                <rect key="frame" x="0.0" y="545" width="132" height="21"/>
+                                <rect key="frame" x="9" y="527" width="132" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyh-GP-3pV">
-                                <rect key="frame" x="185" y="410" width="88" height="30"/>
+                                <rect key="frame" x="212" y="410" width="88" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Toggle Video">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleVideo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="BbP-k4-Q4n"/>
+                                    <action selector="onToggleVideo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="w9b-wU-tvq"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="errorContentLbl" destination="RWn-lH-iMh" id="DoB-f1-TZF"/>
-                        <outlet property="errorLbl" destination="fSN-hR-pmX" id="h2q-eP-Lhz"/>
-                        <outlet property="localPreviewVV" destination="em9-uo-SFu" id="YjF-DL-zRO"/>
+                        <outlet property="errorContentLbl" destination="RWn-lH-iMh" id="Wps-QC-4uj"/>
+                        <outlet property="errorLbl" destination="fSN-hR-pmX" id="BMg-xT-702"/>
+                        <outlet property="localPreviewVV" destination="em9-uo-SFu" id="faZ-hL-hoK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

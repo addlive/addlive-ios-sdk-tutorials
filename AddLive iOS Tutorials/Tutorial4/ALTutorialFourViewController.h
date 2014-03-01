@@ -1,5 +1,5 @@
 //
-//  ALViewController.h
+//  ALTutorialFourViewController.h
 //  Tutorial2
 //
 //  Created by Tadeusz Kozak on 8/26/13.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AddLive/AddLiveAPI.h>
-@interface ALViewController : UIViewController
+
+@interface ALTutorialFourViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (weak, nonatomic) IBOutlet ALVideoView *remoteVV;
@@ -18,9 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *disconnectBtn;
 
-
 - (IBAction)connect:(id)sender;
 - (IBAction)disconnect:(id)sender;
-
 
 @end

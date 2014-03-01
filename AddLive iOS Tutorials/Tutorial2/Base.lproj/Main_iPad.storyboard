@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tutorial Two View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ALViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ALTutorialTwoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c9N-9B-NeE"/>
                         <viewControllerLayoutGuide type="bottom" id="x0E-CO-1Ml"/>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="(C) AddLive 2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bH3-vl-PC7">
-                                <rect key="frame" x="20" y="1004" width="132" height="21"/>
+                                <rect key="frame" x="20" y="983" width="132" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -61,32 +61,32 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBK-E2-7wq">
-                                <rect key="frame" x="119" y="801" width="82" height="30"/>
+                                <rect key="frame" x="154" y="801" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Toggle Cam">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleCam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4nD-gW-y42"/>
+                                    <action selector="onToggleCam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E2g-wb-VuX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxr-Zw-N0Y">
-                                <rect key="frame" x="482" y="801" width="88" height="30"/>
+                                <rect key="frame" x="546" y="801" width="88" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Toggle Video">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onToggleVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mAc-jm-LGf"/>
+                                    <action selector="onToggleVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DeJ-42-ISM"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="errorContentLbl" destination="h5P-gc-p1x" id="OvY-5B-9Fh"/>
-                        <outlet property="errorLbl" destination="nm8-Vb-twa" id="O4O-cA-B0v"/>
-                        <outlet property="localPreviewVV" destination="Qvc-h6-AtK" id="tbj-27-xnb"/>
+                        <outlet property="errorContentLbl" destination="h5P-gc-p1x" id="aOn-GB-MkP"/>
+                        <outlet property="errorLbl" destination="nm8-Vb-twa" id="KrV-y2-rvy"/>
+                        <outlet property="localPreviewVV" destination="Qvc-h6-AtK" id="yun-Ue-le1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

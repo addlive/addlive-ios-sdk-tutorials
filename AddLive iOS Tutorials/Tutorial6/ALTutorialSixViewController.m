@@ -1,12 +1,12 @@
 //
-//  ALViewController.m
-//  Tutorial2
+//  ALTutorialSixViewController.m
+//  Tutorial6
 //
 //  Created by Tadeusz Kozak on 8/26/13.
 //  Copyright (c) 2013 AddLive. All rights reserved.
 //
 
-#import "ALViewController.h"
+#import "ALTutorialSixViewController.h"
 #import <AVFoundation/AVFoundation.h>
 //#import <AudioToolbox/AudioToolbox.h>
 /**
@@ -32,7 +32,7 @@
 @end
 
 
-@interface ALViewController ()
+@interface ALTutorialSixViewController ()
 
 {
     ALService*                _alService;
@@ -50,7 +50,7 @@
 }
 @end
 
-@implementation ALViewController
+@implementation ALTutorialSixViewController
 
 - (void)viewDidLoad
 {

@@ -7,6 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA1135E118A1B922001BFA6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		AA1135E218A1B922001BFA6A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		AA1135E318A1B922001BFA6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		AA1135E918A1B922001BFA6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1135E718A1B922001BFA6A /* InfoPlist.strings */; };
+		AA1135EB18A1B922001BFA6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1135EA18A1B922001BFA6A /* main.m */; };
+		AA1135EF18A1B922001BFA6A /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1135EE18A1B922001BFA6A /* ALAppDelegate.m */; };
+		AA1135F218A1B922001BFA6A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1135F018A1B922001BFA6A /* Main_iPhone.storyboard */; };
+		AA1135F518A1B922001BFA6A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1135F318A1B922001BFA6A /* Main_iPad.storyboard */; };
+		AA1135FA18A1B922001BFA6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1135F918A1B922001BFA6A /* Images.xcassets */; };
+		AA11361C18A1C688001BFA6A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		AA11361D18A1C697001BFA6A /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		AA11361E18A1C6A2001BFA6A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		AA11361F18A1C6BF001BFA6A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		AA11362018A1C6CF001BFA6A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		AA11362118A1C6D6001BFA6A /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		AA11362218A1C6E2001BFA6A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		AA11362318A1C6E8001BFA6A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		AA11362418A1C6F4001BFA6A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		AA11362518A1C6F9001BFA6A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		AA11362618A1C708001BFA6A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		AA11362718A1C70C001BFA6A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AA23A11E18B6BBE200323957 /* ALTutorialFourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */; };
+		AA578E1418A692C80063E390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		AA578E1518A692C80063E390 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		AA578E1618A692C80063E390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		AA578E1C18A692C80063E390 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA578E1A18A692C80063E390 /* InfoPlist.strings */; };
+		AA578E1E18A692C80063E390 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA578E1D18A692C80063E390 /* main.m */; };
+		AA578E2218A692C80063E390 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA578E2118A692C80063E390 /* ALAppDelegate.m */; };
+		AA578E2518A692C80063E390 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA578E2318A692C80063E390 /* Main_iPhone.storyboard */; };
+		AA578E2818A692C80063E390 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA578E2618A692C80063E390 /* Main_iPad.storyboard */; };
+		AA578E2D18A692C80063E390 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA578E2C18A692C80063E390 /* Images.xcassets */; };
+		AA578E4718A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4818A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4918A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4A18A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4B18A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4C18A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4D18A6931D0063E390 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AA578E4E18A693650063E390 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AA578E4F18A6936B0063E390 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		AA578E5018A693730063E390 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		AA578E5118A693780063E390 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		AA578E5218A693810063E390 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		AA578E5318A693890063E390 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		AA578E5418A6938E0063E390 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		AA578E5518A693970063E390 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		AA578E5618A6939F0063E390 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		AA578E5718A693A60063E390 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		AA578E5818A693AF0063E390 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		AA9AFD1D18B6B56F001E90BA /* ALTutorialOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */; };
+		AA9AFD2018B6B87E001E90BA /* ALTutorialTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */; };
+		AA9AFD2318B6BA3C001E90BA /* ALTutorialThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */; };
+		AACB243118B7DE2200F64D3A /* ALTutorialFiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */; };
+		AACB243418B7DF6B00F64D3A /* ALTutorialSevenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */; };
+		AACB243718B7E05C00F64D3A /* ALTutorialEightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */; };
+		AACB247418B7E81500F64D3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		AACB247518B7E81500F64D3A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		AACB247618B7E81600F64D3A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		AACB247C18B7E81600F64D3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AACB247A18B7E81600F64D3A /* InfoPlist.strings */; };
+		AACB247E18B7E81600F64D3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB247D18B7E81600F64D3A /* main.m */; };
+		AACB248218B7E81600F64D3A /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB248118B7E81600F64D3A /* ALAppDelegate.m */; };
+		AACB248518B7E81600F64D3A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACB248318B7E81600F64D3A /* Main_iPhone.storyboard */; };
+		AACB248818B7E81600F64D3A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACB248618B7E81600F64D3A /* Main_iPad.storyboard */; };
+		AACB248D18B7E81600F64D3A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AACB248C18B7E81600F64D3A /* Images.xcassets */; };
+		AACB24A818B7E85E00F64D3A /* ALTutorialSixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB24A718B7E85E00F64D3A /* ALTutorialSixViewController.m */; };
+		AACB24A918B7EA0900F64D3A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		AACB24AA18B7EA1100F64D3A /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		AACB24AB18B7EA1700F64D3A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		AACB24AC18B7EA1C00F64D3A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		AACB24AD18B7EA2100F64D3A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		AACB24AE18B7EA2800F64D3A /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		AACB24AF18B7EA3800F64D3A /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA578E4618A6931D0063E390 /* AddLive.framework */; };
+		AACB24B018B7EA4000F64D3A /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		AACB24B118B7EA4500F64D3A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		AACB24B218B7EA4A00F64D3A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		AACB24B318B7EA4F00F64D3A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		AACB24B418B7EA5500F64D3A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		AACB24B518B7EA5B00F64D3A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AACB24B718B7EBB500F64D3A /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = AACB24B618B7EBB500F64D3A /* test.wav */; };
+		AADDB2F318A431BF00298780 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		AADDB2F418A431BF00298780 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		AADDB2F518A431BF00298780 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		AADDB2FB18A431BF00298780 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AADDB2F918A431BF00298780 /* InfoPlist.strings */; };
+		AADDB2FD18A431BF00298780 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AADDB2FC18A431BF00298780 /* main.m */; };
+		AADDB30118A431BF00298780 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AADDB30018A431BF00298780 /* ALAppDelegate.m */; };
+		AADDB30418A431BF00298780 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADDB30218A431BF00298780 /* Main_iPhone.storyboard */; };
+		AADDB30718A431BF00298780 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADDB30518A431BF00298780 /* Main_iPad.storyboard */; };
+		AADDB30C18A431BF00298780 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AADDB30B18A431BF00298780 /* Images.xcassets */; };
+		AADDB33318A4325500298780 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AADDB33418A4325D00298780 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		AADDB33518A4326600298780 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		AADDB33618A4326B00298780 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		AADDB33718A4327400298780 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		AADDB33818A4327A00298780 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		AADDB33918A4328700298780 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		AADDB33A18A4328B00298780 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		AADDB33B18A4329600298780 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		AADDB33C18A432A300298780 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		AADDB33D18A432AC00298780 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		AADDB33E18A432B600298780 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		F2250B97189169340089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		F2250B98189169400089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		F2250B991891694C0089714A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
@@ -18,7 +118,6 @@
 		F23FFAC218721A4D00F30444 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFAC118721A4D00F30444 /* ALAppDelegate.m */; };
 		F23FFAC518721A4D00F30444 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */; };
 		F23FFAC818721A4D00F30444 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */; };
-		F23FFACB18721A4D00F30444 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F23FFACA18721A4D00F30444 /* ALViewController.m */; };
 		F23FFACD18721A4D00F30444 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23FFACC18721A4D00F30444 /* Images.xcassets */; };
 		F23FFAE618721A7500F30444 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F23FFAE718721A7500F30444 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
@@ -31,7 +130,6 @@
 		F23FFAEF18721A7500F30444 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
 		F23FFAF018721A7500F30444 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
 		F23FFAF118721A7500F30444 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
-		F23FFAF218721A7500F30444 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
 		F27EDA6C1871F77000273A80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		F27EDA6D1871F77000273A80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		F27EDA6E1871F77000273A80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -40,9 +138,7 @@
 		F27EDA7A1871F77100273A80 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDA791871F77100273A80 /* ALAppDelegate.m */; };
 		F27EDA7D1871F77100273A80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDA7B1871F77100273A80 /* Main_iPhone.storyboard */; };
 		F27EDA801871F77100273A80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDA7E1871F77100273A80 /* Main_iPad.storyboard */; };
-		F27EDA831871F77100273A80 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDA821871F77100273A80 /* ALViewController.m */; };
 		F27EDA851871F77100273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDA841871F77100273A80 /* Images.xcassets */; };
-		F27EDA9F1871F7F400273A80 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
 		F27EDAA11871F86900273A80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
 		F27EDAAA1871F8BE00273A80 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
 		F27EDAAB1871F8BE00273A80 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
@@ -62,7 +158,6 @@
 		F27EDAE71872074800273A80 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDAE61872074800273A80 /* ALAppDelegate.m */; };
 		F27EDAEA1872074800273A80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAE81872074800273A80 /* Main_iPhone.storyboard */; };
 		F27EDAED1872074800273A80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAEB1872074800273A80 /* Main_iPad.storyboard */; };
-		F27EDAF01872074800273A80 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDAEF1872074800273A80 /* ALViewController.m */; };
 		F27EDAF21872074800273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDAF11872074800273A80 /* Images.xcassets */; };
 		F27EDB0B1872076D00273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDB0C1872078B00273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
@@ -75,7 +170,6 @@
 		F27EDB141872078B00273A80 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
 		F27EDB151872078B00273A80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
 		F27EDB161872078B00273A80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
-		F27EDB171872078B00273A80 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
 		F27EDB1D18720A3100273A80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		F27EDB1E18720A3100273A80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		F27EDB1F18720A3100273A80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -84,7 +178,6 @@
 		F27EDB2B18720A3100273A80 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDB2A18720A3100273A80 /* ALAppDelegate.m */; };
 		F27EDB2E18720A3100273A80 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB2C18720A3100273A80 /* Main_iPhone.storyboard */; };
 		F27EDB3118720A3100273A80 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB2F18720A3100273A80 /* Main_iPad.storyboard */; };
-		F27EDB3418720A3200273A80 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F27EDB3318720A3200273A80 /* ALViewController.m */; };
 		F27EDB3618720A3200273A80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F27EDB3518720A3200273A80 /* Images.xcassets */; };
 		F27EDB4F18720A7600273A80 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		F27EDB5018720A7600273A80 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
@@ -97,36 +190,68 @@
 		F27EDB5818720A7600273A80 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
 		F27EDB5918720A7600273A80 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
 		F27EDB5A18720A7600273A80 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
-		F27EDB5B18720A7600273A80 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
 		F28731E0188D3D8E006803C6 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
-		F29218BC18A3CFB2001101F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
-		F29218BD18A3CFB2001101F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
-		F29218BE18A3CFB2001101F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
-		F29218C418A3CFB2001101F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F29218C218A3CFB2001101F4 /* InfoPlist.strings */; };
-		F29218C618A3CFB2001101F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F29218C518A3CFB2001101F4 /* main.m */; };
-		F29218CA18A3CFB2001101F4 /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F29218C918A3CFB2001101F4 /* ALAppDelegate.m */; };
-		F29218CD18A3CFB2001101F4 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F29218CB18A3CFB2001101F4 /* Main_iPhone.storyboard */; };
-		F29218D018A3CFB2001101F4 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F29218CE18A3CFB2001101F4 /* Main_iPad.storyboard */; };
-		F29218D318A3CFB2001101F4 /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F29218D218A3CFB2001101F4 /* ALViewController.m */; };
-		F29218D518A3CFB2001101F4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F29218D418A3CFB2001101F4 /* Images.xcassets */; };
-		F29218EE18A3D075001101F4 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
-		F29218EF18A3D075001101F4 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
-		F29218F018A3D075001101F4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
-		F29218F118A3D075001101F4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
-		F29218F218A3D075001101F4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
-		F29218F318A3D075001101F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
-		F29218F418A3D075001101F4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
-		F29218F518A3D075001101F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
-		F29218F618A3D075001101F4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
-		F29218F718A3D075001101F4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
-		F29218F818A3D075001101F4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
-		F29218F918A3D075001101F4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
-		F29218FA18A3D075001101F4 /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA9E1871F7F400273A80 /* AddLive.framework */; };
-		F29218FB18A3D075001101F4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA511871F70300273A80 /* XCTest.framework */; };
-		F29218FD18A3D415001101F4 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = F29218FC18A3D415001101F4 /* test.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA1135E018A1B922001BFA6A /* Tutorial5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial5.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA1135E618A1B922001BFA6A /* Tutorial5-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial5-Info.plist"; sourceTree = "<group>"; };
+		AA1135E818A1B922001BFA6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA1135EA18A1B922001BFA6A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA1135EC18A1B922001BFA6A /* Tutorial5-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial5-Prefix.pch"; sourceTree = "<group>"; };
+		AA1135ED18A1B922001BFA6A /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		AA1135EE18A1B922001BFA6A /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		AA1135F118A1B922001BFA6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		AA1135F418A1B922001BFA6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		AA1135F918A1B922001BFA6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AA23A11C18B6BBE200323957 /* ALTutorialFourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFourViewController.h; sourceTree = "<group>"; };
+		AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFourViewController.m; sourceTree = "<group>"; };
+		AA578E1318A692C80063E390 /* Tutorial8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial8.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA578E1918A692C80063E390 /* Tutorial8-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial8-Info.plist"; sourceTree = "<group>"; };
+		AA578E1B18A692C80063E390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA578E1D18A692C80063E390 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA578E1F18A692C80063E390 /* Tutorial8-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial8-Prefix.pch"; sourceTree = "<group>"; };
+		AA578E2018A692C80063E390 /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		AA578E2118A692C80063E390 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		AA578E2418A692C80063E390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		AA578E2718A692C80063E390 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		AA578E2C18A692C80063E390 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AA578E4618A6931D0063E390 /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
+		AA9AFD1B18B6B56F001E90BA /* ALTutorialOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialOneViewController.h; sourceTree = "<group>"; };
+		AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialOneViewController.m; sourceTree = "<group>"; };
+		AA9AFD1E18B6B87E001E90BA /* ALTutorialTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialTwoViewController.h; sourceTree = "<group>"; };
+		AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialTwoViewController.m; sourceTree = "<group>"; };
+		AA9AFD2118B6BA3C001E90BA /* ALTutorialThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialThreeViewController.h; sourceTree = "<group>"; };
+		AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialThreeViewController.m; sourceTree = "<group>"; };
+		AACB242F18B7DE2200F64D3A /* ALTutorialFiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFiveViewController.h; sourceTree = "<group>"; };
+		AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFiveViewController.m; sourceTree = "<group>"; };
+		AACB243218B7DF6B00F64D3A /* ALTutorialSevenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialSevenViewController.h; sourceTree = "<group>"; };
+		AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialSevenViewController.m; sourceTree = "<group>"; };
+		AACB243518B7E05C00F64D3A /* ALTutorialEightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialEightViewController.h; sourceTree = "<group>"; };
+		AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialEightViewController.m; sourceTree = "<group>"; };
+		AACB247318B7E81500F64D3A /* Tutorial6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial6.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AACB247918B7E81600F64D3A /* Tutorial6-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial6-Info.plist"; sourceTree = "<group>"; };
+		AACB247B18B7E81600F64D3A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AACB247D18B7E81600F64D3A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AACB247F18B7E81600F64D3A /* Tutorial6-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial6-Prefix.pch"; sourceTree = "<group>"; };
+		AACB248018B7E81600F64D3A /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		AACB248118B7E81600F64D3A /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		AACB248418B7E81600F64D3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		AACB248718B7E81600F64D3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		AACB248C18B7E81600F64D3A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AACB24A618B7E85E00F64D3A /* ALTutorialSixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialSixViewController.h; sourceTree = "<group>"; };
+		AACB24A718B7E85E00F64D3A /* ALTutorialSixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialSixViewController.m; sourceTree = "<group>"; };
+		AACB24B618B7EBB500F64D3A /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
+		AADDB2F218A431BF00298780 /* Tutorial7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial7.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AADDB2F818A431BF00298780 /* Tutorial7-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial7-Info.plist"; sourceTree = "<group>"; };
+		AADDB2FA18A431BF00298780 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AADDB2FC18A431BF00298780 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AADDB2FE18A431BF00298780 /* Tutorial7-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial7-Prefix.pch"; sourceTree = "<group>"; };
+		AADDB2FF18A431BF00298780 /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		AADDB30018A431BF00298780 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		AADDB30318A431BF00298780 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		AADDB30618A431BF00298780 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		AADDB30B18A431BF00298780 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F23FFAB318721A4C00F30444 /* Tutorial4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23FFAB918721A4D00F30444 /* Tutorial4-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial4-Info.plist"; sourceTree = "<group>"; };
 		F23FFABB18721A4D00F30444 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -136,8 +261,6 @@
 		F23FFAC118721A4D00F30444 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F23FFAC418721A4D00F30444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F23FFAC718721A4D00F30444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F23FFAC918721A4D00F30444 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F23FFACA18721A4D00F30444 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F23FFACC18721A4D00F30444 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F27EDA2F1871F70300273A80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F27EDA311871F70300273A80 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -152,10 +275,7 @@
 		F27EDA791871F77100273A80 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F27EDA7C1871F77100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F27EDA7F1871F77100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F27EDA811871F77100273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F27EDA821871F77100273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDA841871F77100273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F27EDA9E1871F7F400273A80 /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		F27EDAA01871F86900273A80 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F27EDAA31871F8BE00273A80 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -165,6 +285,7 @@
 		F27EDAA71871F8BE00273A80 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F27EDAA81871F8BE00273A80 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F27EDACE1872067800273A80 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		F27EDAD01872068200273A80 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F27EDAD21872068D00273A80 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		F27EDAD81872074700273A80 /* Tutorial2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,8 +297,6 @@
 		F27EDAE61872074800273A80 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F27EDAE91872074800273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F27EDAEC1872074800273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F27EDAEE1872074800273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F27EDAEF1872074800273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDAF11872074800273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F27EDB1C18720A3100273A80 /* Tutorial3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F27EDB2218720A3100273A80 /* Tutorial3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial3-Info.plist"; sourceTree = "<group>"; };
@@ -188,26 +307,103 @@
 		F27EDB2A18720A3100273A80 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
 		F27EDB2D18720A3100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F27EDB3018720A3100273A80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F27EDB3218720A3100273A80 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F27EDB3318720A3200273A80 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		F27EDB3518720A3200273A80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F28731DD188D3D53006803C6 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		F28731DF188D3D8E006803C6 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		F29218BB18A3CFB2001101F4 /* Tutorial6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial6.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F29218C118A3CFB2001101F4 /* Tutorial6-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial6-Info.plist"; sourceTree = "<group>"; };
-		F29218C318A3CFB2001101F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F29218C518A3CFB2001101F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F29218C718A3CFB2001101F4 /* Tutorial6-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial6-Prefix.pch"; sourceTree = "<group>"; };
-		F29218C818A3CFB2001101F4 /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
-		F29218C918A3CFB2001101F4 /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
-		F29218CC18A3CFB2001101F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		F29218CF18A3CFB2001101F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F29218D118A3CFB2001101F4 /* ALViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
-		F29218D218A3CFB2001101F4 /* ALViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
-		F29218D418A3CFB2001101F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F29218FC18A3D415001101F4 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AA1135DD18A1B922001BFA6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA11362718A1C70C001BFA6A /* Security.framework in Frameworks */,
+				AA11362618A1C708001BFA6A /* SystemConfiguration.framework in Frameworks */,
+				AA11362518A1C6F9001BFA6A /* QuartzCore.framework in Frameworks */,
+				AA11362418A1C6F4001BFA6A /* OpenGLES.framework in Frameworks */,
+				AA11362318A1C6E8001BFA6A /* MessageUI.framework in Frameworks */,
+				AA11362218A1C6E2001BFA6A /* CoreVideo.framework in Frameworks */,
+				AA578E4B18A6931D0063E390 /* AddLive.framework in Frameworks */,
+				AA11362118A1C6D6001BFA6A /* CoreMedia.framework in Frameworks */,
+				AA11362018A1C6CF001BFA6A /* AVFoundation.framework in Frameworks */,
+				AA11361F18A1C6BF001BFA6A /* AudioToolbox.framework in Frameworks */,
+				AA11361E18A1C6A2001BFA6A /* libz.dylib in Frameworks */,
+				AA11361D18A1C697001BFA6A /* libresolv.dylib in Frameworks */,
+				AA11361C18A1C688001BFA6A /* libc++.dylib in Frameworks */,
+				AA1135E218A1B922001BFA6A /* CoreGraphics.framework in Frameworks */,
+				AA1135E318A1B922001BFA6A /* UIKit.framework in Frameworks */,
+				AA1135E118A1B922001BFA6A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA578E1018A692C80063E390 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA578E5818A693AF0063E390 /* libc++.dylib in Frameworks */,
+				AA578E5718A693A60063E390 /* libresolv.dylib in Frameworks */,
+				AA578E5618A6939F0063E390 /* libz.dylib in Frameworks */,
+				AA578E5518A693970063E390 /* AudioToolbox.framework in Frameworks */,
+				AA578E5418A6938E0063E390 /* AVFoundation.framework in Frameworks */,
+				AA578E5318A693890063E390 /* CoreMedia.framework in Frameworks */,
+				AA578E5218A693810063E390 /* CoreVideo.framework in Frameworks */,
+				AA578E5118A693780063E390 /* MessageUI.framework in Frameworks */,
+				AA578E5018A693730063E390 /* OpenGLES.framework in Frameworks */,
+				AA578E4F18A6936B0063E390 /* QuartzCore.framework in Frameworks */,
+				AA578E4E18A693650063E390 /* Security.framework in Frameworks */,
+				AA578E1518A692C80063E390 /* CoreGraphics.framework in Frameworks */,
+				AA578E1618A692C80063E390 /* UIKit.framework in Frameworks */,
+				AA578E4D18A6931D0063E390 /* AddLive.framework in Frameworks */,
+				AA578E1418A692C80063E390 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AACB247018B7E81500F64D3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB24B518B7EA5B00F64D3A /* Security.framework in Frameworks */,
+				AACB24B418B7EA5500F64D3A /* SystemConfiguration.framework in Frameworks */,
+				AACB24B318B7EA4F00F64D3A /* QuartzCore.framework in Frameworks */,
+				AACB24B218B7EA4A00F64D3A /* OpenGLES.framework in Frameworks */,
+				AACB24B118B7EA4500F64D3A /* MessageUI.framework in Frameworks */,
+				AACB24B018B7EA4000F64D3A /* CoreVideo.framework in Frameworks */,
+				AACB24AF18B7EA3800F64D3A /* AddLive.framework in Frameworks */,
+				AACB24AE18B7EA2800F64D3A /* CoreMedia.framework in Frameworks */,
+				AACB24AD18B7EA2100F64D3A /* AVFoundation.framework in Frameworks */,
+				AACB24AC18B7EA1C00F64D3A /* AudioToolbox.framework in Frameworks */,
+				AACB24AB18B7EA1700F64D3A /* libz.dylib in Frameworks */,
+				AACB24AA18B7EA1100F64D3A /* libresolv.dylib in Frameworks */,
+				AACB24A918B7EA0900F64D3A /* libc++.dylib in Frameworks */,
+				AACB247518B7E81500F64D3A /* CoreGraphics.framework in Frameworks */,
+				AACB247618B7E81600F64D3A /* UIKit.framework in Frameworks */,
+				AACB247418B7E81500F64D3A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADDB2EF18A431BF00298780 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADDB33E18A432B600298780 /* libc++.dylib in Frameworks */,
+				AADDB33D18A432AC00298780 /* libresolv.dylib in Frameworks */,
+				AADDB33C18A432A300298780 /* libz.dylib in Frameworks */,
+				AADDB33B18A4329600298780 /* AudioToolbox.framework in Frameworks */,
+				AADDB33A18A4328B00298780 /* AVFoundation.framework in Frameworks */,
+				AADDB33918A4328700298780 /* CoreMedia.framework in Frameworks */,
+				AA578E4C18A6931D0063E390 /* AddLive.framework in Frameworks */,
+				AADDB33818A4327A00298780 /* CoreVideo.framework in Frameworks */,
+				AADDB33718A4327400298780 /* MessageUI.framework in Frameworks */,
+				AADDB33618A4326B00298780 /* OpenGLES.framework in Frameworks */,
+				AADDB33518A4326600298780 /* QuartzCore.framework in Frameworks */,
+				AADDB33418A4325D00298780 /* SystemConfiguration.framework in Frameworks */,
+				AADDB33318A4325500298780 /* Security.framework in Frameworks */,
+				AADDB2F418A431BF00298780 /* CoreGraphics.framework in Frameworks */,
+				AADDB2F518A431BF00298780 /* UIKit.framework in Frameworks */,
+				AADDB2F318A431BF00298780 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F23FFAB018721A4C00F30444 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,13 +414,13 @@
 				F23FFAE918721A7500F30444 /* AudioToolbox.framework in Frameworks */,
 				F23FFAEA18721A7500F30444 /* AVFoundation.framework in Frameworks */,
 				F23FFAEB18721A7500F30444 /* CoreMedia.framework in Frameworks */,
+				AA578E4A18A6931D0063E390 /* AddLive.framework in Frameworks */,
 				F23FFAEC18721A7500F30444 /* CoreVideo.framework in Frameworks */,
 				F23FFAED18721A7500F30444 /* MessageUI.framework in Frameworks */,
 				F23FFAEE18721A7500F30444 /* OpenGLES.framework in Frameworks */,
 				F23FFAEF18721A7500F30444 /* QuartzCore.framework in Frameworks */,
 				F23FFAF018721A7500F30444 /* SystemConfiguration.framework in Frameworks */,
 				F23FFAF118721A7500F30444 /* Security.framework in Frameworks */,
-				F23FFAF218721A7500F30444 /* AddLive.framework in Frameworks */,
 				F23FFAB418721A4D00F30444 /* Foundation.framework in Frameworks */,
 				F23FFAB518721A4D00F30444 /* CoreGraphics.framework in Frameworks */,
 				F23FFAB618721A4D00F30444 /* UIKit.framework in Frameworks */,
@@ -241,6 +437,7 @@
 				F27EDAAA1871F8BE00273A80 /* AudioToolbox.framework in Frameworks */,
 				F27EDAAB1871F8BE00273A80 /* AVFoundation.framework in Frameworks */,
 				F27EDAAC1871F8BE00273A80 /* CoreMedia.framework in Frameworks */,
+				AA578E4718A6931D0063E390 /* AddLive.framework in Frameworks */,
 				F27EDAAD1871F8BE00273A80 /* CoreVideo.framework in Frameworks */,
 				F27EDAAE1871F8BE00273A80 /* MessageUI.framework in Frameworks */,
 				F27EDAAF1871F8BE00273A80 /* OpenGLES.framework in Frameworks */,
@@ -250,7 +447,6 @@
 				F27EDA6C1871F77000273A80 /* Foundation.framework in Frameworks */,
 				F27EDAA11871F86900273A80 /* Security.framework in Frameworks */,
 				F27EDA6E1871F77000273A80 /* UIKit.framework in Frameworks */,
-				F27EDA9F1871F7F400273A80 /* AddLive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,13 +460,13 @@
 				F27EDB0E1872078B00273A80 /* AudioToolbox.framework in Frameworks */,
 				F27EDB0F1872078B00273A80 /* AVFoundation.framework in Frameworks */,
 				F27EDB101872078B00273A80 /* CoreMedia.framework in Frameworks */,
+				AA578E4818A6931D0063E390 /* AddLive.framework in Frameworks */,
 				F27EDB111872078B00273A80 /* CoreVideo.framework in Frameworks */,
 				F27EDB121872078B00273A80 /* MessageUI.framework in Frameworks */,
 				F27EDB131872078B00273A80 /* OpenGLES.framework in Frameworks */,
 				F27EDB141872078B00273A80 /* QuartzCore.framework in Frameworks */,
 				F27EDB151872078B00273A80 /* SystemConfiguration.framework in Frameworks */,
 				F27EDB161872078B00273A80 /* Security.framework in Frameworks */,
-				F27EDB171872078B00273A80 /* AddLive.framework in Frameworks */,
 				F27EDAD91872074700273A80 /* Foundation.framework in Frameworks */,
 				F27EDADA1872074700273A80 /* CoreGraphics.framework in Frameworks */,
 				F27EDADB1872074700273A80 /* UIKit.framework in Frameworks */,
@@ -287,46 +483,127 @@
 				F27EDB5218720A7600273A80 /* AudioToolbox.framework in Frameworks */,
 				F27EDB5318720A7600273A80 /* AVFoundation.framework in Frameworks */,
 				F27EDB5418720A7600273A80 /* CoreMedia.framework in Frameworks */,
+				AA578E4918A6931D0063E390 /* AddLive.framework in Frameworks */,
 				F27EDB5518720A7600273A80 /* CoreVideo.framework in Frameworks */,
 				F27EDB5618720A7600273A80 /* MessageUI.framework in Frameworks */,
 				F27EDB5718720A7600273A80 /* OpenGLES.framework in Frameworks */,
 				F27EDB5818720A7600273A80 /* QuartzCore.framework in Frameworks */,
 				F27EDB5918720A7600273A80 /* SystemConfiguration.framework in Frameworks */,
 				F27EDB5A18720A7600273A80 /* Security.framework in Frameworks */,
-				F27EDB5B18720A7600273A80 /* AddLive.framework in Frameworks */,
 				F27EDB1D18720A3100273A80 /* Foundation.framework in Frameworks */,
 				F27EDB1E18720A3100273A80 /* CoreGraphics.framework in Frameworks */,
 				F27EDB1F18720A3100273A80 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F29218B818A3CFB2001101F4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F29218EE18A3D075001101F4 /* libc++.dylib in Frameworks */,
-				F29218EF18A3D075001101F4 /* libresolv.dylib in Frameworks */,
-				F29218F018A3D075001101F4 /* libz.dylib in Frameworks */,
-				F29218F118A3D075001101F4 /* AudioToolbox.framework in Frameworks */,
-				F29218F218A3D075001101F4 /* AVFoundation.framework in Frameworks */,
-				F29218F318A3D075001101F4 /* CoreMedia.framework in Frameworks */,
-				F29218F418A3D075001101F4 /* CoreVideo.framework in Frameworks */,
-				F29218F518A3D075001101F4 /* MessageUI.framework in Frameworks */,
-				F29218F618A3D075001101F4 /* OpenGLES.framework in Frameworks */,
-				F29218F718A3D075001101F4 /* QuartzCore.framework in Frameworks */,
-				F29218F818A3D075001101F4 /* SystemConfiguration.framework in Frameworks */,
-				F29218F918A3D075001101F4 /* Security.framework in Frameworks */,
-				F29218FA18A3D075001101F4 /* AddLive.framework in Frameworks */,
-				F29218BC18A3CFB2001101F4 /* Foundation.framework in Frameworks */,
-				F29218BD18A3CFB2001101F4 /* CoreGraphics.framework in Frameworks */,
-				F29218BE18A3CFB2001101F4 /* UIKit.framework in Frameworks */,
-				F29218FB18A3D075001101F4 /* XCTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA1135E418A1B922001BFA6A /* Tutorial5 */ = {
+			isa = PBXGroup;
+			children = (
+				AA1135ED18A1B922001BFA6A /* ALAppDelegate.h */,
+				AA1135EE18A1B922001BFA6A /* ALAppDelegate.m */,
+				AA1135F018A1B922001BFA6A /* Main_iPhone.storyboard */,
+				AA1135F318A1B922001BFA6A /* Main_iPad.storyboard */,
+				AACB242F18B7DE2200F64D3A /* ALTutorialFiveViewController.h */,
+				AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */,
+				AA1135F918A1B922001BFA6A /* Images.xcassets */,
+				AA1135E518A1B922001BFA6A /* Supporting Files */,
+			);
+			path = Tutorial5;
+			sourceTree = "<group>";
+		};
+		AA1135E518A1B922001BFA6A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA1135E618A1B922001BFA6A /* Tutorial5-Info.plist */,
+				AA1135E718A1B922001BFA6A /* InfoPlist.strings */,
+				AA1135EA18A1B922001BFA6A /* main.m */,
+				AA1135EC18A1B922001BFA6A /* Tutorial5-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA578E1718A692C80063E390 /* Tutorial8 */ = {
+			isa = PBXGroup;
+			children = (
+				AA578E2018A692C80063E390 /* ALAppDelegate.h */,
+				AA578E2118A692C80063E390 /* ALAppDelegate.m */,
+				AA578E2318A692C80063E390 /* Main_iPhone.storyboard */,
+				AA578E2618A692C80063E390 /* Main_iPad.storyboard */,
+				AACB243518B7E05C00F64D3A /* ALTutorialEightViewController.h */,
+				AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */,
+				AA578E2C18A692C80063E390 /* Images.xcassets */,
+				AA578E1818A692C80063E390 /* Supporting Files */,
+			);
+			path = Tutorial8;
+			sourceTree = "<group>";
+		};
+		AA578E1818A692C80063E390 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA578E1918A692C80063E390 /* Tutorial8-Info.plist */,
+				AA578E1A18A692C80063E390 /* InfoPlist.strings */,
+				AA578E1D18A692C80063E390 /* main.m */,
+				AA578E1F18A692C80063E390 /* Tutorial8-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AACB247718B7E81600F64D3A /* Tutorial6 */ = {
+			isa = PBXGroup;
+			children = (
+				AACB248018B7E81600F64D3A /* ALAppDelegate.h */,
+				AACB248118B7E81600F64D3A /* ALAppDelegate.m */,
+				AACB248318B7E81600F64D3A /* Main_iPhone.storyboard */,
+				AACB248618B7E81600F64D3A /* Main_iPad.storyboard */,
+				AACB24A618B7E85E00F64D3A /* ALTutorialSixViewController.h */,
+				AACB24A718B7E85E00F64D3A /* ALTutorialSixViewController.m */,
+				AACB24B618B7EBB500F64D3A /* test.wav */,
+				AACB248C18B7E81600F64D3A /* Images.xcassets */,
+				AACB247818B7E81600F64D3A /* Supporting Files */,
+			);
+			path = Tutorial6;
+			sourceTree = "<group>";
+		};
+		AACB247818B7E81600F64D3A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AACB247918B7E81600F64D3A /* Tutorial6-Info.plist */,
+				AACB247A18B7E81600F64D3A /* InfoPlist.strings */,
+				AACB247D18B7E81600F64D3A /* main.m */,
+				AACB247F18B7E81600F64D3A /* Tutorial6-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AADDB2F618A431BF00298780 /* Tutorial7 */ = {
+			isa = PBXGroup;
+			children = (
+				AADDB2FF18A431BF00298780 /* ALAppDelegate.h */,
+				AADDB30018A431BF00298780 /* ALAppDelegate.m */,
+				AADDB30218A431BF00298780 /* Main_iPhone.storyboard */,
+				AADDB30518A431BF00298780 /* Main_iPad.storyboard */,
+				AACB243218B7DF6B00F64D3A /* ALTutorialSevenViewController.h */,
+				AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */,
+				AADDB30B18A431BF00298780 /* Images.xcassets */,
+				AADDB2F718A431BF00298780 /* Supporting Files */,
+			);
+			path = Tutorial7;
+			sourceTree = "<group>";
+		};
+		AADDB2F718A431BF00298780 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AADDB2F818A431BF00298780 /* Tutorial7-Info.plist */,
+				AADDB2F918A431BF00298780 /* InfoPlist.strings */,
+				AADDB2FC18A431BF00298780 /* main.m */,
+				AADDB2FE18A431BF00298780 /* Tutorial7-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F23FFAB718721A4D00F30444 /* Tutorial4 */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,8 +611,8 @@
 				F23FFAC118721A4D00F30444 /* ALAppDelegate.m */,
 				F23FFAC318721A4D00F30444 /* Main_iPhone.storyboard */,
 				F23FFAC618721A4D00F30444 /* Main_iPad.storyboard */,
-				F23FFAC918721A4D00F30444 /* ALViewController.h */,
-				F23FFACA18721A4D00F30444 /* ALViewController.m */,
+				AA23A11C18B6BBE200323957 /* ALTutorialFourViewController.h */,
+				AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */,
 				F23FFACC18721A4D00F30444 /* Images.xcassets */,
 				F23FFAB818721A4D00F30444 /* Supporting Files */,
 			);
@@ -360,7 +637,10 @@
 				F27EDADC1872074700273A80 /* Tutorial2 */,
 				F27EDB2018720A3100273A80 /* Tutorial3 */,
 				F23FFAB718721A4D00F30444 /* Tutorial4 */,
-				F29218BF18A3CFB2001101F4 /* Tutorial6 */,
+				AA1135E418A1B922001BFA6A /* Tutorial5 */,
+				AACB247718B7E81600F64D3A /* Tutorial6 */,
+				AADDB2F618A431BF00298780 /* Tutorial7 */,
+				AA578E1718A692C80063E390 /* Tutorial8 */,
 				F27EDA2E1871F70300273A80 /* Frameworks */,
 				F27EDA2D1871F70300273A80 /* Products */,
 			);
@@ -373,7 +653,10 @@
 				F27EDAD81872074700273A80 /* Tutorial2.app */,
 				F27EDB1C18720A3100273A80 /* Tutorial3.app */,
 				F23FFAB318721A4C00F30444 /* Tutorial4.app */,
-				F29218BB18A3CFB2001101F4 /* Tutorial6.app */,
+				AA1135E018A1B922001BFA6A /* Tutorial5.app */,
+				AADDB2F218A431BF00298780 /* Tutorial7.app */,
+				AA578E1318A692C80063E390 /* Tutorial8.app */,
+				AACB247318B7E81500F64D3A /* Tutorial6.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,8 +665,11 @@
 			isa = PBXGroup;
 			children = (
 				F28731DF188D3D8E006803C6 /* libc++.dylib */,
+				F28731DD188D3D53006803C6 /* libstdc++.dylib */,
 				F27EDAD21872068D00273A80 /* libresolv.dylib */,
 				F27EDAD01872068200273A80 /* libz.dylib */,
+				F27EDACE1872067800273A80 /* libstdc++.6.dylib */,
+				AA578E4618A6931D0063E390 /* AddLive.framework */,
 				F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */,
 				F27EDAA31871F8BE00273A80 /* AVFoundation.framework */,
 				F27EDAA41871F8BE00273A80 /* CoreMedia.framework */,
@@ -393,7 +679,6 @@
 				F27EDAA81871F8BE00273A80 /* QuartzCore.framework */,
 				F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */,
 				F27EDAA01871F86900273A80 /* Security.framework */,
-				F27EDA9E1871F7F400273A80 /* AddLive.framework */,
 				F27EDA2F1871F70300273A80 /* Foundation.framework */,
 				F27EDA311871F70300273A80 /* CoreGraphics.framework */,
 				F27EDA331871F70300273A80 /* UIKit.framework */,
@@ -409,8 +694,8 @@
 				F27EDA791871F77100273A80 /* ALAppDelegate.m */,
 				F27EDA7B1871F77100273A80 /* Main_iPhone.storyboard */,
 				F27EDA7E1871F77100273A80 /* Main_iPad.storyboard */,
-				F27EDA811871F77100273A80 /* ALViewController.h */,
-				F27EDA821871F77100273A80 /* ALViewController.m */,
+				AA9AFD1B18B6B56F001E90BA /* ALTutorialOneViewController.h */,
+				AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */,
 				F27EDA841871F77100273A80 /* Images.xcassets */,
 				F27EDA701871F77100273A80 /* Supporting Files */,
 			);
@@ -435,8 +720,8 @@
 				F27EDAE61872074800273A80 /* ALAppDelegate.m */,
 				F27EDAE81872074800273A80 /* Main_iPhone.storyboard */,
 				F27EDAEB1872074800273A80 /* Main_iPad.storyboard */,
-				F27EDAEE1872074800273A80 /* ALViewController.h */,
-				F27EDAEF1872074800273A80 /* ALViewController.m */,
+				AA9AFD1E18B6B87E001E90BA /* ALTutorialTwoViewController.h */,
+				AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */,
 				F27EDAF11872074800273A80 /* Images.xcassets */,
 				F27EDADD1872074700273A80 /* Supporting Files */,
 			);
@@ -461,8 +746,8 @@
 				F27EDB2A18720A3100273A80 /* ALAppDelegate.m */,
 				F27EDB2C18720A3100273A80 /* Main_iPhone.storyboard */,
 				F27EDB2F18720A3100273A80 /* Main_iPad.storyboard */,
-				F27EDB3218720A3100273A80 /* ALViewController.h */,
-				F27EDB3318720A3200273A80 /* ALViewController.m */,
+				AA9AFD2118B6BA3C001E90BA /* ALTutorialThreeViewController.h */,
+				AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */,
 				F27EDB3518720A3200273A80 /* Images.xcassets */,
 				F27EDB2118720A3100273A80 /* Supporting Files */,
 			);
@@ -480,36 +765,77 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F29218BF18A3CFB2001101F4 /* Tutorial6 */ = {
-			isa = PBXGroup;
-			children = (
-				F29218FC18A3D415001101F4 /* test.wav */,
-				F29218C818A3CFB2001101F4 /* ALAppDelegate.h */,
-				F29218C918A3CFB2001101F4 /* ALAppDelegate.m */,
-				F29218CB18A3CFB2001101F4 /* Main_iPhone.storyboard */,
-				F29218CE18A3CFB2001101F4 /* Main_iPad.storyboard */,
-				F29218D118A3CFB2001101F4 /* ALViewController.h */,
-				F29218D218A3CFB2001101F4 /* ALViewController.m */,
-				F29218D418A3CFB2001101F4 /* Images.xcassets */,
-				F29218C018A3CFB2001101F4 /* Supporting Files */,
-			);
-			path = Tutorial6;
-			sourceTree = "<group>";
-		};
-		F29218C018A3CFB2001101F4 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F29218C118A3CFB2001101F4 /* Tutorial6-Info.plist */,
-				F29218C218A3CFB2001101F4 /* InfoPlist.strings */,
-				F29218C518A3CFB2001101F4 /* main.m */,
-				F29218C718A3CFB2001101F4 /* Tutorial6-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AA1135DF18A1B922001BFA6A /* Tutorial5 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA11361118A1B923001BFA6A /* Build configuration list for PBXNativeTarget "Tutorial5" */;
+			buildPhases = (
+				AA1135DC18A1B922001BFA6A /* Sources */,
+				AA1135DD18A1B922001BFA6A /* Frameworks */,
+				AA1135DE18A1B922001BFA6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial5;
+			productName = Tutorial5;
+			productReference = AA1135E018A1B922001BFA6A /* Tutorial5.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA578E1218A692C80063E390 /* Tutorial8 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA578E4018A692C90063E390 /* Build configuration list for PBXNativeTarget "Tutorial8" */;
+			buildPhases = (
+				AA578E0F18A692C80063E390 /* Sources */,
+				AA578E1018A692C80063E390 /* Frameworks */,
+				AA578E1118A692C80063E390 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial8;
+			productName = Tutorial8;
+			productReference = AA578E1318A692C80063E390 /* Tutorial8.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AACB247218B7E81500F64D3A /* Tutorial6 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AACB24A018B7E81700F64D3A /* Build configuration list for PBXNativeTarget "Tutorial6" */;
+			buildPhases = (
+				AACB246F18B7E81500F64D3A /* Sources */,
+				AACB247018B7E81500F64D3A /* Frameworks */,
+				AACB247118B7E81500F64D3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial6;
+			productName = Tutorial6;
+			productReference = AACB247318B7E81500F64D3A /* Tutorial6.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AADDB2F118A431BF00298780 /* Tutorial7 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AADDB31F18A431C000298780 /* Build configuration list for PBXNativeTarget "Tutorial7" */;
+			buildPhases = (
+				AADDB2EE18A431BF00298780 /* Sources */,
+				AADDB2EF18A431BF00298780 /* Frameworks */,
+				AADDB2F018A431BF00298780 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial7;
+			productName = Tutorial7;
+			productReference = AADDB2F218A431BF00298780 /* Tutorial7.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F23FFAB218721A4C00F30444 /* Tutorial4 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F23FFAE018721A4D00F30444 /* Build configuration list for PBXNativeTarget "Tutorial4" */;
@@ -578,23 +904,6 @@
 			productReference = F27EDB1C18720A3100273A80 /* Tutorial3.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F29218BA18A3CFB2001101F4 /* Tutorial6 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F29218E818A3CFB2001101F4 /* Build configuration list for PBXNativeTarget "Tutorial6" */;
-			buildPhases = (
-				F29218B718A3CFB2001101F4 /* Sources */,
-				F29218B818A3CFB2001101F4 /* Frameworks */,
-				F29218B918A3CFB2001101F4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Tutorial6;
-			productName = Tutorial6;
-			productReference = F29218BB18A3CFB2001101F4 /* Tutorial6.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -622,12 +931,60 @@
 				F27EDAD71872074700273A80 /* Tutorial2 */,
 				F27EDB1B18720A3100273A80 /* Tutorial3 */,
 				F23FFAB218721A4C00F30444 /* Tutorial4 */,
-				F29218BA18A3CFB2001101F4 /* Tutorial6 */,
+				AA1135DF18A1B922001BFA6A /* Tutorial5 */,
+				AACB247218B7E81500F64D3A /* Tutorial6 */,
+				AADDB2F118A431BF00298780 /* Tutorial7 */,
+				AA578E1218A692C80063E390 /* Tutorial8 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AA1135DE18A1B922001BFA6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1135F518A1B922001BFA6A /* Main_iPad.storyboard in Resources */,
+				AA1135FA18A1B922001BFA6A /* Images.xcassets in Resources */,
+				AA1135F218A1B922001BFA6A /* Main_iPhone.storyboard in Resources */,
+				AA1135E918A1B922001BFA6A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA578E1118A692C80063E390 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA578E2818A692C80063E390 /* Main_iPad.storyboard in Resources */,
+				AA578E2D18A692C80063E390 /* Images.xcassets in Resources */,
+				AA578E2518A692C80063E390 /* Main_iPhone.storyboard in Resources */,
+				AA578E1C18A692C80063E390 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AACB247118B7E81500F64D3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB24B718B7EBB500F64D3A /* test.wav in Resources */,
+				AACB248818B7E81600F64D3A /* Main_iPad.storyboard in Resources */,
+				AACB248D18B7E81600F64D3A /* Images.xcassets in Resources */,
+				AACB248518B7E81600F64D3A /* Main_iPhone.storyboard in Resources */,
+				AACB247C18B7E81600F64D3A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADDB2F018A431BF00298780 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AADDB30718A431BF00298780 /* Main_iPad.storyboard in Resources */,
+				AADDB30C18A431BF00298780 /* Images.xcassets in Resources */,
+				AADDB30418A431BF00298780 /* Main_iPhone.storyboard in Resources */,
+				AADDB2FB18A431BF00298780 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F23FFAB118721A4C00F30444 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -672,27 +1029,55 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F29218B918A3CFB2001101F4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F29218FD18A3D415001101F4 /* test.wav in Resources */,
-				F29218D018A3CFB2001101F4 /* Main_iPad.storyboard in Resources */,
-				F29218D518A3CFB2001101F4 /* Images.xcassets in Resources */,
-				F29218CD18A3CFB2001101F4 /* Main_iPhone.storyboard in Resources */,
-				F29218C418A3CFB2001101F4 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AA1135DC18A1B922001BFA6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1135EB18A1B922001BFA6A /* main.m in Sources */,
+				AA1135EF18A1B922001BFA6A /* ALAppDelegate.m in Sources */,
+				AACB243118B7DE2200F64D3A /* ALTutorialFiveViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA578E0F18A692C80063E390 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB243718B7E05C00F64D3A /* ALTutorialEightViewController.m in Sources */,
+				AA578E1E18A692C80063E390 /* main.m in Sources */,
+				AA578E2218A692C80063E390 /* ALAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AACB246F18B7E81500F64D3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB247E18B7E81600F64D3A /* main.m in Sources */,
+				AACB248218B7E81600F64D3A /* ALAppDelegate.m in Sources */,
+				AACB24A818B7E85E00F64D3A /* ALTutorialSixViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AADDB2EE18A431BF00298780 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB243418B7DF6B00F64D3A /* ALTutorialSevenViewController.m in Sources */,
+				AADDB2FD18A431BF00298780 /* main.m in Sources */,
+				AADDB30118A431BF00298780 /* ALAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F23FFAAF18721A4C00F30444 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA23A11E18B6BBE200323957 /* ALTutorialFourViewController.m in Sources */,
 				F23FFABE18721A4D00F30444 /* main.m in Sources */,
-				F23FFACB18721A4D00F30444 /* ALViewController.m in Sources */,
 				F23FFAC218721A4D00F30444 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,7 +1087,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27EDA761871F77100273A80 /* main.m in Sources */,
-				F27EDA831871F77100273A80 /* ALViewController.m in Sources */,
+				AA9AFD1D18B6B56F001E90BA /* ALTutorialOneViewController.m in Sources */,
 				F27EDA7A1871F77100273A80 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,7 +1097,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27EDAE31872074700273A80 /* main.m in Sources */,
-				F27EDAF01872074800273A80 /* ALViewController.m in Sources */,
+				AA9AFD2018B6B87E001E90BA /* ALTutorialTwoViewController.m in Sources */,
 				F27EDAE71872074800273A80 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,24 +1107,110 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27EDB2718720A3100273A80 /* main.m in Sources */,
-				F27EDB3418720A3200273A80 /* ALViewController.m in Sources */,
+				AA9AFD2318B6BA3C001E90BA /* ALTutorialThreeViewController.m in Sources */,
 				F27EDB2B18720A3100273A80 /* ALAppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F29218B718A3CFB2001101F4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F29218C618A3CFB2001101F4 /* main.m in Sources */,
-				F29218D318A3CFB2001101F4 /* ALViewController.m in Sources */,
-				F29218CA18A3CFB2001101F4 /* ALAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		AA1135E718A1B922001BFA6A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA1135E818A1B922001BFA6A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AA1135F018A1B922001BFA6A /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA1135F118A1B922001BFA6A /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		AA1135F318A1B922001BFA6A /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA1135F418A1B922001BFA6A /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		AA578E1A18A692C80063E390 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA578E1B18A692C80063E390 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AA578E2318A692C80063E390 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA578E2418A692C80063E390 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		AA578E2618A692C80063E390 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA578E2718A692C80063E390 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		AACB247A18B7E81600F64D3A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AACB247B18B7E81600F64D3A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AACB248318B7E81600F64D3A /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AACB248418B7E81600F64D3A /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		AACB248618B7E81600F64D3A /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AACB248718B7E81600F64D3A /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		AADDB2F918A431BF00298780 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AADDB2FA18A431BF00298780 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AADDB30218A431BF00298780 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AADDB30318A431BF00298780 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		AADDB30518A431BF00298780 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AADDB30618A431BF00298780 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
 		F23FFABA18721A4D00F30444 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -836,33 +1307,181 @@
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
-		F29218C218A3CFB2001101F4 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F29218C318A3CFB2001101F4 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F29218CB18A3CFB2001101F4 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F29218CC18A3CFB2001101F4 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		F29218CE18A3CFB2001101F4 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F29218CF18A3CFB2001101F4 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AA11360D18A1B923001BFA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					.,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial5/Tutorial5-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Tutorial5/Tutorial5-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AA11360E18A1B923001BFA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					.,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial5/Tutorial5-Prefix.pch";
+				INFOPLIST_FILE = "Tutorial5/Tutorial5-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AA578E4118A692C90063E390 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					.,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial8/Tutorial8-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Tutorial8/Tutorial8-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AA578E4218A692C90063E390 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					.,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial8/Tutorial8-Prefix.pch";
+				INFOPLIST_FILE = "Tutorial8/Tutorial8-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AACB24A118B7E81700F64D3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = .;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial6/Tutorial6-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Tutorial6/Tutorial6-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AACB24A218B7E81700F64D3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = .;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial6/Tutorial6-Prefix.pch";
+				INFOPLIST_FILE = "Tutorial6/Tutorial6-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AADDB32018A431C000298780 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					.,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial7/Tutorial7-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Tutorial7/Tutorial7-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AADDB32118A431C000298780 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = armv7;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					.,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial7/Tutorial7-Prefix.pch";
+				INFOPLIST_FILE = "Tutorial7/Tutorial7-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		F23FFAE118721A4D00F30444 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -873,7 +1492,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial4/Tutorial4-Prefix.pch";
@@ -898,7 +1517,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial4/Tutorial4-Prefix.pch";
@@ -994,12 +1613,13 @@
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Tutorial1/Tutorial1-Info.plist";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -1017,7 +1637,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial1/Tutorial1-Prefix.pch";
@@ -1037,7 +1657,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial2/Tutorial2-Prefix.pch";
@@ -1061,7 +1681,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					"/Users/juandocal/Box\\ Documents/Personal/AddLive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial2/Tutorial2-Prefix.pch";
@@ -1081,7 +1701,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial3/Tutorial3-Prefix.pch";
@@ -1105,7 +1725,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
+					.,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial3/Tutorial3-Prefix.pch";
@@ -1116,53 +1736,44 @@
 			};
 			name = Release;
 		};
-		F29218E918A3CFB2001101F4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = armv7;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tutorial6/Tutorial6-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Tutorial6/Tutorial6-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv7;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		F29218EA18A3CFB2001101F4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = armv7;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/tkozak/Work/OSource/addlive/addlive-ios-sdk-tutorials/AddLive\\ iOS\\ Tutorials",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tutorial6/Tutorial6-Prefix.pch";
-				INFOPLIST_FILE = "Tutorial6/Tutorial6-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = armv7;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA11361118A1B923001BFA6A /* Build configuration list for PBXNativeTarget "Tutorial5" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA11360D18A1B923001BFA6A /* Debug */,
+				AA11360E18A1B923001BFA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA578E4018A692C90063E390 /* Build configuration list for PBXNativeTarget "Tutorial8" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA578E4118A692C90063E390 /* Debug */,
+				AA578E4218A692C90063E390 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AACB24A018B7E81700F64D3A /* Build configuration list for PBXNativeTarget "Tutorial6" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AACB24A118B7E81700F64D3A /* Debug */,
+				AACB24A218B7E81700F64D3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AADDB31F18A431C000298780 /* Build configuration list for PBXNativeTarget "Tutorial7" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AADDB32018A431C000298780 /* Debug */,
+				AADDB32118A431C000298780 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F23FFAE018721A4D00F30444 /* Build configuration list for PBXNativeTarget "Tutorial4" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1207,14 +1818,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		F29218E818A3CFB2001101F4 /* Build configuration list for PBXNativeTarget "Tutorial6" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F29218E918A3CFB2001101F4 /* Debug */,
-				F29218EA18A3CFB2001101F4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,6 +1,6 @@
 //
-//  ALViewController.h
-//  Tutorial2
+//  ALTutorialThreeViewController.h
+//  Tutorial3
 //
 //  Created by Tadeusz Kozak on 8/26/13.
 //  Copyright (c) 2013 AddLive. All rights reserved.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AddLive/AddLiveAPI.h>
-@interface ALViewController : UIViewController
+
+@interface ALTutorialThreeViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (weak, nonatomic) IBOutlet ALVideoView *remoteVV;
@@ -18,10 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *disconnectBtn;
 
-
-
 - (IBAction)connect:(id)sender;
 - (IBAction)disconnect:(id)sender;
-
 
 @end
