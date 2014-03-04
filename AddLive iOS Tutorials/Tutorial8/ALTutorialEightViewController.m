@@ -116,6 +116,12 @@
                                              selector:@selector(receiveNotification:)
                                                  name:@"onSpeechActivity"
                                                object:nil];
+    
+    // Notification triggering the media stream event.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotification:)
+                                                 name:@"onMediaStreamEvent"
+                                               object:nil];
 }
 
 /**
@@ -172,6 +178,45 @@
             }
         }
     }
+    else if([[notification name] isEqualToString:@"onMediaStreamEvent"])
+    {
+        // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener.
+        ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+        
+        // Update the user video sink id
+        [_videoSinkIdDictionary setObject:event.videoSinkId forKey:[NSString stringWithFormat:@"%lld", event.userId]];
+        
+        // If the media event ocurres is video
+        if([event.mediaType isEqualToString:@"video"]){
+            
+            // If the user disabled his video
+            if(event.videoPublished == NO){
+
+                // If it's the current user feeding video
+                if([[NSString stringWithFormat:@"%lld", event.userId] isEqualToString:_currentVideoUserId]){
+                
+                    _currentVideoSinkerId = @"";
+                    
+                    // Change video feed calling the method in the main thread.
+                    [self updateAllowedSenders];
+                    [self startVideoWithTheCurrentSpeaker];
+                }
+                
+            } else{
+                
+                // If it's the current user feeding video
+                if([[NSString stringWithFormat:@"%lld", event.userId] isEqualToString:_currentVideoUserId]){
+                    
+                    _currentVideoUserId = [NSString stringWithFormat:@"%lld", event.userId];
+                    _currentVideoSinkerId = [NSString stringWithFormat:@"%@", [_videoSinkIdDictionary objectForKey:[NSString stringWithFormat:@"%@", _currentVideoUserId]]];
+                
+                    // Change video feed calling the method in the main thread.
+                    [self updateAllowedSenders];
+                    [self startVideoWithTheCurrentSpeaker];
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -186,7 +231,6 @@
                   err.err_message, err.err_code);
             return;
         }
-        NSLog(@"onAllowedSenders");
     };
     
     // We need to send the Array of userIds of those users sending video (in this case just the one feeding the remoteVideoView).
@@ -466,6 +510,12 @@
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                  withObject:self]];
     _paused = NO;
+    
+    
+    _checkConnectionThread = [[NSThread alloc] initWithTarget:self
+                                                     selector:@selector(checkActivity)
+                                                       object:nil];
+    [_checkConnectionThread start];
 }
 
 /**
@@ -476,6 +526,11 @@
 {
     while (_connectBtn.hidden)
     {
+        if(_paused)
+        {
+            break;
+        }
+
         [NSThread sleepForTimeInterval:2.0];
         
         // If there is some activity.
@@ -582,11 +637,21 @@
 }
 
 /**
+ * Notifies about media streaming status change for given remote user.
+ */
+- (void) onMediaStreamEvent:(ALUserStateChangedEvent *)event
+{
+    NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setObject:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
+}
+
+/**
  * Event describing a change of a resolution in a video feed produced by given video sink.
  */
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
 {
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
+    NSLog(@"Got video frame size changed.  Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
 }
 
 /**
