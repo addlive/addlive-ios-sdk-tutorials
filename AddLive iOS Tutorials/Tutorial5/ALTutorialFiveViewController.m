@@ -93,6 +93,10 @@
     self.pageControl.currentPage = 0;
     self.scrollView.delegate = self;
     
+    // TODO addObservers to a different methods - one to handle user joined and
+    // the other one for user left. With this approach you have a nice strategy
+    // design pattern instead of fairly ugly if inside the receiveNotification
+    
     // Notification triggered when an user join the session
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveNotification:)
@@ -133,6 +137,7 @@
         // 2. etting userId of the user joining the session from the ALUserStateChangedEvent
         NSNumber* userIdNumber = [NSNumber numberWithLongLong:eventDetails.userId];
         
+        // TODO why not to just copy the String? Also why not to just use eventDetails.videoSink in step 5?
         // 3. Getting videoSinkId of the user joining the session from the ALUserStateChangedEvent
         NSString* videoSinkId = [[NSString alloc] initWithFormat:@"%@", eventDetails.videoSinkId];
         
@@ -143,6 +148,7 @@
         // 5. Setting up the ALVideoView with the service and the videoSinkId of the user joining
         [videoView setupWithService:_alService withSink:videoSinkId withMirror:YES];
         
+        // TODO use block here
         // 6. Starting the chat and setting the responder
         [videoView start:[ALResponder responderWithSelector:@selector(onRemoteRenderStarted:) object:self]];
         
@@ -337,6 +343,7 @@
     _cams = [devs copy];
     _selectedCam  = [NSNumber numberWithInt:1];
     ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
+    // TODO use block here
     [_alService setVideoCaptureDevice:dev.id
                             responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
                                                                  withObject:self]];
@@ -510,6 +517,7 @@
     if(event.isConnected)
     {
         NSLog(@"Got user connected: %@", event);
+        // TODO use dictionary literal instead of mutable dict
         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
         [userInfo setObject:event forKey:@"event"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserJoined" object:self userInfo:userInfo];
@@ -517,6 +525,7 @@
     else
     {
         NSLog(@"Got user disconnected: %@", event);
+        // TODO use dictionary literal instead of mutable dict
         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
         [userInfo setObject:event forKey:@"event"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserDisjoined" object:self userInfo:userInfo];

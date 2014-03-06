@@ -28,7 +28,7 @@
 
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
 
-- (void) onUserEvent:(ALUserStateChangedEvent *)event;
+- (void) userEvent:(ALUserStateChangedEvent *)event;
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
 
@@ -294,12 +294,12 @@
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"";
+    return @"AddLiveSuperSecret";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"";
+    return @"iOS";
 }
 
 @end
@@ -326,9 +326,9 @@
  * Listener to capture an user event. (user joining media scope, user leaving media scope, 
  * user publishing or stop publishing any of possible media streams.)
  */
-- (void) onUserEvent:(ALUserStateChangedEvent *)event
+- (void) userEvent:(ALUserStateChangedEvent *)event
 {
-    NSLog(@"Got user event: %@", event);
+    NSLog(@"Got an old school user event: %@", event);
     if(event.isConnected)
     {
         ResultBlock onStopped = ^(ALError* err, id nothing){
