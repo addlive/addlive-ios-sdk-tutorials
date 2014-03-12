@@ -43,7 +43,10 @@
     NSArray*                  _cams;
     NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
+    // TODO [tk_review] Sinker? what is "Sinker" ? :)
     NSString*                 _currentVideoSinkerId;
+    
+    // TODO [tk_review] Why string as user id? o_O it all should be long long or NSNumber
     NSString*                 _currentVideoUserId;
     BOOL                      _paused;
     BOOL                      _settingCam;
@@ -105,6 +108,11 @@
     
     [self.view addSubview:_remoteVideoView];
     
+    // TODO [tk_review] Same as with the tutorial 5 - please use nice strategy design pattern
+
+    // TODO [tk_review] Why are you not handling the user disconnected? In this case, rendering should be terminated
+    
+    
     // Notification triggered when an user join the session.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveNotification:)
@@ -143,9 +151,16 @@
         // If it's the first time.
         if(!_currentVideoSinkerId)
         {
+            
+            // TODO [tk_review] again why stringWithFormat instead of copying?
             // Set the values.
             _currentVideoSinkerId = [NSString stringWithFormat:@"%@", eventDetails.videoSinkId];
             _currentVideoUserId = [NSString stringWithFormat:@"%lld", eventDetails.userId];
+            
+            
+            // TODO [tk_review] that's actually wrong, the withMirror:YES is kind of reserved for the local preview
+            // remote video feeds should not be mirrored.
+            // The reason for the mirror is that it is more natural for a user to see self
             
             // Start the video.
             [_remoteVideoView setupWithService:_alService withSink:_currentVideoSinkerId withMirror:YES];
@@ -168,6 +183,12 @@
                 
                 // Get the previous activity value.
                 int prevActivityValue = [[_speechActivityDictionary objectForKey:[event.speechActivity valueForKey:@"userId"][index]] integerValue];
+                
+                // TODO [tk_review] Actually I think it does make sense to change this a bit. Currently you will elect the loudest guy,
+                // what we would like instead is the most active one - the one that talks most of the time during the 2 sec window.
+                // I think that it will be a better idea, to count events where particular user was present in the activeSpeakers array.
+                // The thread that toggles speakers should check if currently active speaker have counter bigger than N (constant pulled on top)
+                // If yes - do not change the speaker. If not, elect a new one, the one that have biggest counter value
                 
                 // Accumulate the activity to set the video of the user with more activity (this is restart it each 2 seconds).
                 activityValue = activityValue + prevActivityValue;
@@ -235,6 +256,8 @@
     
     // We need to send the Array of userIds of those users sending video (in this case just the one feeding the remoteVideoView).
     NSNumber *speakingUserId = [NSNumber numberWithInt:[_currentVideoUserId intValue]];
+    
+    // TODO [tk_review] why not to use here the @[] literal?
     NSArray *userIds = [[NSArray alloc] initWithObjects:speakingUserId, nil];
     [_alService setAllowedSenders:Consts.SCOPE_ID mediaType:@"video" userIds:userIds responder:[ALResponder responderWithBlock:onAllowedSenders]];
 }
@@ -308,6 +331,7 @@
       
         [_alService monitorSpeechActivity:Consts.SCOPE_ID enable:true responder:[ALResponder responderWithBlock:onMonitorSpeech]];
       
+        // TODO [tk_review] Don't like, see more around this method.
         _checkConnectionThread = [[NSThread alloc] initWithTarget:self
                                                          selector:@selector(checkActivity)
                                                            object:nil];
@@ -518,19 +542,23 @@
     [_checkConnectionThread start];
 }
 
+// TODO [tk_review] I really, really don't like this thread. It's totally not needed. The execution happens only
+// every 2 secs and it needs to perform certain tasks on main thread. Why to create a thread instead of repeatedly
+// submit a task using if(shouldRun) [self performSelectorOnMainThread:]
+// or actually check at the beginning of the method - if (!shouldRun) return; so the check is done before not
+// after the execution
+
 /**
  * Thread to select the current speaking user (each 2 seconds).
  */
 #pragma mark - Reconnection Thread
 - (void)checkActivity
 {
+    // TODO [tk_review] don't like. Using view's properties to maintain application state is IMO rape on MVC
     while (_connectBtn.hidden)
     {
-        if(_paused)
-        {
-            break;
-        }
-
+        
+        // TODO [tk_review] please udpate this method as per previous long comment - about how the election should work
         [NSThread sleepForTimeInterval:2.0];
         
         // If there is some activity.
@@ -539,6 +567,8 @@
             // Getting the max activity during those 2 seconds.
             NSString *maxString = [[_speechActivityDictionary allValues] valueForKeyPath:@"@max.intValue"];
             
+            // TODO [tk_review] why userId is string here?
+            // TODO [tk_review] And btw this is a serious fuck up - string to int to string - why so many conversions?
             // Getting the user with that max activity.
             NSString *userId = [_speechUserIdDictionary objectForKey:[NSString stringWithFormat:@"%d", [maxString intValue]]];
             

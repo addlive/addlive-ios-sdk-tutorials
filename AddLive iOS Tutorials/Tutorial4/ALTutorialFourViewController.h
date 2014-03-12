@@ -2,6 +2,7 @@
 //  ALTutorialFourViewController.h
 //  Tutorial2
 //
+//  TODO [tk_review] Please change "Created by" to some real value. Do  :)
 //  Created by Tadeusz Kozak on 8/26/13.
 //  Copyright (c) 2013 AddLive. All rights reserved.
 //

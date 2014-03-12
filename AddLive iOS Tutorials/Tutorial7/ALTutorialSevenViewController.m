@@ -61,6 +61,7 @@
     
     _paused = NO;
     _settingCam = NO;
+    // TODO [tk_review] 2nd call to viewDidLoad
     [super viewDidLoad];
     _listener = [[MyServiceListener alloc] initWithRemoteVideoView:_remoteVV];
     [self initAddLive];
@@ -88,8 +89,7 @@
     
     ResultBlock onConn = ^(ALError* err, id nothing) {
         _connecting = NO;
-        if([self handleErrorMaybe:err where:@"Connect"])
-        {
+        if([self handleErrorMaybe:err where:@"Connect"]) {
             return;
         }
         NSLog(@"Successfully connected");
@@ -330,6 +330,15 @@
 {
     NSLog(@"Got user event: %@", event);
     
+    // TODO [tk_review] This is actually wrong. If the isConnected is false, the value for the screenPublished is "undefined".
+    // The onUserEvent is dispatched only in context of remote peer joining/leaving the session, so if you have this event
+    // with isConnected false, it does not make sense to check if the screenPublished is true, as the remote user is already gone...
+    // I think that in general, it would be best to have here a button that allows user to toggle between the screen and video.
+    // If the remote peer publishes both screen and video - the button is active and toggles (stop render, setSink, start render).
+    // If user publishes only single feed - there is no button and the feed published should be rendered. I'll stop the review to allow \
+    // you to modify this first as the onMediaStreamEvent also needs to be updated.
+    
+    
     // If the coming event is screen sharing or video
     if(event.isConnected || event.screenPublished)
     {
@@ -393,6 +402,11 @@
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
 {
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
+    
+    // TODO [tk_review] This one is wrong. The size of the screen sharing feed can change in any time -
+    // e.g. someone is sharing a window and simply resizes it. The app needs to handle every
+    // videoFrameSizeChanged if it is related to the screen sharing sink. You should store the id of screen sharing sink
+    // and check if this event is related to that sink, and if so - fix the AR
     
     // If it is a new event
     if(_newScreen)
