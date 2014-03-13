@@ -190,11 +190,11 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    return @"";
+    return @"AddLiveSuperSecret";
 }
 
 + (NSString*) SCOPE_ID {
-    return @"iOS";
+    return @"ADL_iOS";
 }
 
 @end

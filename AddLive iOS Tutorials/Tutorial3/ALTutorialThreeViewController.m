@@ -299,7 +299,7 @@
 
 + (NSString*) SCOPE_ID
 {
-    return @"iOS";
+    return @"ADL_iOS";
 }
 
 @end
