@@ -25,8 +25,6 @@
 
 @interface MyServiceListener : NSObject <ALServiceListener>
 
-- (id) initWithRemoteVideoView:(ALVideoView*) view;
-
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
@@ -48,12 +46,40 @@
     BOOL                      _localPreviewStarted;
     MyServiceListener*        _listener;
     BOOL                      _connecting;
-    UIView*                   _container;
-	NSMutableDictionary*      _alUserIdToVideoView;
 }
 @end
 
 @implementation ALTutorialSevenViewController
+
+// Remote Video Sink Id
+NSString *_remoteVideoSinkId;
+
+// Remote Screen Sink Id
+NSString *_remoteScreenSinkId;
+
+// Current Sink Id feeding
+NSString *_currentRemoteSinkId;
+
+// Feeding video or screen
+bool _videoFeed;
+
+// Remote video width before setting properly the dimensions
+int _remoteVideoWidth;
+
+// Remote video height before setting properly the dimensions
+int _remoteVideoHeight;
+
+// Remote video left before setting properly the dimensions
+int _remoteVideoLeft;
+
+// Remote video width after setting properly the dimensions
+float _videoWidth;
+
+// Remote video height after setting properly the dimensions
+float _videoHeight;
+
+// Remote video left after setting properly the dimensions
+float _left;
 
 - (void)viewDidLoad
 {
@@ -61,11 +87,212 @@
     
     _paused = NO;
     _settingCam = NO;
-    // TODO [tk_review] 2nd call to viewDidLoad
-    [super viewDidLoad];
-    _listener = [[MyServiceListener alloc] initWithRemoteVideoView:_remoteVV];
+    _listener = [[MyServiceListener alloc] init];
     [self initAddLive];
     _connecting = NO;
+    
+    // Defining values to set the VideoView size properly
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        _remoteVideoWidth = 728;
+        _remoteVideoHeight = 584;
+        _remoteVideoLeft = 20;
+    }
+    else
+    {
+        _remoteVideoWidth = 300;
+        _remoteVideoHeight = 225;
+        _remoteVideoLeft = 10;
+    }
+    
+    // Notification triggered when an user event is triggered
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserEvent:)
+                                                 name:@"onUserEvent"
+                                               object:nil];
+    
+    // Notification triggered when a media stream event is triggered
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onMediaStreamEvent:)
+                                                 name:@"onMediaStreamEvent"
+                                               object:nil];
+    
+    // Notification triggered when a frame size event is triggered
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onVideoFrameSizeChanged:)
+                                                 name:@"onVideoFrameSizeChanged"
+                                               object:nil];
+    
+    // Notification triggered when a frame size event is triggered
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onConnectionLost:)
+                                                 name:@"onConnectionLost"
+                                               object:nil];
+}
+
+/**
+ * Receives the notification when a frame size event occurs
+ */
+- (void) onConnectionLost:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onVideoFrameSizeChanged defined in the ALServiceListener
+    ALConnectionLostEvent* event = [userInfo objectForKey:@"event"];
+    
+    NSLog(@"Got connection lost. Error msg: %@, willReconnect: %hhd", event.errMessage, event.willReconnect);
+    
+    [_remoteVV stop:nil];
+}
+
+/**
+ * Receives the notification when an user event occurs
+ */
+- (void) onUserEvent:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onUserEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    
+    NSLog(@"Got user event: %@", event);
+    
+    // New user connected
+    if(event.isConnected)
+    {
+        // Getting the videoId
+        if(event.videoPublished)
+        {
+            _currentRemoteSinkId = event.videoSinkId;
+            _remoteVideoSinkId = _currentRemoteSinkId;
+            _videoFeed = true;
+        }
+        
+        // Getting the screenId. Giving priority to the
+        // screen feed if both are available
+        if(event.screenPublished)
+        {
+            _currentRemoteSinkId = event.screenSinkId;
+            _remoteScreenSinkId = _currentRemoteSinkId;
+            _videoFeed = false;
+        }
+        
+        // Showing the toggle button
+        if(event.screenPublished && event.videoPublished)
+        {
+            _toggleBtn.hidden = NO;
+        }
+        
+        // Stop the previous one and start the new one
+        ResultBlock onStopped = ^(ALError* err, id nothing){
+            [_remoteVV setSinkId:_currentRemoteSinkId];
+            [_remoteVV start:nil];
+        };
+        [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
+    }
+    else
+    {
+        [_remoteVV stop:nil];
+    }
+}
+
+/**
+ * Receives the notification when a media event occurs
+ */
+- (void) onMediaStreamEvent:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    
+    NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
+    
+    if([event.mediaType isEqualToString:@"video"])
+    {
+        // Updating the Id
+        _remoteVideoSinkId = event.videoSinkId;
+        
+        // If I was feeding video but now it's disabble and I have available screen
+        if(_videoFeed && !event.videoPublished && event.screenPublished)
+        {
+            // Starting screen feed
+            [_remoteVV stop:[ALResponder responderWithSelector:@selector(onRemoteStoppedVideo) object:self]];
+        }
+        else if(event.videoPublished)
+        {
+            // Stop the previous one and start the new one
+            ResultBlock onStopped = ^(ALError* err, id nothing){
+                
+                // Updating current Id
+                _currentRemoteSinkId = _remoteVideoSinkId;
+                [_remoteVV setSinkId:_currentRemoteSinkId];
+                [_remoteVV start:nil];
+            };
+            [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
+        }
+    }
+    else if([event.mediaType isEqualToString:@"screen"])
+    {
+        // Updating the Id
+        _remoteScreenSinkId = event.screenSinkId;
+        
+        // If I was feeding screen but now it's disabble and I have available video
+        if(!_videoFeed && !event.screenPublished && event.videoPublished)
+        {
+            // Starting video feed
+            [_remoteVV stop:[ALResponder responderWithSelector:@selector(onRemoteStoppedScreen) object:self]];
+        }
+        else if(event.screenPublished)
+        {
+            // Stop the previous one and start the new one
+            ResultBlock onStopped = ^(ALError* err, id nothing){
+                
+                // Updating current Id
+                _currentRemoteSinkId = _remoteScreenSinkId;
+                [_remoteVV setSinkId:_currentRemoteSinkId];
+                [_remoteVV start:nil];
+            };
+            [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
+        }
+    }
+    
+    // Stop the feeding if there's none
+    if(!event.screenPublished && !event.videoPublished)
+    {
+        [_remoteVV stop:nil];
+    }
+    
+    // Setting the toggle button visibility
+    if(event.screenPublished && event.videoPublished)
+    {
+        _toggleBtn.hidden = NO;
+    }
+    else if(event.screenPublished || event.videoPublished)
+    {
+        _toggleBtn.hidden = YES;
+    }
+}
+
+/**
+ * Receives the notification when a frame size event occurs
+ */
+- (void) onVideoFrameSizeChanged:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onVideoFrameSizeChanged defined in the ALServiceListener
+    ALVideoFrameSizeChangedEvent* event = [userInfo objectForKey:@"event"];
+    
+    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
+    
+    // If its the current sink feeding
+    if([event.sinkId isEqualToString:_currentRemoteSinkId])
+    {
+        // Get and set the correct dimensions
+        [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
+        _remoteVV.frame = CGRectMake(_remoteVideoLeft + _left, _remoteVV.frame.origin.y, _videoWidth, _videoHeight);
+    }
 }
 
 /**
@@ -113,6 +340,49 @@
         [_remoteVV stop:nil];
     };
     [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
+}
+
+/**
+ * Button to toggle feed.
+ */
+- (IBAction)toggleFeed:(id)sender
+{
+    if(!_videoFeed)
+    {
+        // Starting video feed
+        [_remoteVV stop:[ALResponder responderWithSelector:@selector(onRemoteStoppedScreen) object:self]];
+    }
+    else
+    {
+        // Starting screen feed
+        [_remoteVV stop:[ALResponder responderWithSelector:@selector(onRemoteStoppedVideo) object:self]];
+    }
+}
+
+/**
+ * Toggle feed from video to screen.
+ */
+- (void) onRemoteStoppedVideo
+{
+    // Updating current Id
+    _currentRemoteSinkId = _remoteScreenSinkId;
+    
+    [_remoteVV setSinkId:_remoteScreenSinkId];
+    [_remoteVV start:nil];
+    _videoFeed = false;
+}
+
+/**
+ * Toggle feed from screen to video.
+ */
+- (void) onRemoteStoppedScreen
+{
+    // Updating current Id
+    _currentRemoteSinkId = _remoteVideoSinkId;
+    
+    [_remoteVV setSinkId:_remoteVideoSinkId];
+    [_remoteVV start:nil];
+    _videoFeed = true;
 }
 
 /**
@@ -252,197 +522,6 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-
-@implementation Consts
-
-+ (NSNumber*) APP_ID
-{
-    // TODO update this to use some real value
-    return @1;
-}
-
-+ (NSString*) API_KEY
-{
-    // TODO update this to use some real value
-    return @"";
-}
-
-+ (NSString*) SCOPE_ID
-{
-    return @"";
-}
-
-@end
-
-
-@implementation MyServiceListener
-{
-    // Remote video object
-    ALVideoView*    _videoView;
-    
-    // New event flag
-    BOOL            _newScreen;
-    
-    // Remote video width before setting properly the dimensions
-    int             _remoteVideoWidth;
-    
-    // Remote video height before setting properly the dimensions
-    int             _remoteVideoHeight;
-    
-    // Remote video left before setting properly the dimensions
-    int             _remoteVideoLeft;
-    
-    // Remote video width after setting properly the dimensions
-    float           _videoWidth;
-    
-    // Remote video height after setting properly the dimensions
-    float           _videoHeight;
-    
-    // Remote video left after setting properly the dimensions
-    float           _left;
-}
-
-/**
- * Method to init the remote view within it's view.
- */
-- (id) initWithRemoteVideoView:(ALVideoView*) view
-{
-    self = [super init];
-    if(self) {
-        _videoView = view;
-    }
-    return self;
-}
-
-/**
- * Listener to capture an user event. (user joining media scope, user leaving media scope,
- * user publishing or stop publishing any of possible media streams.)
- */
-
-- (void) onUserEvent:(ALUserStateChangedEvent *)event
-{
-    NSLog(@"Got user event: %@", event);
-    
-    // TODO [tk_review] This is actually wrong. If the isConnected is false, the value for the screenPublished is "undefined".
-    // The onUserEvent is dispatched only in context of remote peer joining/leaving the session, so if you have this event
-    // with isConnected false, it does not make sense to check if the screenPublished is true, as the remote user is already gone...
-    // I think that in general, it would be best to have here a button that allows user to toggle between the screen and video.
-    // If the remote peer publishes both screen and video - the button is active and toggles (stop render, setSink, start render).
-    // If user publishes only single feed - there is no button and the feed published should be rendered. I'll stop the review to allow \
-    // you to modify this first as the onMediaStreamEvent also needs to be updated.
-    
-    
-    // If the coming event is screen sharing or video
-    if(event.isConnected || event.screenPublished)
-    {
-        NSString *sinkId;
-        
-        // Get the correct sinkId for each case
-        if(event.screenPublished){
-            sinkId = event.screenSinkId;
-        }
-        else{
-            sinkId = event.videoSinkId;
-        }
-        
-        // Stop the previous one and start the new one
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:sinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
-    }
-    else
-    {
-        [_videoView stop:nil];
-    }
-}
-
-/**
- * Notifies about media streaming status change for given remote user.
- */
-- (void) onMediaStreamEvent:(ALUserStateChangedEvent*) event
-{
-    NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
-    
-    // If the coming event is either video or screensharing
-    if(event.screenPublished || event.videoPublished){
-        
-        // Set to yes the new event flag
-        _newScreen = YES;
-    }
-    
-    /**
-     * Defining values to set the scrollview content size properly
-     */
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        _remoteVideoWidth = 728;
-        _remoteVideoHeight = 584;
-        _remoteVideoLeft = 20;
-    }
-    else
-    {
-        _remoteVideoWidth = 300;
-        _remoteVideoHeight = 225;
-        _remoteVideoLeft = 10;
-    }
-}
-
-/**
- * Event describing a change of a resolution in a video feed produced by given video sink.
- */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
-{
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
-    
-    // TODO [tk_review] This one is wrong. The size of the screen sharing feed can change in any time -
-    // e.g. someone is sharing a window and simply resizes it. The app needs to handle every
-    // videoFrameSizeChanged if it is related to the screen sharing sink. You should store the id of screen sharing sink
-    // and check if this event is related to that sink, and if so - fix the AR
-    
-    // If it is a new event
-    if(_newScreen)
-    {
-        // Get and set the correct dimensions
-        [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
-        _videoView.frame = CGRectMake(_remoteVideoLeft + _left, _videoView.frame.origin.y, _videoWidth, _videoHeight);
-        
-        // Stop the previous one and start the new one
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:event.sinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
-        
-        // Set to no the new event flag
-        _newScreen = NO;
-    }
-}
-
-/**
- * Event describing a lost connection.
- */
-- (void) onConnectionLost:(ALConnectionLostEvent *)event
-{
-    NSLog(@"Got connection lost");
-}
-
-/**
- * Event describing a reconnection.
- */
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
-{
-    NSLog(@"On Session reconnected");
-}
-
 /**
  * Method to get the current dimensions from the coming width and height onVideoFrameSizeChanged
  */
@@ -468,6 +547,88 @@
         _videoHeight = targetW * srcH / srcW;
         _left = 0;
     }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
+
+@implementation Consts
+
++ (NSNumber*) APP_ID
+{
+    // TODO update this to use some real value
+    return @486;
+}
+
++ (NSString*) API_KEY
+{
+    // TODO update this to use some real value
+    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+}
+
++ (NSString*) SCOPE_ID
+{
+    return @"MOmJ";
+}
+
+@end
+
+
+@implementation MyServiceListener
+
+/**
+ * Listener to capture an user event. (user joining media scope, user leaving media scope,
+ * user publishing or stop publishing any of possible media streams.)
+ */
+
+- (void) onUserEvent:(ALUserStateChangedEvent *)event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserEvent" object:self userInfo:userInfo];
+}
+
+/**
+ * Notifies about media streaming status change for given remote user.
+ */
+- (void) onMediaStreamEvent:(ALUserStateChangedEvent*) event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
+}
+
+/**
+ * Event describing a change of a resolution in a video feed produced by given video sink.
+ */
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onVideoFrameSizeChanged" object:self userInfo:userInfo];
+}
+
+/**
+ * Event describing a lost connection.
+ */
+- (void) onConnectionLost:(ALConnectionLostEvent *)event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onConnectionLost" object:self userInfo:userInfo];
+}
+
+/**
+ * Event describing a reconnection.
+ */
+- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
+{
+    NSLog(@"On Session reconnected");
 }
 
 @end
