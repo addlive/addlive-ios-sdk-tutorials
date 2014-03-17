@@ -7,6 +7,7 @@
 //
 
 #import "ALTutorialFourViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -76,7 +77,22 @@
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
-    descr.autopublishAudio = YES;
+    
+    // Setting the audio according to the mic access.
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
+        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+            if (granted) {
+                NSLog(@"Mic. is enabled.");
+                descr.autopublishAudio = YES;
+            }
+            else {
+                NSLog(@"Mic. is disabled.");
+                descr.autopublishAudio = NO;
+            }
+        }];
+    }
+    
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);

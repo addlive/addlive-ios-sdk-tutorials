@@ -53,6 +53,12 @@ to swipe between the video feed in the session.
 This tutorial shows how to use AVFoundation AVAudioPlayer class in the presence
 of the AddLive SDK.
 
+## Tutorial 6.1 - Toggling output source
+
+This tutorial will show you how to toggle the audio output source between the
+front and loudspeakers using AVAudioSession. Please keep in mind that this is
+an iPhone only tutorial.
+
 ## Tutorial 7 - Screen Sharing
 
 This tutorial provides a sample implementation of screen sharing functionality

@@ -1,12 +1,12 @@
 //
-//  ALTutorialSixViewController.m
-//  Tutorial6
+//  ALViewController.m
+//  Tutorial6.1
 //
-//  Created by Tadeusz Kozak on 8/26/13.
-//  Copyright (c) 2013 AddLive. All rights reserved.
+//  Created by Juan Docal on 17.03.14.
+//  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALTutorialSixViewController.h"
+#import "ALTutorialSixOneViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 /**
@@ -23,15 +23,7 @@
 
 @end
 
-@interface PlaybackCompleteDelegate : NSObject<AVAudioPlayerDelegate>
-
-@property ALService* service;
-
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag;
-
-@end
-
-@interface ALTutorialSixViewController ()
+@interface ALTutorialSixOneViewController ()
 {
     ALService*                _alService;
     NSArray*                  _cams;
@@ -41,40 +33,27 @@
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
     BOOL                      _connecting;
-
-    
-    AVAudioPlayer*            _player;
-    PlaybackCompleteDelegate* _playbackCompleteDelegate;
+    BOOL                      _outputState;
 }
 @end
 
-@implementation ALTutorialSixViewController
+@implementation ALTutorialSixOneViewController
 
 - (void)viewDidLoad
 {
-    
+    [super viewDidLoad];
     _paused = NO;
     _settingCam = NO;
     [super viewDidLoad];
     [self initAddLive];
     _connecting = NO;
-    
-    _playbackCompleteDelegate = [[PlaybackCompleteDelegate alloc] init];
-    NSURL *url;
-    
-    //where you are about to add sound
-    NSString *path =[[NSBundle mainBundle] pathForResource:@"test" ofType:@"wav"];
-    
-    url = [NSURL fileURLWithPath:path];
-    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:NULL];
-    [_player setVolume:1.0];
-    [_player prepareToPlay];
-    [_player setDelegate:_playbackCompleteDelegate];
-
 }
 
-
-- (IBAction)connect:(id)sender {
+/**
+ * Button action to start the connection.
+ */
+- (IBAction)connect:(id)sender
+{
     if(_connecting) {
         return;
     }
@@ -116,7 +95,11 @@
     [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
 
-- (IBAction)disconnect:(id)sender {
+/**
+ * Button action to start disconnecting.
+ */
+- (IBAction)disconnect:(id)sender
+{
     ResultBlock onDisconn = ^(ALError* err, id nothing) {
         NSLog(@"Successfully disconnected");
         _stateLbl.text = @"Disconnected";
@@ -127,38 +110,69 @@
                  responder:[ALResponder responderWithBlock:onDisconn]];
 }
 
-- (IBAction) playSnd:(id)sender {
-    NSLog(@"Playing sound");
-    ResultBlock onUnpublished = ^(ALError* err, id nothing) {
-        // Change the AVAudioSession configuration to allow sound playback.
-        // After the playback is complete, it will be restored by
-        // the PlaybackCompleteDelegate
-        AVAudioSession* session = [AVAudioSession sharedInstance];
-        [session setMode:AVAudioSessionModeDefault error:nil];
-        [session setCategory:AVAudioSessionCategorySoloAmbient error:nil];
+/**
+ * Button action to toggle the output.
+ */
+- (IBAction)toggle:(id)sender
+{
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *setCategoryError = nil;
+    
+    if(_outputState){
+        if (![session setCategory:AVAudioSessionCategoryPlayAndRecord
+                      withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
+                            error:&setCategoryError]) {
         
-        [_player play];
-    };
-    [_alService unpublish:Consts.SCOPE_ID
-                     what:ALMediaType.kAudio
-                responder:[ALResponder responderWithBlock:onUnpublished]];
+            NSLog(@"There was an issue toggling to loudspeakers");
+        } else {
+            _outputState = false;
+        }
+    } else {
+        if (![session setCategory:AVAudioSessionCategoryPlayAndRecord
+                      withOptions:kAudioSessionOverrideAudioRoute_None
+                            error:&setCategoryError]) {
+            
+            NSLog(@"There was an issue toggling the frontspeakers");
+        } else {
+            _outputState = true;
+        }
+    }
 }
 
-
-
+/**
+ * Initializes the AddLive SDK.
+ */
 - (void) initAddLive
 {
+    // 1. Allocate the ALService
     _alService = [ALService alloc];
+    
+    // 2. Prepare the responder
     ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
                                                        withObject:self];
+    
+    // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
+    
+    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
+    
+    // Set the apiKey to let the SDK automatically authenticate all connection requests.
+    // Please note that such an approach reduces slightly the security. It is always a good idea
+    // not to pass the API key to the client side and implement a server side component that
+    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
+    
+    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
-                       responder:responder];
+                   responder:responder];
+    
     _stateLbl.text = @"Platform init";
 }
 
+/**
+ * Called by platform when the initialization is complete.
+ */
 - (void) onPlatformReady:(ALError*) err
 {
     NSLog(@"Got platform ready");
@@ -168,9 +182,11 @@
         return;
     }
     _connectBtn.hidden = NO;
-    _playbackCompleteDelegate.service = _alService;
 }
 
+/**
+ * Handles the possible error coming from the sdk
+ */
 - (BOOL) handleErrorMaybe:(ALError*)err where:(NSString*)where
 {
     if(!err) {
@@ -184,7 +200,6 @@
     self.errorContentLbl.hidden = NO;
     return YES;
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -211,18 +226,3 @@
 }
 
 @end
-
-@implementation PlaybackCompleteDelegate
-
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    AVAudioSession* session = [AVAudioSession sharedInstance];
-    
-    // Restore the session configuration
-    [session setMode:AVAudioSessionModeVoiceChat error:nil];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [_service setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
-    [_service publish:Consts.SCOPE_ID what:ALMediaType.kAudio options:nil responder:nil];
-}
-
-@end
-

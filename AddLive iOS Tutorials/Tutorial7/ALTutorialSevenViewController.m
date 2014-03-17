@@ -7,6 +7,7 @@
 //
 
 #import "ALTutorialSevenViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -213,7 +214,7 @@ float _left;
         // Updating the Id
         _remoteVideoSinkId = event.videoSinkId;
         
-        // If I was feeding video but now it's disabble and I have available screen
+        // If I was feeding video but now it's disable and I have available screen
         if(_videoFeed && !event.videoPublished && event.screenPublished)
         {
             // Starting screen feed
@@ -237,7 +238,7 @@ float _left;
         // Updating the Id
         _remoteScreenSinkId = event.screenSinkId;
         
-        // If I was feeding screen but now it's disabble and I have available video
+        // If I was feeding screen but now it's disable and I have available video
         if(!_videoFeed && !event.screenPublished && event.videoPublished)
         {
             // Starting video feed
@@ -308,7 +309,22 @@ float _left;
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
-    descr.autopublishAudio = YES;
+    
+    // Setting the audio according to the mic access.
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
+        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+            if (granted) {
+                NSLog(@"Mic. is enabled.");
+                descr.autopublishAudio = YES;
+            }
+            else {
+                NSLog(@"Mic. is disabled.");
+                descr.autopublishAudio = NO;
+            }
+        }];
+    }
+    
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);
