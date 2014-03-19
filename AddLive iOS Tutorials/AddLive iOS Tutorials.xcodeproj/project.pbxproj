@@ -52,6 +52,29 @@
 		AA13093718D70BBC00AA3338 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		AA13093818D70BC300AA3338 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		AA23A11E18B6BBE200323957 /* ALTutorialFourViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */; };
+		AA5684A918DA2D0100BF818F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		AA5684AA18DA2D0100BF818F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		AA5684AB18DA2D0100BF818F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		AA5684B118DA2D0100BF818F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA5684AF18DA2D0100BF818F /* InfoPlist.strings */; };
+		AA5684B318DA2D0100BF818F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5684B218DA2D0100BF818F /* main.m */; };
+		AA5684B718DA2D0100BF818F /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5684B618DA2D0100BF818F /* ALAppDelegate.m */; };
+		AA5684BA18DA2D0100BF818F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5684B818DA2D0100BF818F /* Main_iPhone.storyboard */; };
+		AA5684BD18DA2D0100BF818F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5684BB18DA2D0100BF818F /* Main_iPad.storyboard */; };
+		AA5684C218DA2D0100BF818F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5684C118DA2D0100BF818F /* Images.xcassets */; };
+		AA5684DB18DA301E00BF818F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AA5684DC18DA302800BF818F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		AA5684DD18DA303000BF818F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		AA5684DE18DA303800BF818F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		AA5684DF18DA303F00BF818F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		AA5684E018DA304500BF818F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		AA5684E118DA304F00BF818F /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE039B118C5179C001CDB2E /* AddLive.framework */; };
+		AA5684E218DA305700BF818F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		AA5684E318DA305D00BF818F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		AA5684E418DA306300BF818F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		AA5684E518DA306A00BF818F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		AA5684E618DA307000BF818F /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		AA5684E718DA307900BF818F /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		AA5684EA18DA31EB00BF818F /* ALTutorialTwoOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5684E918DA31EB00BF818F /* ALTutorialTwoOneViewController.m */; };
 		AA578E1418A692C80063E390 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		AA578E1518A692C80063E390 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		AA578E1618A692C80063E390 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -241,6 +264,18 @@
 		AA13092818D6FE9900AA3338 /* ALTutorialSixOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialSixOneViewController.m; sourceTree = "<group>"; };
 		AA23A11C18B6BBE200323957 /* ALTutorialFourViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFourViewController.h; sourceTree = "<group>"; };
 		AA23A11D18B6BBE200323957 /* ALTutorialFourViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFourViewController.m; sourceTree = "<group>"; };
+		AA5684A818DA2D0100BF818F /* Tutorial2.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial2.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA5684AE18DA2D0100BF818F /* Tutorial2.1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial2.1-Info.plist"; sourceTree = "<group>"; };
+		AA5684B018DA2D0100BF818F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA5684B218DA2D0100BF818F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA5684B418DA2D0100BF818F /* Tutorial2.1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial2.1-Prefix.pch"; sourceTree = "<group>"; };
+		AA5684B518DA2D0100BF818F /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		AA5684B618DA2D0100BF818F /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		AA5684B918DA2D0100BF818F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		AA5684BC18DA2D0100BF818F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		AA5684C118DA2D0100BF818F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AA5684E818DA31EB00BF818F /* ALTutorialTwoOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialTwoOneViewController.h; sourceTree = "<group>"; };
+		AA5684E918DA31EB00BF818F /* ALTutorialTwoOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialTwoOneViewController.m; sourceTree = "<group>"; };
 		AA578E1318A692C80063E390 /* Tutorial8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA578E1918A692C80063E390 /* Tutorial8-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial8-Info.plist"; sourceTree = "<group>"; };
 		AA578E1B18A692C80063E390 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -391,6 +426,29 @@
 				AA1308F618D6FE1700AA3338 /* CoreGraphics.framework in Frameworks */,
 				AA1308F718D6FE1700AA3338 /* UIKit.framework in Frameworks */,
 				AA1308F518D6FE1700AA3338 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5684A518DA2D0100BF818F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5684E718DA307900BF818F /* libc++.dylib in Frameworks */,
+				AA5684E618DA307000BF818F /* libresolv.dylib in Frameworks */,
+				AA5684E518DA306A00BF818F /* libz.dylib in Frameworks */,
+				AA5684E418DA306300BF818F /* AudioToolbox.framework in Frameworks */,
+				AA5684E318DA305D00BF818F /* AVFoundation.framework in Frameworks */,
+				AA5684E218DA305700BF818F /* CoreMedia.framework in Frameworks */,
+				AA5684E118DA304F00BF818F /* AddLive.framework in Frameworks */,
+				AA5684E018DA304500BF818F /* CoreVideo.framework in Frameworks */,
+				AA5684DF18DA303F00BF818F /* MessageUI.framework in Frameworks */,
+				AA5684DE18DA303800BF818F /* OpenGLES.framework in Frameworks */,
+				AA5684DD18DA303000BF818F /* QuartzCore.framework in Frameworks */,
+				AA5684DC18DA302800BF818F /* SystemConfiguration.framework in Frameworks */,
+				AA5684DB18DA301E00BF818F /* Security.framework in Frameworks */,
+				AA5684AA18DA2D0100BF818F /* CoreGraphics.framework in Frameworks */,
+				AA5684AB18DA2D0100BF818F /* UIKit.framework in Frameworks */,
+				AA5684A918DA2D0100BF818F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +667,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AA5684AC18DA2D0100BF818F /* Tutorial2.1 */ = {
+			isa = PBXGroup;
+			children = (
+				AA5684B518DA2D0100BF818F /* ALAppDelegate.h */,
+				AA5684B618DA2D0100BF818F /* ALAppDelegate.m */,
+				AA5684B818DA2D0100BF818F /* Main_iPhone.storyboard */,
+				AA5684BB18DA2D0100BF818F /* Main_iPad.storyboard */,
+				AA5684E818DA31EB00BF818F /* ALTutorialTwoOneViewController.h */,
+				AA5684E918DA31EB00BF818F /* ALTutorialTwoOneViewController.m */,
+				AA5684C118DA2D0100BF818F /* Images.xcassets */,
+				AA5684AD18DA2D0100BF818F /* Supporting Files */,
+			);
+			path = Tutorial2.1;
+			sourceTree = "<group>";
+		};
+		AA5684AD18DA2D0100BF818F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA5684AE18DA2D0100BF818F /* Tutorial2.1-Info.plist */,
+				AA5684AF18DA2D0100BF818F /* InfoPlist.strings */,
+				AA5684B218DA2D0100BF818F /* main.m */,
+				AA5684B418DA2D0100BF818F /* Tutorial2.1-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		AA578E1718A692C80063E390 /* Tutorial8 */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +803,7 @@
 			children = (
 				F27EDA6F1871F77000273A80 /* Tutorial1 */,
 				F27EDADC1872074700273A80 /* Tutorial2 */,
+				AA5684AC18DA2D0100BF818F /* Tutorial2.1 */,
 				F27EDB2018720A3100273A80 /* Tutorial3 */,
 				F23FFAB718721A4D00F30444 /* Tutorial4 */,
 				AA1135E418A1B922001BFA6A /* Tutorial5 */,
@@ -743,6 +828,7 @@
 				AA578E1318A692C80063E390 /* Tutorial8.app */,
 				AACB247318B7E81500F64D3A /* Tutorial6.app */,
 				AA1308F418D6FE1700AA3338 /* Tutorial6.1.app */,
+				AA5684A818DA2D0100BF818F /* Tutorial2.1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -886,6 +972,23 @@
 			name = Tutorial6.1;
 			productName = Tutorial6.1;
 			productReference = AA1308F418D6FE1700AA3338 /* Tutorial6.1.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA5684A718DA2D0100BF818F /* Tutorial2.1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA5684D918DA2D0200BF818F /* Build configuration list for PBXNativeTarget "Tutorial2.1" */;
+			buildPhases = (
+				AA5684A418DA2D0100BF818F /* Sources */,
+				AA5684A518DA2D0100BF818F /* Frameworks */,
+				AA5684A618DA2D0100BF818F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial2.1;
+			productName = Tutorial2.1;
+			productReference = AA5684A818DA2D0100BF818F /* Tutorial2.1.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AA578E1218A692C80063E390 /* Tutorial8 */ = {
@@ -1032,6 +1135,7 @@
 			targets = (
 				F27EDA6A1871F77000273A80 /* Tutorial1 */,
 				F27EDAD71872074700273A80 /* Tutorial2 */,
+				AA5684A718DA2D0100BF818F /* Tutorial2.1 */,
 				F27EDB1B18720A3100273A80 /* Tutorial3 */,
 				F23FFAB218721A4C00F30444 /* Tutorial4 */,
 				AA1135DF18A1B922001BFA6A /* Tutorial5 */,
@@ -1063,6 +1167,17 @@
 				AA13090E18D6FE1700AA3338 /* Images.xcassets in Resources */,
 				AA13090618D6FE1700AA3338 /* Main_iPhone.storyboard in Resources */,
 				AA1308FD18D6FE1700AA3338 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5684A618DA2D0100BF818F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5684BD18DA2D0100BF818F /* Main_iPad.storyboard in Resources */,
+				AA5684C218DA2D0100BF818F /* Images.xcassets in Resources */,
+				AA5684BA18DA2D0100BF818F /* Main_iPhone.storyboard in Resources */,
+				AA5684B118DA2D0100BF818F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,6 +1279,16 @@
 				AA13092918D6FE9900AA3338 /* ALTutorialSixOneViewController.m in Sources */,
 				AA1308FF18D6FE1700AA3338 /* main.m in Sources */,
 				AA13090318D6FE1700AA3338 /* ALAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5684A418DA2D0100BF818F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5684B318DA2D0100BF818F /* main.m in Sources */,
+				AA5684B718DA2D0100BF818F /* ALAppDelegate.m in Sources */,
+				AA5684EA18DA31EB00BF818F /* ALTutorialTwoOneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1284,6 +1409,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA13090818D6FE1700AA3338 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		AA5684AF18DA2D0100BF818F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA5684B018DA2D0100BF818F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AA5684B818DA2D0100BF818F /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA5684B918DA2D0100BF818F /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		AA5684BB18DA2D0100BF818F /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA5684BC18DA2D0100BF818F /* Base */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -1537,6 +1686,42 @@
 			};
 			name = Release;
 		};
+		AA5684D518DA2D0200BF818F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = .;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial2.1/Tutorial2.1-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tutorial2.1/Tutorial2.1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AA5684D618DA2D0200BF818F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = .;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial2.1/Tutorial2.1-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tutorial2.1/Tutorial2.1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		AA578E4118A692C90063E390 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1711,7 +1896,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1744,6 +1929,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -1751,7 +1937,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1778,6 +1964,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -1914,6 +2101,15 @@
 			buildConfigurations = (
 				AA13092118D6FE1800AA3338 /* Debug */,
 				AA13092218D6FE1800AA3338 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA5684D918DA2D0200BF818F /* Build configuration list for PBXNativeTarget "Tutorial2.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA5684D518DA2D0200BF818F /* Debug */,
+				AA5684D618DA2D0200BF818F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

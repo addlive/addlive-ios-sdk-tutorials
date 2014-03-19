@@ -24,6 +24,12 @@ The sample application implemented, initializes the platform, sets up camera
 devices, starts local video and renders it using ALVideoView components
 provided.
 
+## Tutorial 2.1 - ALVideoView lifecycle
+
+This tutorial covers the steps mentioned in the past tutorial and it is mainly
+focused to show the ALVideoView lifecycle by allowing the user to start and stop 
+the rendering.
+
 ## Tutorial 3 - Basic connectivity
 
 This tutorial covers basic connectivity features of the AddLive platform.

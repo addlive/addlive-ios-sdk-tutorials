@@ -1,12 +1,12 @@
 //
-//  ALTutorialTwoViewController.m
-//  Tutorial2
+//  ALViewController.m
+//  Tutorial2.1
 //
-//  Created by Tadeusz Kozak on 8/26/13.
-//  Copyright (c) 2013 AddLive. All rights reserved.
+//  Created by Juan Docal on 19.03.14.
+//  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALTutorialTwoViewController.h"
+#import "ALTutorialTwoOneViewController.h"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -20,82 +20,69 @@
 
 @end
 
-@interface LoggingALServiceListener:NSObject<ALServiceListener>
-
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
-
-@end
-
-@interface ALTutorialTwoViewController ()
+@interface ALTutorialTwoOneViewController ()
 {
     ALService*                _alService;
     NSArray*                  _cams;
     NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
-    BOOL                      _paused;
-    BOOL                      _settingCam;
-    BOOL                      _localPreviewStarted;
-    LoggingALServiceListener* _listener;
 }
 @end
 
-@implementation ALTutorialTwoViewController
+@implementation ALTutorialTwoOneViewController
 
 - (void)viewDidLoad
 {
-    _paused = NO;
-    _settingCam = NO;
     [super viewDidLoad];
-    _listener = [[LoggingALServiceListener alloc] init];
     [self initAddLive];
 }
 
-/**
- * Button action to toggle the cam.
- */
-- (IBAction)onToggleCam:(id)sender
+- (IBAction)startRender:(id)sender
 {
-    NSLog(@"Got cam toggle");
-    if(_settingCam)
-    {
-        return;
-    }
-    unsigned int nextIdx = (_selectedCam.unsignedIntValue + 1) % _cams.count;
-    ALDevice* dev =[_cams objectAtIndex:nextIdx];
-    _selectedCam = [NSNumber numberWithUnsignedInt:nextIdx];
-    _settingCam = YES;
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCameraToggled)
-                                                                 withObject:self]];
+    /**
+     * Responder method called when the render starts
+     */
+    ResultBlock onRenderStarted = ^(ALError* err, id nothing){
+        if(err) {
+            NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
+                  err.err_message, err.err_code);
+            return;
+        } else {
+            NSLog(@"Rendering started");
+        }
+    };
+    /* Sets up this instance of the ALVideoView to work with given service and to render
+     * contents of given sink. Additionally, this method allows an application to specify 
+     * whether the video feed should be mirrored or not. This is especially useful when 
+     * rendering local preview video feed.
+     */
+    [self.localPreviewVV setupWithService:_alService withSink:_localVideoSinkId withMirror:YES];
+    
+    // Starting the render
+    [self.localPreviewVV start:[ALResponder responderWithBlock:onRenderStarted]];
+    self.startRenderBtn.hidden = YES;
+    self.stopRenderBtn.hidden = NO;
 }
 
-/**
- * Button action to toggle the video.
- */
-- (IBAction)onToggleVideo:(id) sender
+- (IBAction)stopRender:(id)sender
 {
-    if(_localPreviewStarted)
-    {
-        NSLog(@"Stopping local video");
-        [_localPreviewVV stop:nil];
-        [_alService stopLocalVideo:nil];
-        _localPreviewStarted = NO;
-    }
-    else
-    {
-        NSLog(@"Starting local video");
-        ResultBlock onVideoStarted = ^(ALError *err, id sinkId) {
-            [_localPreviewVV setSinkId:sinkId];
-            [_localPreviewVV start:nil];
-            _localPreviewStarted = YES;
-        };
-        [_alService startLocalVideo:[ALResponder responderWithBlock:onVideoStarted]];
-    }
-}
-
-- (void) onCameraToggled
-{
-    _settingCam = NO;
+    /**
+     * Responder block called when the render stops
+     */
+    ResultBlock onRenderStopped = ^(ALError* err, id nothing){
+        if(err) {
+            NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)",
+                  err.err_message, err.err_code);
+            return;
+        } else {
+            NSLog(@"Rendering stopped");
+        }
+    };
+    
+    // Stopping the render
+    [self.localPreviewVV stop:[ALResponder responderWithBlock:onRenderStopped]];
+    self.startRenderBtn.hidden = NO;
+    self.stopRenderBtn.hidden = YES;
 }
 
 /**
@@ -124,7 +111,7 @@
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
-                       responder:responder];
+                   responder:responder];
 }
 
 /**
@@ -141,7 +128,6 @@
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
-    [_alService addServiceListener:_listener responder:nil];
 }
 
 /**
@@ -158,7 +144,7 @@
     NSLog(@"Got camera devices");
     
     _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:0];
+    _selectedCam  = [NSNumber numberWithInt:1];
     ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
     [_alService setVideoCaptureDevice:dev.id
                             responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
@@ -177,7 +163,6 @@
         return;
     }
     NSLog(@"Video device set");
-    _settingCam = YES;
     [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                                            withObject:self]];
 }
@@ -193,29 +178,13 @@
               err.err_message, err.err_code);
         return;
     }
-    NSLog(@"Got local video started. Will render using sink: %@",sinkId);
-    [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
-    [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
+    NSLog(@"Got local video started. When clicking will render using sink: %@",sinkId);
+    
+    // Enabling the button
+    self.startRenderBtn.enabled = YES;
+    
+    // Copying value
     _localVideoSinkId = [sinkId copy];
-    _settingCam = NO;
-}
-
-/**
- * Responder method called when the render starts
- */
-- (void) onRenderStarted:(ALError*) err
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    else
-    {
-        NSLog(@"Rendering started");
-        _localPreviewStarted = YES;
-    }
 }
 
 /**
@@ -229,39 +198,6 @@
     self.errorLbl.hidden = NO;
     self.errorContentLbl.text = msg;
     self.errorContentLbl.hidden = NO;
-}
-
-/**
- * Stops the render.
- */
-- (void) pause
-{
-    NSLog(@"Application will pause");
-    [self.localPreviewVV stop:nil];
-    [_alService stopLocalVideo:nil];
-    _paused = YES;
-}
-
-/**
- * Starts the render.
- */
-- (void) resume
-{
-    if(!_paused)
-    {
-        return;
-    }
-    NSLog(@"Application will resume");
-    [_alService startLocalVideo:[[ALResponder alloc]
-                                 initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                 withObject:self]];
-    _paused = NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
@@ -281,18 +217,3 @@
 }
 
 @end
-
-
-@implementation LoggingALServiceListener
-
-/**
- * Listener for when the video frame change.
- */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
-{
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
-}
-
-@end
-
-
