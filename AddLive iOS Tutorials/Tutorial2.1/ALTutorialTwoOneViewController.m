@@ -27,6 +27,9 @@
     NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
 }
+
+@property(nonatomic, strong) ALVideoView *localPreviewVV;
+
 @end
 
 @implementation ALTutorialTwoOneViewController
@@ -39,6 +42,13 @@
 
 - (IBAction)startRender:(id)sender
 {
+    // ALVideoView alloc.
+    _localPreviewVV = [[ALVideoView alloc] initWithFrame:CGRectMake(40.0, 82.0,
+                                                                    239.0, 320.0)];
+    
+    // Adding it to it's parent.
+    [self.view addSubview:_localPreviewVV];
+    
     /**
      * Responder method called when the render starts
      */
@@ -56,10 +66,10 @@
      * whether the video feed should be mirrored or not. This is especially useful when 
      * rendering local preview video feed.
      */
-    [self.localPreviewVV setupWithService:_alService withSink:_localVideoSinkId withMirror:YES];
+    [_localPreviewVV setupWithService:_alService withSink:_localVideoSinkId withMirror:YES];
     
     // Starting the render
-    [self.localPreviewVV start:[ALResponder responderWithBlock:onRenderStarted]];
+    [_localPreviewVV start:[ALResponder responderWithBlock:onRenderStarted]];
     self.startRenderBtn.hidden = YES;
     self.stopRenderBtn.hidden = NO;
 }
@@ -76,13 +86,19 @@
             return;
         } else {
             NSLog(@"Rendering stopped");
+            
+            // Remove it from it's parent
+            [_localPreviewVV removeFromSuperview];
+            
+            _localPreviewVV = nil;
+            
+            self.startRenderBtn.hidden = NO;
+            self.stopRenderBtn.hidden = YES;
         }
     };
     
     // Stopping the render
-    [self.localPreviewVV stop:[ALResponder responderWithBlock:onRenderStopped]];
-    self.startRenderBtn.hidden = NO;
-    self.stopRenderBtn.hidden = YES;
+    [_localPreviewVV stop:[ALResponder responderWithBlock:onRenderStopped]];
 }
 
 /**

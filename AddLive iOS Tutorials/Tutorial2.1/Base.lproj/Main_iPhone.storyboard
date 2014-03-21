@@ -29,11 +29,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1r-Tj-jYw" customClass="ALVideoView">
-                                <rect key="frame" x="40" y="82" width="239" height="320"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wju-Ez-xot">
                                 <rect key="frame" x="119" y="410" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -80,7 +75,6 @@
                     <connections>
                         <outlet property="errorContentLbl" destination="ljd-mp-yek" id="kcA-dL-ON9"/>
                         <outlet property="errorLbl" destination="NcJ-88-66W" id="Fwf-fD-a2T"/>
-                        <outlet property="localPreviewVV" destination="z1r-Tj-jYw" id="0d2-cm-fqy"/>
                         <outlet property="startRenderBtn" destination="wju-Ez-xot" id="BzR-lD-LcK"/>
                         <outlet property="stopRenderBtn" destination="LLw-F9-Qbh" id="CsY-Sw-Pq6"/>
                     </connections>

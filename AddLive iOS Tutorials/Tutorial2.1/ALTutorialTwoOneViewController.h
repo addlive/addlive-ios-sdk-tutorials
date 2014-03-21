@@ -11,7 +11,6 @@
 
 @interface ALTutorialTwoOneViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (weak, nonatomic) IBOutlet UILabel *errorLbl;
 @property (weak, nonatomic) IBOutlet UILabel *errorContentLbl;
 @property (strong, nonatomic) IBOutlet UIButton *startRenderBtn;
