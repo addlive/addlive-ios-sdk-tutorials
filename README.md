@@ -27,7 +27,7 @@ provided.
 ## Tutorial 2.1 - ALVideoView lifecycle
 
 This tutorial covers the steps mentioned in the past tutorial and it is mainly
-focused to show the ALVideoView lifecycle by allowing the user to start and stop 
+focused to show the ALVideoView lifecycle by allowing the user to start and stop
 the rendering.
 
 ## Tutorial 3 - Basic connectivity
@@ -44,6 +44,11 @@ This tutorial covers basic use of the [ALService monitorSpeakrsActivity] API.
 
 The sample application implements the listener onSpeechActivity which receives
 the user id and activity of each user in the session.
+
+## Tutorial 4.1 - Two remote renders at the same time
+
+The sample application related to this tutorial will show you the basics of
+rendering two remote feeds at the same time and in the same view.
 
 ## Tutorial 5 - Conference App
 

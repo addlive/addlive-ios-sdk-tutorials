@@ -1,12 +1,12 @@
 //
-//  ALTutorialFourViewController.m
-//  Tutorial2
+//  ALViewController.m
+//  Tutorial4.1
 //
-//  Created by Tadeusz Kozak on 8/26/13.
-//  Copyright (c) 2013 AddLive. All rights reserved.
+//  Created by Juan Docal on 21.03.14.
+//  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALTutorialFourViewController.h"
+#import "ALTutorialFourOneViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 /**
@@ -25,8 +25,6 @@
 
 @interface MyServiceListener : NSObject <ALServiceListener>
 
-- (id) initWithRemoteVideoView:(ALVideoView*) view;
-
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
@@ -37,7 +35,7 @@
 
 @end
 
-@interface ALTutorialFourViewController ()
+@interface ALTutorialFourOneViewController ()
 {
     ALService*                _alService;
     NSArray*                  _cams;
@@ -48,19 +46,134 @@
     BOOL                      _localPreviewStarted;
     MyServiceListener*        _listener;
     BOOL                      _connecting;
+    BOOL                      _isFirstOneFeeding;
+    BOOL                      _isSecondOneFeeding;
+    long long                 _firstUserId;
+    long long                 _secondUserId;
 }
 @end
 
-@implementation ALTutorialFourViewController
+@implementation ALTutorialFourOneViewController
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     _paused = NO;
     _settingCam = NO;
-    [super viewDidLoad];
-    _listener = [[MyServiceListener alloc] initWithRemoteVideoView:_remoteVV];
+    _isFirstOneFeeding = NO;
+    _isSecondOneFeeding = NO;
+    _listener = [[MyServiceListener alloc] init];
     [self initAddLive];
     _connecting = NO;
+    
+    // Notification triggered when an user join the session
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserJoined:)
+                                                 name:@"onUserJoined"
+                                               object:nil];
+    
+    // Notification triggered when an user disjoin the session
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserDisjoined:)
+                                                 name:@"onUserDisjoined"
+                                               object:nil];
+}
+
+/**
+ * Receives the notification when an user joins the room
+ */
+- (void) onUserJoined:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onUserEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    
+    // If the first VideoView is not active.
+    if(!_isFirstOneFeeding){
+        
+        // Set it's sinkId.
+        [_firstRemoteVV setSinkId:event.videoSinkId];
+        
+        // Start the video.
+        [_firstRemoteVV start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                         withObject:self]];
+        
+        // Update the flags.
+        _isFirstOneFeeding = YES;
+        _firstUserId = event.userId;
+        
+    } else if (!_isSecondOneFeeding) {
+        
+        // Set it's sinkId.
+        [_secondRemoteVV setSinkId:event.videoSinkId];
+        
+        // Start the video.
+        [_secondRemoteVV start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                          withObject:self]];
+        
+        // Update the flags.
+        _isSecondOneFeeding = YES;
+        _secondUserId = event.userId;
+    }
+}
+
+/**
+ * Receives the notification when an user leaves the room
+ */
+- (void) onUserDisjoined:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // We get the details of the event sent by the event onUserEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    
+    // If the first one feeding is disconnected.
+    if(event.userId == _firstUserId){
+        
+        // Stop the video.
+        [_firstRemoteVV stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
+                                                        withObject:self]];
+        
+        // Update the flag.
+        _isFirstOneFeeding = NO;
+    } else if (event.userId == _secondUserId) {
+        
+        // Stop the video.
+        [_secondRemoteVV stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
+                                                         withObject:self]];
+        
+        // Update the flag.
+        _isSecondOneFeeding = NO;
+    }
+}
+
+/**
+ * Responder method called when the remote render starts
+ */
+- (void) onRemoteRenderStarted:(ALError*) err
+{
+    if(err) {
+        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
+              err.err_message, err.err_code);
+        return;
+    } else {
+        NSLog(@"Remote Rendering started");
+    }
+}
+
+/**
+ * Responder method called when the remote render stops
+ */
+- (void) onRemoteRenderStopped:(ALError*) err
+{
+    if(err) {
+        NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)",
+              err.err_message, err.err_code);
+        return;
+    } else {
+        NSLog(@"Remote Rendering stopped");
+    }
 }
 
 /**
@@ -121,7 +234,8 @@
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
         _disconnectBtn.hidden = YES;
-        [_remoteVV stop:nil];
+        [_firstRemoteVV stop:nil];
+        [_secondRemoteVV stop:nil];
     };
     [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
 }
@@ -152,8 +266,8 @@
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
-                       responder:responder];
-
+                   responder:responder];
+    
     _stateLbl.text = @"Platform init";
 }
 
@@ -172,7 +286,10 @@
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
     [_alService addServiceListener:_listener responder:nil];
-    [_remoteVV setupWithService:_alService withSink:@""];
+    
+    // Setting the service to the remote video views
+    [_firstRemoteVV setupWithService:_alService withSink:@""];
+    [_secondRemoteVV setupWithService:_alService withSink:@""];
 }
 
 /**
@@ -214,6 +331,10 @@
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
     [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
     [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
+    
+    // Enabling the button
+    self.connectBtn.enabled = YES;
+    
     _localVideoSinkId = [sinkId copy];
     _settingCam = NO;
 }
@@ -272,7 +393,7 @@
 - (void) resume
 {
     if(!_paused)
-        return;
+    return;
     NSLog(@"Application will resume");
     [_alService startLocalVideo:[[ALResponder alloc]
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
@@ -310,22 +431,7 @@
 @end
 
 
-@implementation MyServiceListener {
-    ALVideoView* _videoView;
-}
-
-/**
- * Method to init the remote view within it's view.
- */
-- (id) initWithRemoteVideoView:(ALVideoView*) view
-{
-    self = [super init];
-    if(self)
-    {
-        _videoView = view;
-    }
-    return self;
-}
+@implementation MyServiceListener
 
 /**
  * Listener to capture an user event. (user joining media scope, user leaving media scope,
@@ -333,18 +439,19 @@
  */
 - (void) onUserEvent:(ALUserStateChangedEvent *)event
 {
-    NSLog(@"Got user event: %@", event);
     if(event.isConnected)
     {
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:event.videoSinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
+        NSLog(@"Got user connected: %@", event);
+        NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setValue:event forKey:@"event"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserJoined" object:self userInfo:userInfo];
     }
     else
     {
-        [_videoView stop:nil];
+        NSLog(@"Got user disconnected: %@", event);
+        NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+        [userInfo setValue:event forKey:@"event"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserDisjoined" object:self userInfo:userInfo];
     }
 }
 
@@ -367,5 +474,3 @@
 }
 
 @end
-
-

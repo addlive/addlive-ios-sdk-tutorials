@@ -423,7 +423,7 @@
 {
     if(err)
     {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
+        NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
         return;
     }
