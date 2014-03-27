@@ -209,7 +209,7 @@ float _left;
     
     NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
     
-    if([event.mediaType isEqualToString:@"video"])
+    if([event.mediaType isEqualToString:ALMediaType.kVideo])
     {
         // Updating the Id
         _remoteVideoSinkId = event.videoSinkId;
@@ -233,7 +233,7 @@ float _left;
             [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
         }
     }
-    else if([event.mediaType isEqualToString:@"screen"])
+    else if([event.mediaType isEqualToString:ALMediaType.kScreen])
     {
         // Updating the Id
         _remoteScreenSinkId = event.screenSinkId;

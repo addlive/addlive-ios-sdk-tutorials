@@ -1,13 +1,14 @@
 //
 //  ALViewController.m
-//  Tutorial3
+//  Tutorial3.1
 //
-//  Created by Tadeusz Kozak on 8/26/13.
-//  Copyright (c) 2013 AddLive. All rights reserved.
+//  Created by Juan Docal on 25.03.14.
+//  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALTutorialThreeViewController.h"
+#import "ALTutorialThreeOneViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ALCamera.h"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -27,8 +28,6 @@
 
 - (id) initWithRemoteVideoView:(ALVideoView*) view;
 
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
-
 - (void) userEvent:(ALUserStateChangedEvent *)event;
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
@@ -37,29 +36,28 @@
 
 @end
 
-@interface ALTutorialThreeViewController ()
+@interface ALTutorialThreeOneViewController ()
 {
     ALService*                _alService;
     NSArray*                  _cams;
-    NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
-    BOOL                      _paused;
     BOOL                      _settingCam;
-    BOOL                      _localPreviewStarted;
     MyServiceListener*        _listener;
     BOOL                      _connecting;
 }
+
+@property(nonatomic,retain) ALCamera* externalCamera;
+
 @end
 
-@implementation ALTutorialThreeViewController
+@implementation ALTutorialThreeOneViewController
 
 - (void)viewDidLoad
 {
-    _paused = NO;
-    _settingCam = NO;
     [super viewDidLoad];
     _listener = [[MyServiceListener alloc] initWithRemoteVideoView:_remoteVV];
     [self initAddLive];
+    _settingCam = NO;
     _connecting = NO;
 }
 
@@ -121,6 +119,7 @@
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
         _disconnectBtn.hidden = YES;
+        [self.externalCamera stop];
         [_remoteVV stop:nil];
     };
     [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
@@ -150,9 +149,21 @@
     // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
     
+    // Flag to enable/disable external video input. When the external video input is enabled,
+    // the AddLive SDK will not process any requests related to video devices configuration
+    //(e.g. setVideoCaptureDevice, startLocalVideo)
+    initOptions.externalVideoInput = YES;
+    
+    // Allowing one to skip the devices initialisation phase. By default, the platform will try
+    // to setup the devices to sane default values. With this flag set to NO, the devices init phase
+    // is aborted. It’s especially useful for applications not using camera device on OSX, as this
+    // will not make the camera active when the user does not expect it. Or in a case when it is not
+    // expected by the user to see camera as active during the platform initialisation.
+    initOptions.initDevices = NO;
+    
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
-                       responder:responder];
+                   responder:responder];
     
     _stateLbl.text = @"Platform init";
 }
@@ -168,81 +179,16 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
-    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
-                                            initWithSelector:@selector(onCams:devs:)
-                                            withObject:self]];
-    [_alService addServiceListener:_listener responder:nil];
-    [_remoteVV setupWithService:_alService withSink:@""];
-}
-
-/**
- * Responder method called when getting the devices
- */
-- (void) onCams:(ALError*)err devs:(NSArray*)devs
-{
-    if (err)
-    {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    NSLog(@"Got camera devices");
     
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:1];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
-                                                                 withObject:self]];
-}
-
-/**
- * Responder method called when setting a cam
- */
-- (void) onCamSet:(ALError*) err
-{
-    NSLog(@"Video device set");
-    _settingCam = YES;
-    [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                                           withObject:self]];
-}
-
-/**
- * Responder method called when the local video starts
- */
-- (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    NSLog(@"Got local video started. Will render using sink: %@",sinkId);
-    [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
-    [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
-    _localVideoSinkId = [sinkId copy];
-    _settingCam = NO;
-}
-
-/**
- * Responder method called when the render starts
- */
-- (void) onRenderStarted:(ALError*) err
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    else
-    {
-        NSLog(@"Rendering started");
-        _localPreviewStarted = YES;
-        _stateLbl.text = @"Platform Ready";
-        _connectBtn.hidden = NO;
-    }
+    [_alService addServiceListener:_listener responder:nil];
+    
+    self.externalCamera = [[ALCamera alloc] initWithService:_alService];
+    [self.externalCamera start];
+    
+    _stateLbl.text = @"Platform Ready";
+    _connectBtn.hidden = NO;
+    
+    [_remoteVV setupWithService:_alService withSink:@""];
 }
 
 /**
@@ -263,39 +209,6 @@
     return YES;
 }
 
-/**
- * Stops the render.
- */
-- (void) pause
-{
-    NSLog(@"Application will pause");
-    [self.localPreviewVV stop:nil];
-    [_alService stopLocalVideo:nil];
-    _paused = YES;
-}
-
-/**
- * Starts the render.
- */
-- (void) resume
-{
-    if(!_paused)
-    {
-        return;
-    }
-    NSLog(@"Application will resume");
-    [_alService startLocalVideo:[[ALResponder alloc]
-                                 initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                 withObject:self]];
-    _paused = NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
 
 @implementation Consts
@@ -303,18 +216,18 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
-    return @1;
+    return @486;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"AddLiveSuperSecret";
+    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"ADL_iOS";
+    return @"MOmJ";
 }
 
 @end
@@ -338,7 +251,7 @@
 }
 
 /**
- * Listener to capture an user event. (user joining media scope, user leaving media scope, 
+ * Listener to capture an user event. (user joining media scope, user leaving media scope,
  * user publishing or stop publishing any of possible media streams.)
  */
 - (void) userEvent:(ALUserStateChangedEvent *)event
@@ -359,14 +272,6 @@
 }
 
 /**
- * Event describing a change of a resolution in a video feed produced by given video sink.
- */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
-{
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
-}
-
-/**
  * Event describing a lost connection.
  */
 - (void) onConnectionLost:(ALConnectionLostEvent *)event
@@ -383,5 +288,3 @@
 }
 
 @end
-
-

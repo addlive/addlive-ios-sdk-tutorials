@@ -26,9 +26,11 @@
 
 @interface MyServiceListener : NSObject <ALServiceListener>
 
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
-
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
+
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*)event;
+
+- (void) onMediaStreamEvent:(ALUserStateChangedEvent *)event;
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
 
@@ -105,6 +107,24 @@
                                              selector:@selector(onUserDisjoined:)
                                                  name:@"onUserDisjoined"
                                                object:nil];
+    
+    // Notification triggering the media stream event.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onMediaStreamEvent:)
+                                                 name:@"onMediaStreamEvent"
+                                               object:nil];
+    
+    // Notification triggered when the app will resign to be active
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResignActive:)
+                                                 name:@"applicationWillResignActive"
+                                               object:nil];
+    
+    // Notification triggered when the app will enter foreground
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:@"applicationWillEnterForeground"
+                                               object:nil];
 }
 
 /**
@@ -136,41 +156,28 @@
     videoView.backgroundColor = [UIColor grayColor];
     
     // 4. Setting up the ALVideoView with the service and the videoSinkId of the user joining
-    [videoView setupWithService:_alService withSink:eventDetails.videoSinkId withMirror:YES];
+    [videoView setupWithService:_alService withSink:eventDetails.videoSinkId withMirror:NO];
     
-    // 5. Block called when the remote render starts
-    ResultBlock onRemoteRenderStarted = ^(ALError* err, id nothing) {
-        if(err)
-        {
-            NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-                  err.err_message, err.err_code);
-            return;
-        }
-        else
-        {
-            NSLog(@"Remote Rendering started");
-        }
-    };
+    // 5. Starting the chat and setting the responder
+    [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                withObject:self]];
     
-    // 6. Starting the chat and setting the responder
-    [videoView start:[ALResponder responderWithBlock:onRemoteRenderStarted]];
-    
-    // 7. Adding the ALVideoView we created to the scrollView object
+    // 6. Adding the ALVideoView we created to the scrollView object
     [self.scrollView addSubview: videoView];
     
-    // 8. Saving that ALVideoView into a NSMutableDictionary for further processing (Disconnecting, etc)
+    // 7. Saving that ALVideoView into a NSMutableDictionary for further processing (Disconnecting, etc)
     [_alUserIdToVideoView setObject:videoView forKey:userIdNumber];
     
-    // 9. Setting up the new contentSize
+    // 8. Setting up the new contentSize
     [self.scrollView setContentSize:CGSizeMake(MAX(1, [_alUserIdToVideoView count]) * self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
     
-    // 10. Moving to the joining user ALVideoView
+    // 9. Moving to the joining user ALVideoView
     [self.scrollView setContentOffset:CGPointMake(_screenWidth * ([_alUserIdToVideoView count] - 1), 0) animated:YES];
     
-    // 11. Setting the new number of pages
+    // 10. Setting the new number of pages
     self.pageControl.numberOfPages = [_alUserIdToVideoView count];
     
-    // 12. Setting the new current page
+    // 11. Setting the new current page
     self.pageControl.currentPage = [_alUserIdToVideoView count] - 1;
 }
 
@@ -213,6 +220,125 @@
     
     // 9. Setting the new number of pages
     self.pageControl.numberOfPages = [_alUserIdToVideoView count];
+}
+
+
+/**
+ * Receives the notification when a media event occurs.
+ */
+- (void) onMediaStreamEvent:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener.
+    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    
+    NSLog(@"Got media stream event %lld videoPublished %d", event.userId, event.videoPublished);
+    
+    if([event.mediaType isEqualToString:ALMediaType.kVideo])
+    {
+        if(event.videoPublished)
+        {
+            // 1. Getting userId of the user joining the session from the ALUserStateChangedEvent
+            NSNumber* userIdNumber = [NSNumber numberWithLongLong:event.userId];
+            
+            // 2. Getting ALVideoView of the disconnected user
+            ALVideoView* videoView = [_alUserIdToVideoView objectForKey:userIdNumber];
+            
+            // 3. Setting up the ALVideoView with the service and the videoSinkId of the user joining
+            [videoView setupWithService:_alService withSink:event.videoSinkId withMirror:NO];
+            
+            // 4. Starting the chat and setting the responder
+            [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                        withObject:self]];
+        }
+        else
+        {
+            // 1. Getting userId of the user joining the session from the ALUserStateChangedEvent
+            NSNumber* userIdNumber = [NSNumber numberWithLongLong:event.userId];
+            
+            // 2. Getting ALVideoView of the disconnected user
+            ALVideoView* videoView = [_alUserIdToVideoView objectForKey:userIdNumber];
+            
+            // 3. Stopping the chat and setting the responder
+            [videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
+                                                       withObject:self]];
+        }
+    }
+}
+
+/**
+ * Receives the notification the application will resign to be active
+ */
+- (void) applicationWillResignActive:(NSNotification *)notification
+{
+    [self pause];
+    
+    for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
+        [videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
+                                                   withObject:self]];
+    }
+}
+
+/**
+ * Receives the notification the app will enter foreground
+ */
+- (void) applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self resume];
+    
+    for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
+        [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                    withObject:self]];
+    }
+}
+
+/**
+ * Stops the render.
+ */
+- (void) pause
+{
+    NSLog(@"Application will pause");
+    
+    ResultBlock onUnpublishVideo = ^(ALError* err, id nothing){
+        if(err) {
+            NSLog(@"Got an error unpublishing video: %@ (%d)", err.err_message, err.err_code);
+            return;
+        }
+    };
+    [_alService unpublish:Consts.SCOPE_ID
+                     what:ALMediaType.kVideo
+                responder:[ALResponder responderWithBlock:onUnpublishVideo]];
+    
+    [self.localPreviewVV stop:nil];
+    [_alService stopLocalVideo:nil];
+    _paused = YES;
+}
+
+/**
+ * Starts the render.
+ */
+- (void) resume
+{
+    if(!_paused)
+    {
+        return;
+    }
+    NSLog(@"Application will resume");
+    
+    ResultBlock onPublishVideo = ^(ALError* err, id nothing){
+        if(err) {
+            NSLog(@"Got an error publishing video: %@ (%d)", err.err_message, err.err_code);
+            return;
+        }
+    };
+    [_alService publish:Consts.SCOPE_ID
+                   what:ALMediaType.kVideo options:nil
+              responder:[ALResponder responderWithBlock:onPublishVideo]];
+    
+    [_alService startLocalVideo:[[ALResponder alloc]
+                                 initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+                                 withObject:self]];
 }
 
 /**
@@ -412,7 +538,28 @@
         NSLog(@"Rendering started");
         _localPreviewStarted = YES;
         _stateLbl.text = @"Platform Ready";
-        _connectBtn.hidden = NO;
+        if(!_paused){
+            _connectBtn.hidden = NO;
+        } else {
+            _paused = NO;
+        }
+    }
+}
+
+/**
+ * Responder method called when the remote render stops
+ */
+- (void) onRemoteRenderStarted:(ALError*) err
+{
+    if(err)
+    {
+        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
+              err.err_message, err.err_code);
+        return;
+    }
+    else
+    {
+        NSLog(@"Remote Rendering started");
     }
 }
 
@@ -449,33 +596,6 @@
     self.errorContentLbl.text = msg;
     self.errorContentLbl.hidden = NO;
     return YES;
-}
-
-/**
- * Stops the render.
- */
-- (void) pause
-{
-    NSLog(@"Application will pause");
-    [self.localPreviewVV stop:nil];
-    [_alService stopLocalVideo:nil];
-    _paused = YES;
-}
-
-/**
- * Starts the render.
- */
-- (void) resume
-{
-    if(!_paused)
-    {
-        return;
-    }
-    NSLog(@"Application will resume");
-    [_alService startLocalVideo:[[ALResponder alloc]
-                                 initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                 withObject:self]];
-    _paused = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -534,9 +654,19 @@
 /**
  * Event describing a change of a resolution in a video feed produced by given video sink.
  */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*)event
 {
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
+}
+
+/**
+ * Notifies about media streaming status change for given remote user.
+ */
+- (void) onMediaStreamEvent:(ALUserStateChangedEvent *)event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:@"event"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
 }
 
 /**

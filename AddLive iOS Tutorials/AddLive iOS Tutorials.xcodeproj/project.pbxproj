@@ -98,6 +98,30 @@
 		AA9AFD1D18B6B56F001E90BA /* ALTutorialOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD1C18B6B56F001E90BA /* ALTutorialOneViewController.m */; };
 		AA9AFD2018B6B87E001E90BA /* ALTutorialTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */; };
 		AA9AFD2318B6BA3C001E90BA /* ALTutorialThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */; };
+		AAAEE11518E1A6CF00AEAEDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		AAAEE11618E1A6CF00AEAEDB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		AAAEE11718E1A6CF00AEAEDB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		AAAEE11D18E1A6CF00AEAEDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAAEE11B18E1A6CF00AEAEDB /* InfoPlist.strings */; };
+		AAAEE11F18E1A6CF00AEAEDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAEE11E18E1A6CF00AEAEDB /* main.m */; };
+		AAAEE12318E1A6CF00AEAEDB /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAEE12218E1A6CF00AEAEDB /* ALAppDelegate.m */; };
+		AAAEE12618E1A6CF00AEAEDB /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAAEE12418E1A6CF00AEAEDB /* Main_iPhone.storyboard */; };
+		AAAEE12918E1A6CF00AEAEDB /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAAEE12718E1A6CF00AEAEDB /* Main_iPad.storyboard */; };
+		AAAEE12E18E1A6CF00AEAEDB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAAEE12D18E1A6CF00AEAEDB /* Images.xcassets */; };
+		AAAEE14918E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAEE14818E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.m */; };
+		AAAEE14A18E1BB6300AEAEDB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		AAAEE14B18E1BB6800AEAEDB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		AAAEE14C18E1BB6F00AEAEDB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		AAAEE14D18E1BB7200AEAEDB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		AAAEE14E18E1BB7900AEAEDB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		AAAEE14F18E1BB7D00AEAEDB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		AAAEE15018E1BB8700AEAEDB /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE039B118C5179C001CDB2E /* AddLive.framework */; };
+		AAAEE15118E1BB8C00AEAEDB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		AAAEE15218E1BB9300AEAEDB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		AAAEE15318E1BB9700AEAEDB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		AAAEE15418E1BB9E00AEAEDB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		AAAEE15518E1BBA600AEAEDB /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		AAAEE15618E1BBAE00AEAEDB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
+		AAAEE15918E1C2B100AEAEDB /* ALCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAEE15818E1C2B100AEAEDB /* ALCamera.m */; };
 		AACB243118B7DE2200F64D3A /* ALTutorialFiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */; };
 		AACB243418B7DF6B00F64D3A /* ALTutorialSevenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243318B7DF6B00F64D3A /* ALTutorialSevenViewController.m */; };
 		AACB243718B7E05C00F64D3A /* ALTutorialEightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACB243618B7E05C00F64D3A /* ALTutorialEightViewController.m */; };
@@ -315,6 +339,20 @@
 		AA9AFD1F18B6B87E001E90BA /* ALTutorialTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialTwoViewController.m; sourceTree = "<group>"; };
 		AA9AFD2118B6BA3C001E90BA /* ALTutorialThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialThreeViewController.h; sourceTree = "<group>"; };
 		AA9AFD2218B6BA3C001E90BA /* ALTutorialThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialThreeViewController.m; sourceTree = "<group>"; };
+		AAAEE11418E1A6CF00AEAEDB /* Tutorial3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAAEE11A18E1A6CF00AEAEDB /* Tutorial3.1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial3.1-Info.plist"; sourceTree = "<group>"; };
+		AAAEE11C18E1A6CF00AEAEDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AAAEE11E18E1A6CF00AEAEDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AAAEE12018E1A6CF00AEAEDB /* Tutorial3.1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial3.1-Prefix.pch"; sourceTree = "<group>"; };
+		AAAEE12118E1A6CF00AEAEDB /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		AAAEE12218E1A6CF00AEAEDB /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		AAAEE12518E1A6CF00AEAEDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		AAAEE12818E1A6CF00AEAEDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		AAAEE12D18E1A6CF00AEAEDB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AAAEE14718E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialThreeOneViewController.h; sourceTree = "<group>"; };
+		AAAEE14818E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialThreeOneViewController.m; sourceTree = "<group>"; };
+		AAAEE15718E1C2B100AEAEDB /* ALCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALCamera.h; sourceTree = "<group>"; };
+		AAAEE15818E1C2B100AEAEDB /* ALCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALCamera.m; sourceTree = "<group>"; };
 		AACB242F18B7DE2200F64D3A /* ALTutorialFiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFiveViewController.h; sourceTree = "<group>"; };
 		AACB243018B7DE2200F64D3A /* ALTutorialFiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFiveViewController.m; sourceTree = "<group>"; };
 		AACB243218B7DF6B00F64D3A /* ALTutorialSevenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialSevenViewController.h; sourceTree = "<group>"; };
@@ -506,6 +544,29 @@
 				AA578E1518A692C80063E390 /* CoreGraphics.framework in Frameworks */,
 				AA578E1618A692C80063E390 /* UIKit.framework in Frameworks */,
 				AA578E1418A692C80063E390 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAAEE11118E1A6CF00AEAEDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAAEE15618E1BBAE00AEAEDB /* libc++.dylib in Frameworks */,
+				AAAEE15518E1BBA600AEAEDB /* libresolv.dylib in Frameworks */,
+				AAAEE15418E1BB9E00AEAEDB /* libz.dylib in Frameworks */,
+				AAAEE15318E1BB9700AEAEDB /* AudioToolbox.framework in Frameworks */,
+				AAAEE15218E1BB9300AEAEDB /* AVFoundation.framework in Frameworks */,
+				AAAEE15118E1BB8C00AEAEDB /* CoreMedia.framework in Frameworks */,
+				AAAEE15018E1BB8700AEAEDB /* AddLive.framework in Frameworks */,
+				AAAEE14F18E1BB7D00AEAEDB /* CoreVideo.framework in Frameworks */,
+				AAAEE14E18E1BB7900AEAEDB /* MessageUI.framework in Frameworks */,
+				AAAEE14D18E1BB7200AEAEDB /* OpenGLES.framework in Frameworks */,
+				AAAEE14C18E1BB6F00AEAEDB /* QuartzCore.framework in Frameworks */,
+				AAAEE14B18E1BB6800AEAEDB /* SystemConfiguration.framework in Frameworks */,
+				AAAEE14A18E1BB6300AEAEDB /* Security.framework in Frameworks */,
+				AAAEE11618E1A6CF00AEAEDB /* CoreGraphics.framework in Frameworks */,
+				AAAEE11718E1A6CF00AEAEDB /* UIKit.framework in Frameworks */,
+				AAAEE11518E1A6CF00AEAEDB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +838,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AAAEE11818E1A6CF00AEAEDB /* Tutorial3.1 */ = {
+			isa = PBXGroup;
+			children = (
+				AAAEE12118E1A6CF00AEAEDB /* ALAppDelegate.h */,
+				AAAEE12218E1A6CF00AEAEDB /* ALAppDelegate.m */,
+				AAAEE12418E1A6CF00AEAEDB /* Main_iPhone.storyboard */,
+				AAAEE12718E1A6CF00AEAEDB /* Main_iPad.storyboard */,
+				AAAEE14718E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.h */,
+				AAAEE14818E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.m */,
+				AAAEE15718E1C2B100AEAEDB /* ALCamera.h */,
+				AAAEE15818E1C2B100AEAEDB /* ALCamera.m */,
+				AAAEE12D18E1A6CF00AEAEDB /* Images.xcassets */,
+				AAAEE11918E1A6CF00AEAEDB /* Supporting Files */,
+			);
+			path = Tutorial3.1;
+			sourceTree = "<group>";
+		};
+		AAAEE11918E1A6CF00AEAEDB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AAAEE11A18E1A6CF00AEAEDB /* Tutorial3.1-Info.plist */,
+				AAAEE11B18E1A6CF00AEAEDB /* InfoPlist.strings */,
+				AAAEE11E18E1A6CF00AEAEDB /* main.m */,
+				AAAEE12018E1A6CF00AEAEDB /* Tutorial3.1-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		AACB247718B7E81600F64D3A /* Tutorial6 */ = {
 			isa = PBXGroup;
 			children = (
@@ -889,6 +978,7 @@
 				F27EDADC1872074700273A80 /* Tutorial2 */,
 				AA5684AC18DA2D0100BF818F /* Tutorial2.1 */,
 				F27EDB2018720A3100273A80 /* Tutorial3 */,
+				AAAEE11818E1A6CF00AEAEDB /* Tutorial3.1 */,
 				F23FFAB718721A4D00F30444 /* Tutorial4 */,
 				AAEC23A318DC705E00D01246 /* Tutorial4.1 */,
 				AA1135E418A1B922001BFA6A /* Tutorial5 */,
@@ -915,6 +1005,7 @@
 				AA1308F418D6FE1700AA3338 /* Tutorial6.1.app */,
 				AA5684A818DA2D0100BF818F /* Tutorial2.1.app */,
 				AAEC239F18DC705E00D01246 /* Tutorial4.1.app */,
+				AAAEE11418E1A6CF00AEAEDB /* Tutorial3.1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1094,6 +1185,23 @@
 			productReference = AA578E1318A692C80063E390 /* Tutorial8.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AAAEE11318E1A6CF00AEAEDB /* Tutorial3.1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAAEE14518E1A6D000AEAEDB /* Build configuration list for PBXNativeTarget "Tutorial3.1" */;
+			buildPhases = (
+				AAAEE11018E1A6CF00AEAEDB /* Sources */,
+				AAAEE11118E1A6CF00AEAEDB /* Frameworks */,
+				AAAEE11218E1A6CF00AEAEDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial3.1;
+			productName = Tutorial3.1;
+			productReference = AAAEE11418E1A6CF00AEAEDB /* Tutorial3.1.app */;
+			productType = "com.apple.product-type.application";
+		};
 		AACB247218B7E81500F64D3A /* Tutorial6 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AACB24A018B7E81700F64D3A /* Build configuration list for PBXNativeTarget "Tutorial6" */;
@@ -1240,6 +1348,7 @@
 				F27EDAD71872074700273A80 /* Tutorial2 */,
 				AA5684A718DA2D0100BF818F /* Tutorial2.1 */,
 				F27EDB1B18720A3100273A80 /* Tutorial3 */,
+				AAAEE11318E1A6CF00AEAEDB /* Tutorial3.1 */,
 				F23FFAB218721A4C00F30444 /* Tutorial4 */,
 				AAEC239E18DC705E00D01246 /* Tutorial4.1 */,
 				AA1135DF18A1B922001BFA6A /* Tutorial5 */,
@@ -1293,6 +1402,17 @@
 				AA578E2D18A692C80063E390 /* Images.xcassets in Resources */,
 				AA578E2518A692C80063E390 /* Main_iPhone.storyboard in Resources */,
 				AA578E1C18A692C80063E390 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAAEE11218E1A6CF00AEAEDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAAEE12918E1A6CF00AEAEDB /* Main_iPad.storyboard in Resources */,
+				AAAEE12E18E1A6CF00AEAEDB /* Images.xcassets in Resources */,
+				AAAEE12618E1A6CF00AEAEDB /* Main_iPhone.storyboard in Resources */,
+				AAAEE11D18E1A6CF00AEAEDB /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1534,17 @@
 				AACB243718B7E05C00F64D3A /* ALTutorialEightViewController.m in Sources */,
 				AA578E1E18A692C80063E390 /* main.m in Sources */,
 				AA578E2218A692C80063E390 /* ALAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAAEE11018E1A6CF00AEAEDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAAEE11F18E1A6CF00AEAEDB /* main.m in Sources */,
+				AAAEE14918E1A7CA00AEAEDB /* ALTutorialThreeOneViewController.m in Sources */,
+				AAAEE12318E1A6CF00AEAEDB /* ALAppDelegate.m in Sources */,
+				AAAEE15918E1C2B100AEAEDB /* ALCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1582,6 +1713,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA578E2718A692C80063E390 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		AAAEE11B18E1A6CF00AEAEDB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAAEE11C18E1A6CF00AEAEDB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AAAEE12418E1A6CF00AEAEDB /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAAEE12518E1A6CF00AEAEDB /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		AAAEE12718E1A6CF00AEAEDB /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAAEE12818E1A6CF00AEAEDB /* Base */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -1915,6 +2070,42 @@
 			};
 			name = Release;
 		};
+		AAAEE14118E1A6D000AEAEDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = .;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial3.1/Tutorial3.1-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tutorial3.1/Tutorial3.1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AAAEE14218E1A6D000AEAEDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = .;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial3.1/Tutorial3.1-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tutorial3.1/Tutorial3.1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		AACB24A118B7E81700F64D3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2006,10 +2197,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					.,
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = .;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial4.1/Tutorial4.1-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2029,10 +2217,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					.,
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = .;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tutorial4.1/Tutorial4.1-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -2314,6 +2499,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AAAEE14518E1A6D000AEAEDB /* Build configuration list for PBXNativeTarget "Tutorial3.1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAAEE14118E1A6D000AEAEDB /* Debug */,
+				AAAEE14218E1A6D000AEAEDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		AACB24A018B7E81700F64D3A /* Build configuration list for PBXNativeTarget "Tutorial6" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2339,6 +2532,7 @@
 				AAEC23CD18DC705E00D01246 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F23FFAE018721A4D00F30444 /* Build configuration list for PBXNativeTarget "Tutorial4" */ = {
 			isa = XCConfigurationList;

@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Tutorial3.1.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Tutorial3.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,37 +32,37 @@
 		<key>Tutorial4.1.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Tutorial4.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 		<key>Tutorial5.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>7</integer>
 		</dict>
 		<key>Tutorial6.1.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>Tutorial6.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>8</integer>
 		</dict>
 		<key>Tutorial7.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Tutorial8.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>11</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -98,6 +103,16 @@
 			<true/>
 		</dict>
 		<key>AA578E3118A692C90063E390</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAAEE11318E1A6CF00AEAEDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAAEE13218E1A6CF00AEAEDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

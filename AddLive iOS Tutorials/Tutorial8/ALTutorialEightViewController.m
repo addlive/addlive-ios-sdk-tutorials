@@ -244,7 +244,6 @@
     }
 }
 
-
 /**
  * Receives the notification when a media event occurs.
  */
@@ -257,7 +256,7 @@
     
     NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
     
-    if([event.mediaType isEqualToString:@"video"])
+    if([event.mediaType isEqualToString:ALMediaType.kVideo])
     {
         // Update the user video sink id.
         [_videoSinkIdDictionary setObject:event.videoSinkId forKey:[NSString stringWithFormat:@"%lld", event.userId]];
@@ -291,13 +290,13 @@
 }
 
 /**
- * Receives the notification when a frame size event occurs.
+ * Receives the notification when a connection lost occurs.
  */
 - (void) onConnectionLost:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
     
-    // Details of the event sent by the event onVideoFrameSizeChanged defined in the ALServiceListener.
+    // Details of the event sent by the event onConnectionLost defined in the ALServiceListener.
     ALConnectionLostEvent* event = [userInfo objectForKey:@"event"];
     
     NSLog(@"Got connection lost. Error msg: %@, willReconnect: %hhd", event.errMessage, event.willReconnect);
@@ -321,7 +320,7 @@
     
     // We need to send the Array of userIds of those users sending video (in this case just the one feeding the remoteVideoView).
     NSArray *userIds = @[[NSNumber numberWithLongLong:_currentVideoUserId]];
-    [_alService setAllowedSenders:Consts.SCOPE_ID mediaType:@"video" userIds:userIds responder:[ALResponder responderWithBlock:onAllowedSenders]];
+    [_alService setAllowedSenders:Consts.SCOPE_ID mediaType:ALMediaType.kVideo userIds:userIds responder:[ALResponder responderWithBlock:onAllowedSenders]];
 }
 
 /**

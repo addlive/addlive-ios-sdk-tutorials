@@ -198,16 +198,16 @@
 
 + (NSNumber*) APP_ID {
     // TODO update this to use some real value
-    return @1;
+    return @486;
 }
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    return @"AddLiveSuperSecret";
+    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
 }
 
 + (NSString*) SCOPE_ID {
-    return @"ADL_iOS";
+    return @"MOmJ";
 }
 
 @end
