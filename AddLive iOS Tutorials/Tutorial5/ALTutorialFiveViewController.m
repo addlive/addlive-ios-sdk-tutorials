@@ -116,14 +116,14 @@
     
     // Notification triggered when the app will resign to be active
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillResignActive:)
-                                                 name:@"applicationWillResignActive"
+                                             selector:@selector(applicationPause:)
+                                                 name:@"applicationPause"
                                                object:nil];
     
     // Notification triggered when the app will enter foreground
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationWillEnterForeground:)
-                                                 name:@"applicationWillEnterForeground"
+                                             selector:@selector(applicationResume:)
+                                                 name:@"applicationResume"
                                                object:nil];
 }
 
@@ -270,7 +270,7 @@
 /**
  * Receives the notification the application will resign to be active
  */
-- (void) applicationWillResignActive:(NSNotification *)notification
+- (void) applicationPause:(NSNotification *)notification
 {
     [self pause];
     
@@ -283,7 +283,7 @@
 /**
  * Receives the notification the app will enter foreground
  */
-- (void) applicationWillEnterForeground:(NSNotification *)notification
+- (void) applicationResume:(NSNotification *)notification
 {
     [self resume];
     
