@@ -2506,6 +2506,7 @@
 				AAAEE14218E1A6D000AEAEDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AACB24A018B7E81700F64D3A /* Build configuration list for PBXNativeTarget "Tutorial6" */ = {
 			isa = XCConfigurationList;
