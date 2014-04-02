@@ -129,7 +129,9 @@
 
 - (IBAction) playSnd:(id)sender {
     NSLog(@"Playing sound");
-    ResultBlock onUnpublished = ^(ALError* err, id nothing) {
+    
+    ResultBlock onDisableAudio = ^(ALError* err, id nothing) {
+        
         // Change the AVAudioSession configuration to allow sound playback.
         // After the playback is complete, it will be restored by
         // the PlaybackCompleteDelegate
@@ -139,9 +141,10 @@
         
         [_player play];
     };
-    [_alService unpublish:Consts.SCOPE_ID
-                     what:ALMediaType.kAudio
-                responder:[ALResponder responderWithBlock:onUnpublished]];
+    
+    [_alService setProperty:@"global.dev.audioEnabled"
+                      value:@"0"
+                  responder:[ALResponder responderWithBlock:onDisableAudio]];
 }
 
 
@@ -198,16 +201,16 @@
 
 + (NSNumber*) APP_ID {
     // TODO update this to use some real value
-    return @486;
+    return @1;
 }
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+    return @"AddLiveSuperSecret";
 }
 
 + (NSString*) SCOPE_ID {
-    return @"MOmJ";
+    return @"ADL_iOS";
 }
 
 @end
@@ -221,7 +224,7 @@
     [session setMode:AVAudioSessionModeVoiceChat error:nil];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [_service setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
-    [_service publish:Consts.SCOPE_ID what:ALMediaType.kAudio options:nil responder:nil];
+    [_service setProperty:@"global.dev.audioEnabled" value:@"1" responder:nil];
 }
 
 @end
