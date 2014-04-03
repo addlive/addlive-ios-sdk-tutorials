@@ -40,11 +40,21 @@
     [self initAddLive];
 }
 
-- (IBAction)startRender:(id)sender
+- (IBAction)startRender:(id)sende
 {
-    // ALVideoView alloc.
-    _localPreviewVV = [[ALVideoView alloc] initWithFrame:CGRectMake(40.0, 82.0,
-                                                                    239.0, 320.0)];
+    // Defining values to set the VideoView size properly
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        // ALVideoView alloc.
+        _localPreviewVV = [[ALVideoView alloc] initWithFrame:CGRectMake(164.0, 112.0,
+                                                                        441.0, 582.0)];
+    }
+    else
+    {
+        // ALVideoView alloc.
+        _localPreviewVV = [[ALVideoView alloc] initWithFrame:CGRectMake(40.0, 82.0,
+                                                                        239.0, 320.0)];
+    }
     
     // Adding it to it's parent.
     [self.view addSubview:_localPreviewVV];

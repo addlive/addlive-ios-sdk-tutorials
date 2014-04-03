@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *stateLbl;
 @property (weak, nonatomic) IBOutlet UIButton *connectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *disconnectBtn;
+@property (strong, nonatomic) IBOutlet UIButton *playSndBtn;
 
 
 - (IBAction) connect:(id)sender;
