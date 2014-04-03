@@ -2,3 +2,5 @@
 .DS_Store
 *.dylib
 
+AddLive iOS Tutorials/AddLive iOS Tutorials.xcodeproj/xcuserdata/*
+AddLive iOS Tutorials/AddLive iOS Tutorials.xcodeproj/project.xcworkspace/xcuserdata/*
