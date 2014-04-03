@@ -43,6 +43,8 @@
 - (IBAction)startRender:(id)sende
 {
     // Defining values to set the VideoView size properly
+    // TODO #review minor code style - put only creation of the CGRectMake in the if/else - create a variable and pass
+    // it to ALVideoView alloc] initWithFrame
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         // ALVideoView alloc.
@@ -62,10 +64,9 @@
     /**
      * Responder method called when the render starts
      */
-    ResultBlock onRenderStarted = ^(ALError* err, id nothing){
+    ResultBlock onRenderStarted = ^(ALError* err, id nothing) {
         if(err) {
-            NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-                  err.err_message, err.err_code);
+            NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)", err.err_message, err.err_code);
             return;
         } else {
             NSLog(@"Rendering started");
@@ -91,8 +92,7 @@
      */
     ResultBlock onRenderStopped = ^(ALError* err, id nothing){
         if(err) {
-            NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)",
-                  err.err_message, err.err_code);
+            NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)", err.err_message, err.err_code);
             return;
         } else {
             NSLog(@"Rendering stopped");
@@ -151,6 +151,8 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    // TODO #review I believe you can skip the camera init methods. This is handled internally by the SDK Let's just the
+    // tutorial 2 deals with that 
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];

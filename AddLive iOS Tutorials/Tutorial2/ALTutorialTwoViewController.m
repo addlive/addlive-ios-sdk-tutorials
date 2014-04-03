@@ -103,6 +103,9 @@
  */
 - (void) initAddLive
 {
+    // TODO #review - I haven't thought about it previously. Please add just a line of comment on top refering them
+    // to the Tutorial one for more details on platform initialisation. Let's all subsequent platform initialisation
+    // are just execution - no detailed comment. Of course unless there is a need to explain something new.
     // 1. Allocate the ALService
     _alService = [ALService alloc];
     
@@ -133,6 +136,11 @@
 - (void) onPlatformReady:(ALError*) err
 {
     NSLog(@"Got platform ready");
+    // TODO #review - again I just thought about it now. Please update the handleErrorMaybe, so it returns YES/NO
+    // depending if there was an error or no. This will allow you to use something like
+    // if([self handleErrorMaybe:err where:@"blah"]) return;
+    // where handle error returns YES if there was an error. YES like the error was handled
+    // Please apply the change throughout the tutorials
     if(err)
     {
         [self handleErrorMaybe:err where:@"platformInit"];
@@ -151,6 +159,7 @@
 {
     if (err)
     {
+        // TODO #review - add handleErrorMaybe, please do it for every if err
         NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
         return;
@@ -193,7 +202,7 @@
               err.err_message, err.err_code);
         return;
     }
-    NSLog(@"Got local video started. Will render using sink: %@",sinkId);
+    NSLog(@"Got local video started. Will render using sink: %@", sinkId);
     [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
     [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
     _localVideoSinkId = [sinkId copy];

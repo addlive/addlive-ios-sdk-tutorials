@@ -142,7 +142,8 @@
         [_player play];
     };
     
-    [_alService setProperty:@"global.dev.audioEnabled"
+    // TODO #review this one is just FYI
+    [_alService setProperty:ALPropertyNames.kAudioDeviceEnabled
                       value:@"0"
                   responder:[ALResponder responderWithBlock:onDisableAudio]];
 }
@@ -206,6 +207,7 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
+    // TODO #review please remove this one.
     return @"AddLiveSuperSecret";
 }
 
@@ -224,7 +226,7 @@
     [session setMode:AVAudioSessionModeVoiceChat error:nil];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [_service setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
-    [_service setProperty:@"global.dev.audioEnabled" value:@"1" responder:nil];
+    [_service setProperty:ALPropertyNames.kAudioDeviceEnabled value:@"1" responder:nil];
 }
 
 @end

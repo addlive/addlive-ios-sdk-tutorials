@@ -74,6 +74,7 @@
     _settingCam = NO;
     [super viewDidLoad];
     
+    // TODO #review pull number values to constants
     // Defining values to set the VideoView size properly
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
@@ -106,6 +107,16 @@
     _remoteVV.backgroundColor = [UIColor lightGrayColor];
     
     [self.view addSubview:_remoteVV];
+    
+    // TODO #review maybe try to improve this by sth like:
+//    NSDictionary* mapping = @{@"onUserEvent":@selector(onUserEvent:)}
+//    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:obj
+//                                                     name:key
+//                                                   object:nil];
+//    }];
+    // avoid repetition
     
     // Notification triggered when an user join the session.
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -197,6 +208,7 @@
     
     NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
     
+    // TODO #review - question here, why adjusting dims?
     // If its the current sink feeding.
     if([event.sinkId isEqualToString:_currentVideoSinkId])
     {
@@ -218,6 +230,8 @@
     ALSpeechActivityEvent* event = [userInfo objectForKey:@"event"];
     
     // Getting the values for each user.
+    // TODO #review maybe fast foreach here? Probably not required performance wise, but definitely helps with
+    // readability
     for(int index = 0; index < [event.activeSpeakers count]; index++)
     {
         // If it's not myself.
@@ -238,6 +252,7 @@
     _checkTimer++;
     
     // If there is some activity.
+    // TODO #review pull 15 to constants
     if(_checkTimer >= 15 && [_speakersActivityDictionary count] > 0)
     {
         [self performSelectorOnMainThread:@selector(checkActivity) withObject:nil waitUntilDone:NO];

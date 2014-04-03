@@ -115,6 +115,10 @@
  */
 - (IBAction)toggle:(id)sender
 {
+    // TODO #review this is plain wrong. Use our API.
+    // [_alService setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
+    // [_alService setAudioOutputDevice:ALAudioOutputDevice.kFrontSpeaker responder:nil];
+    
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *setCategoryError = nil;
     
@@ -218,6 +222,7 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
+    // TODO #review remove this one.
     return @"AddLiveSuperSecret";
 }
 

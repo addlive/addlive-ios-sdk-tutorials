@@ -27,6 +27,23 @@
 
 @end
 
+/* TODO #review general notes
+ 
+I.  Clean up order of methods so every tutorial has the same groups:
+ 1. License
+ 1. Imports (pretty obvious)
+ 1. Consts
+ 1. Definition of internal intefraces
+ 1. ViewController members
+ 1. the overwritten view specific methods
+ 1. button handlers implementation
+ 1. AddLive Stuff - "forward API" (calls made to ALService and responders
+ 1. AddLive Stuff - event handlers
+ 1. Implementation of the internal interfaces defined on top
+ 
+II. Please use constants. There are quite a few places where you have just hardcoded digits with dims or position, 
+    pls pull it to top of the consts section in top of the source file
+ */
 @implementation ALTutorialOneViewController {
     ALService* _alService;
 }
@@ -62,6 +79,9 @@
     // not to pass the API key to the client side and implement a server side component that
     // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
+    
+    // TODO #review new thing - please add a call to initOptions.logInteractions to show everyone that we have
+    // sucn an API in stable
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions

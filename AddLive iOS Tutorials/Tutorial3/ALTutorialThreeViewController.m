@@ -78,6 +78,10 @@
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
+    // TODO #review This is wrong - please use our API instead. The onPlatformReady: now takes not only the responder but also
+    // an instance of the ALInitResult. Please store it and check the micFunctional flag instead. See:
+    // http://api.addlive.com/releases/Release/3.0.1.26/apidocs-ios/Classes/ALInitResult.html
+    // Please update it in every place you've put it.
     AVAudioSession *session = [AVAudioSession sharedInstance];
     if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
         [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
@@ -168,6 +172,9 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    
+    // TODO #review the same as with Tutorial 2.1 - let's leave defaults here. Remove all code that deals with the
+    // camera configuration.
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];

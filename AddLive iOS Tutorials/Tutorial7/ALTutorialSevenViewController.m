@@ -52,6 +52,9 @@
 
 @implementation ALTutorialSevenViewController
 
+// TODO #review it does not make sense to describe the variable just with it's name. Either add some more comments
+// or remove it assuming it is self-explanatory
+
 // Remote Video Sink Id
 NSString *_remoteVideoSinkId;
 
@@ -61,8 +64,16 @@ NSString *_remoteScreenSinkId;
 // Current Sink Id feeding
 NSString *_currentRemoteSinkId;
 
+// TODO #review the name is unclear it should be rather isVideoPublished
+// ok, after going through the tutorial code as a whole I can say it is even more unclear - I thought it's a flag
+// saying whether the remote peer sends video or not. But actually it's about what is displayed/renderered.
+// rename it to _isRenderingVideo
 // Feeding video or screen
 bool _videoFeed;
+
+// TODO #review Please add some more comments on what's the rationale behind all these variables - it's not clear what
+// they do, what does it mean "before setting properly dimensions. It's better to group the w, h, l, r and put more
+// verbose comment on all of them instead of repeating pretty much the same thing.
 
 // Remote video width before setting properly the dimensions
 int _remoteVideoWidth;
@@ -214,7 +225,26 @@ float _left;
         // Updating the Id
         _remoteVideoSinkId = event.videoSinkId;
         
+        // TODO #review it should rather read
+        // Case when the remote peer: was publishing video with screen and video is unpublished
+        
+        // TODO #review and actually it doesn't make sense to check the _videoFeed. If we have event related to video
+        // and the event's videoPublished flag is NO it means that _videoFeed was YES, pls remove
         // If I was feeding video but now it's disable and I have available screen
+        
+        // TODO #review forget about the above comment I left it to allow you to see my thinking... Now I know that the
+        // _videoFeed = YES ==> app is displaying video.
+        
+        // TODO #review but it's still wrong - if the event.mediaType == kVideo the value of *Published flags for other
+        // media is undefined. You cannot use it here. The ALUserStateChangedEvent describes only the change only delta
+        // if it is used in onMediaStreamEvent it describes the change of streaming state for this particular media type
+        
+        // I think that at this point, it will be best to introduce an interface RemotePeer with all the *Published
+        // and *SinkId properties. The class will describe connected remote peer. It should have a method applyDelta
+        // that takes ALUserStateChangedEvent and updates internal state accordingly. This event handler should update
+        // state and then check which media are available and what is currently displayed. It should then update the UI
+        // accordingly. This will allow you to ignore the mediaType and just focus on current state. At some point of
+        // time we'll incorporate this into our API.
         if(_videoFeed && !event.videoPublished && event.screenPublished)
         {
             // Starting screen feed
@@ -443,6 +473,7 @@ float _left;
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    // TODO #review - use defaults here.
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
@@ -639,6 +670,8 @@ float _left;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"onConnectionLost" object:self userInfo:userInfo];
 }
 
+
+// TODO #review not used - drop it.
 /**
  * Event describing a reconnection.
  */

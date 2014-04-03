@@ -149,10 +149,14 @@
     // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
     
+    // TODO #review this is slightly not true, the startLocalVideo will be working even with the external camera capture
+    // interface. I'll fix this in the SDK documentation
+    
     // Flag to enable/disable external video input. When the external video input is enabled,
     // the AddLive SDK will not process any requests related to video devices configuration
     //(e.g. setVideoCaptureDevice, startLocalVideo)
     initOptions.externalVideoInput = YES;
+    
     
     // Allowing one to skip the devices initialisation phase. By default, the platform will try
     // to setup the devices to sane default values. With this flag set to NO, the devices init phase
@@ -173,6 +177,9 @@
  */
 - (void) onPlatformReady:(ALError*) err
 {
+    // TODO #review add here calls required to make this tutorial functional even though they are due to the SDK
+    // limitation
+    
     NSLog(@"Got platform ready");
     if(err)
     {
@@ -182,6 +189,7 @@
     
     [_alService addServiceListener:_listener responder:nil];
     
+    // TODO #review this one is misplaced - why to have the camera running if it's not used. Move it to before connect 
     self.externalCamera = [[ALCamera alloc] initWithService:_alService];
     [self.externalCamera start];
     
@@ -216,17 +224,20 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
+    // TODO #review Remove this
     return @486;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
+    // TODO #review Remove this
     return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
 }
 
 + (NSString*) SCOPE_ID
 {
+    // TODO #review put something better here, like iOS
     return @"MOmJ";
 }
 

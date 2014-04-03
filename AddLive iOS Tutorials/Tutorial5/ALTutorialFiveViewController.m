@@ -287,11 +287,16 @@
 {
     [self resume];
     
+    // TODO #review - check here if the view has a sink id. This will log errors when you try to start not initialised
+    // views
     for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
         [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
                                                     withObject:self]];
     }
 }
+
+// TODO #review merge these two pairs of methods . It does not make sense to have applicationPause and pause - semantic
+// is the same and the pause method is used only in applicationPause
 
 /**
  * Stops the render.
@@ -468,6 +473,7 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    // TODO #review remove this - since there are no buttons for toggling the cam, use the SDK defaults
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
@@ -651,6 +657,7 @@
     }
 }
 
+// TODO #review remove this one - it does not add any value to the tutorial
 /**
  * Event describing a change of a resolution in a video feed produced by given video sink.
  */
@@ -668,6 +675,8 @@
     [userInfo setValue:event forKey:@"event"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
 }
+
+// TODO #review remove these. We'll have to add tutorial covering connectivity issues.
 
 /**
  * Event describing a lost connection.

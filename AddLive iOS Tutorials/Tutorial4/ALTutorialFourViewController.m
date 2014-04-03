@@ -168,6 +168,7 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    // TODO #review remove the code related to camera selection
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
@@ -299,6 +300,7 @@
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
+    // TODO #review remove this one
     return @"AddLiveSuperSecret";
 }
 

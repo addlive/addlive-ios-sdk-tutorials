@@ -53,6 +53,7 @@
 }
 @end
 
+// TODO #review, this actually should be tutorial 3.2 not 4.1. It's not related to speakers activity API at all.
 @implementation ALTutorialFourOneViewController
 
 - (void)viewDidLoad
@@ -65,6 +66,22 @@
     _listener = [[MyServiceListener alloc] init];
     [self initAddLive];
     _connecting = NO;
+    
+    // TODO #review maybe try to improve this by sth like:
+    //    NSDictionary* mapping = @{@"onUserEvent":@selector(onUserEvent:)}
+    //    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    //        [[NSNotificationCenter defaultCenter] addObserver:self
+    //                                                 selector:obj
+    //                                                     name:key
+    //                                                   object:nil];
+    //    }];
+    // use this pattern to avoid repetition here. It may be overkill for two, but with this struct the code is more
+    // flexible for future changes - it's easier to add new listeners. And in tutorial 8 it definitely starts to make
+    // sense.
+    
+    // TODO #review, also when dispatching the notification, use some constant instead of @"event" so it is checked
+    // compile time not debugged in runtime :)
+
     
     // Notification triggered when an user join the session
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -282,6 +299,7 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    // TODO #review remove this, let's use platform default camera
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
                                             initWithSelector:@selector(onCams:devs:)
                                             withObject:self]];
