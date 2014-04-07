@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AddLive/AddLiveAPI.h>
 
-@interface ALTutorialFourOneViewController : UIViewController
+@interface ALTutorialThreeTwoViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet ALVideoView *localPreviewVV;
 @property (strong, nonatomic) IBOutlet ALVideoView *firstRemoteVV;

@@ -27,23 +27,6 @@
 
 @end
 
-/* TODO #review general notes
- 
-I.  Clean up order of methods so every tutorial has the same groups:
- 1. License
- 1. Imports (pretty obvious)
- 1. Consts
- 1. Definition of internal intefraces
- 1. ViewController members
- 1. the overwritten view specific methods
- 1. button handlers implementation
- 1. AddLive Stuff - "forward API" (calls made to ALService and responders
- 1. AddLive Stuff - event handlers
- 1. Implementation of the internal interfaces defined on top
- 
-II. Please use constants. There are quite a few places where you have just hardcoded digits with dims or position, 
-    pls pull it to top of the consts section in top of the source file
- */
 @implementation ALTutorialOneViewController {
     ALService* _alService;
 }
@@ -55,6 +38,11 @@ II. Please use constants. There are quite a few places where you have just hardc
     [self initAddLive];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 /**
  * Initializes the AddLive SDK.
@@ -79,6 +67,9 @@ II. Please use constants. There are quite a few places where you have just hardc
     // not to pass the API key to the client side and implement a server side component that
     // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
+    
+    // Property that enables logging of all application <> SDK interactions using NSLog.
+    initOptions.logInteractions = YES;
     
     // TODO #review new thing - please add a call to initOptions.logInteractions to show everyone that we have
     // sucn an API in stable
@@ -117,7 +108,6 @@ II. Please use constants. There are quite a few places where you have just hardc
     self.versionLbl.text = version;
     self.versionLbl.textColor = GREEN;
     [self performSelector:@selector(disposePlatform) withObject:nil afterDelay:2.0];
-
 }
 
 /**
@@ -147,11 +137,6 @@ II. Please use constants. There are quite a few places where you have just hardc
     self.errorLbl.hidden = NO;
     self.errorContentLbl.text = msg;
     self.errorContentLbl.hidden = NO;
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

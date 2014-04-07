@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALTutorialFourOneViewController.h"
+#import "ALTutorialThreeTwoViewController.h"
 #import <AVFoundation/AVFoundation.h>
+
+#define kEventInfo @"eventInfo"
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -35,7 +37,7 @@
 
 @end
 
-@interface ALTutorialFourOneViewController ()
+@interface ALTutorialThreeTwoViewController ()
 {
     ALService*                _alService;
     NSArray*                  _cams;
@@ -50,11 +52,11 @@
     BOOL                      _isSecondOneFeeding;
     long long                 _firstUserId;
     long long                 _secondUserId;
+    BOOL                      _micFunctional;
 }
 @end
 
-// TODO #review, this actually should be tutorial 3.2 not 4.1. It's not related to speakers activity API at all.
-@implementation ALTutorialFourOneViewController
+@implementation ALTutorialThreeTwoViewController
 
 - (void)viewDidLoad
 {
@@ -67,33 +69,21 @@
     [self initAddLive];
     _connecting = NO;
     
-    // TODO #review maybe try to improve this by sth like:
-    //    NSDictionary* mapping = @{@"onUserEvent":@selector(onUserEvent:)}
-    //    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-    //        [[NSNotificationCenter defaultCenter] addObserver:self
-    //                                                 selector:obj
-    //                                                     name:key
-    //                                                   object:nil];
-    //    }];
-    // use this pattern to avoid repetition here. It may be overkill for two, but with this struct the code is more
-    // flexible for future changes - it's easier to add new listeners. And in tutorial 8 it definitely starts to make
-    // sense.
+    NSDictionary* mapping = @{@"onUserJoined":[NSValue valueWithPointer:@selector(onUserJoined:)],
+                              @"onUserDisjoined":[NSValue valueWithPointer:@selector(onUserDisjoined:)]};
     
-    // TODO #review, also when dispatching the notification, use some constant instead of @"event" so it is checked
-    // compile time not debugged in runtime :)
+    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:[obj pointerValue]
+                                                     name:key
+                                                   object:nil];
+    }];
+}
 
-    
-    // Notification triggered when an user join the session
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onUserJoined:)
-                                                 name:@"onUserJoined"
-                                               object:nil];
-    
-    // Notification triggered when an user disjoin the session
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onUserDisjoined:)
-                                                 name:@"onUserDisjoined"
-                                               object:nil];
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /**
@@ -104,7 +94,7 @@
     NSDictionary *userInfo = notification.userInfo;
     
     // Details of the event sent by the event onUserEvent defined in the ALServiceListener
-    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
     
     // If the first VideoView is not active.
     if(!_isFirstOneFeeding){
@@ -143,7 +133,7 @@
     NSDictionary *userInfo = notification.userInfo;
     
     // We get the details of the event sent by the event onUserEvent defined in the ALServiceListener
-    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
     
     // If the first one feeding is disconnected.
     if(event.userId == _firstUserId){
@@ -170,7 +160,7 @@
  */
 - (void) onRemoteRenderStarted:(ALError*) err
 {
-    if(err) {
+    if([self handleErrorMaybe:err where:@"onRemoteRenderStarted:"]) {
         NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
         return;
@@ -184,7 +174,7 @@
  */
 - (void) onRemoteRenderStopped:(ALError*) err
 {
-    if(err) {
+    if([self handleErrorMaybe:err where:@"onRemoteRenderStopped:"]) {
         NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
         return;
@@ -208,18 +198,12 @@
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
-        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            if (granted) {
-                NSLog(@"Mic. is enabled.");
-                descr.autopublishAudio = YES;
-            }
-            else {
-                NSLog(@"Mic. is disabled.");
-                descr.autopublishAudio = NO;
-            }
-        }];
+    if(_micFunctional) {
+        NSLog(@"Mic. is enabled.");
+        descr.autopublishAudio = YES;
+    } else {
+        NSLog(@"Mic. is disabled.");
+        descr.autopublishAudio = NO;
     }
     
     descr.autopublishVideo = YES;
@@ -247,6 +231,10 @@
 - (IBAction)disconnect:(id)sender
 {
     ResultBlock onDisconn = ^(ALError* err, id nothing) {
+        if([self handleErrorMaybe:err where:@"onDisconn:"])
+        {
+            return;
+        }
         NSLog(@"Successfully disconnected");
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
@@ -259,29 +247,18 @@
 
 /**
  * Initializes the AddLive SDK.
+ * For a more detailed explanation about the initialization please check Tutorial 1.
  */
 - (void) initAddLive
 {
-    // 1. Allocate the ALService
     _alService = [ALService alloc];
-    
-    // 2. Prepare the responder
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     
-    // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
-    
-    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
-    
-    // Set the apiKey to let the SDK automatically authenticate all connection requests.
-    // Please note that such an approach reduces slightly the security. It is always a good idea
-    // not to pass the API key to the client side and implement a server side component that
-    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
-    
-    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                    responder:responder];
     
@@ -291,18 +268,20 @@
 /**
  * Called by platform when the initialization is complete.
  */
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
     NSLog(@"Got platform ready");
-    if(err)
+    if([self handleErrorMaybe:err where:@"onPlatformReady:withInitResult:"])
     {
-        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
-    // TODO #review remove this, let's use platform default camera
-    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
-                                            initWithSelector:@selector(onCams:devs:)
-                                            withObject:self]];
+    
+    _micFunctional = initResult.micFunctional;
+    
+    _settingCam = YES;
+    [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+                                                           withObject:self]];
+    
     [_alService addServiceListener:_listener responder:nil];
     
     // Setting the service to the remote video views
@@ -311,41 +290,14 @@
 }
 
 /**
- * Responder method called when getting the devices
- */
-- (void) onCams:(ALError*)err devs:(NSArray*)devs
-{
-    if (err)
-    {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames: %@", err );
-        return;
-    }
-    NSLog(@"Got camera devices");
-    
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:1];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
-                                                                 withObject:self]];
-}
-
-/**
- * Responder method called when setting a cam
- */
-- (void) onCamSet:(ALError*) err
-{
-    NSLog(@"Video device set");
-    _settingCam = YES;
-    [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                                           withObject:self]];
-}
-
-/**
  * Responder method called when the local video starts
  */
 - (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
 {
+    if([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
+    {
+        return;
+    }
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
     [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
     [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
@@ -362,18 +314,14 @@
  */
 - (void) onRenderStarted:(ALError*) err
 {
-    if(err)
+    if([self handleErrorMaybe:err where:@"onRenderStarted:"])
     {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
+        return;
     }
-    else
-    {
-        NSLog(@"Rendering started");
-        _localPreviewStarted = YES;
-        _stateLbl.text = @"Platform Ready";
-        _connectBtn.hidden = NO;
-    }
+    NSLog(@"Rendering started");
+    _localPreviewStarted = YES;
+    _stateLbl.text = @"Platform Ready";
+    _connectBtn.hidden = NO;
 }
 
 /**
@@ -419,12 +367,6 @@
     _paused = NO;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
 
 @implementation Consts
@@ -438,12 +380,12 @@
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"AddLiveSuperSecret";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"ADL_iOS";
+    return @"iOS";
 }
 
 @end
@@ -461,14 +403,14 @@
     {
         NSLog(@"Got user connected: %@", event);
         NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-        [userInfo setValue:event forKey:@"event"];
+        [userInfo setValue:event forKey:kEventInfo];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserJoined" object:self userInfo:userInfo];
     }
     else
     {
         NSLog(@"Got user disconnected: %@", event);
         NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-        [userInfo setValue:event forKey:@"event"];
+        [userInfo setValue:event forKey:kEventInfo];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserDisjoined" object:self userInfo:userInfo];
     }
 }

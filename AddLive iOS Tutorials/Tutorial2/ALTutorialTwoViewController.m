@@ -50,6 +50,12 @@
     [self initAddLive];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /**
  * Button action to toggle the cam.
  */
@@ -100,32 +106,18 @@
 
 /**
  * Initializes the AddLive SDK.
+ * For a more detailed explanation about the initialization please check Tutorial 1.
  */
 - (void) initAddLive
 {
-    // TODO #review - I haven't thought about it previously. Please add just a line of comment on top refering them
-    // to the Tutorial one for more details on platform initialisation. Let's all subsequent platform initialisation
-    // are just execution - no detailed comment. Of course unless there is a need to explain something new.
-    // 1. Allocate the ALService
     _alService = [ALService alloc];
-    
-    // 2. Prepare the responder
     ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
                                                        withObject:self];
     
-    // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
-    
-    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
-    
-    // Set the apiKey to let the SDK automatically authenticate all connection requests.
-    // Please note that such an approach reduces slightly the security. It is always a good idea
-    // not to pass the API key to the client side and implement a server side component that
-    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
-    
-    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                        responder:responder];
 }
@@ -136,14 +128,8 @@
 - (void) onPlatformReady:(ALError*) err
 {
     NSLog(@"Got platform ready");
-    // TODO #review - again I just thought about it now. Please update the handleErrorMaybe, so it returns YES/NO
-    // depending if there was an error or no. This will allow you to use something like
-    // if([self handleErrorMaybe:err where:@"blah"]) return;
-    // where handle error returns YES if there was an error. YES like the error was handled
-    // Please apply the change throughout the tutorials
-    if(err)
+    if([self handleErrorMaybe:err where:@"platformInit"])
     {
-        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
     [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
@@ -157,11 +143,8 @@
  */
 - (void) onCams:(ALError*)err devs:(NSArray*)devs
 {
-    if (err)
+    if ([self handleErrorMaybe:err where:@"onCams:devs:"])
     {
-        // TODO #review - add handleErrorMaybe, please do it for every if err
-        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     NSLog(@"Got camera devices");
@@ -179,10 +162,8 @@
  */
 - (void) onCamSet:(ALError*) err
 {
-    if(err)
+    if ([self handleErrorMaybe:err where:@"onCamSet:"])
     {
-        NSLog(@"Failed to set the camera due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     NSLog(@"Video device set");
@@ -196,10 +177,8 @@
  */
 - (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
 {
-    if(err)
+    if ([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
     {
-        NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     NSLog(@"Got local video started. Will render using sink: %@", sinkId);
@@ -214,10 +193,8 @@
  */
 - (void) onRenderStarted:(ALError*) err
 {
-    if(err)
+    if ([self handleErrorMaybe:err where:@"onRenderStarted:"])
     {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     else
@@ -230,14 +207,19 @@
 /**
  * Handles the possible error coming from the sdk
  */
-- (void) handleErrorMaybe:(ALError*)err where:(NSString*)where
+- (BOOL) handleErrorMaybe:(ALError*)err where:(NSString*)where
 {
+    if(!err) {
+        return NO;
+    }
     NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
                      where, err.err_message, err.err_code];
     NSLog(@"%@", msg);
     self.errorLbl.hidden = NO;
     self.errorContentLbl.text = msg;
     self.errorContentLbl.hidden = NO;
+    
+    return YES;
 }
 
 /**
@@ -265,12 +247,6 @@
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                  withObject:self]];
     _paused = NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

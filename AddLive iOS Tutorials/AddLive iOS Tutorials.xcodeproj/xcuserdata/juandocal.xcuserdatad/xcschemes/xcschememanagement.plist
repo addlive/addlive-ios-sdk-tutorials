@@ -24,20 +24,20 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>Tutorial3.2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>Tutorial3.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>Tutorial4.1.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
 		<key>Tutorial4.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Tutorial5.xcscheme</key>
 		<dict>
@@ -103,6 +103,16 @@
 			<true/>
 		</dict>
 		<key>AA578E3118A692C90063E390</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA80D01418EEC7F500A7F7A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA80D03318EEC7F500A7F7A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

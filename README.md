@@ -38,17 +38,22 @@ The sample application implemented, initializes the platform and sets up local
 preview as per Tutorial 2. It allows also user to connect to a media scope with
 a hardcoded id.
 
+## Tutorial 3.1 - External video feed
+
+The sample application related to this tutorial will show you how to implement
+the SDK with an external video feed.
+
+## Tutorial 3.2 - Two remote renders at the same time
+
+The sample application related to this tutorial will show you the basics of
+rendering two remote feeds at the same time and in the same view.
+
 ## Tutorial 4 - Speakers' activity
 
 This tutorial covers basic use of the [ALService monitorSpeakrsActivity] API.
 
 The sample application implements the listener onSpeechActivity which receives
 the user id and activity of each user in the session.
-
-## Tutorial 4.1 - Two remote renders at the same time
-
-The sample application related to this tutorial will show you the basics of
-rendering two remote feeds at the same time and in the same view.
 
 ## Tutorial 5 - Conference App
 

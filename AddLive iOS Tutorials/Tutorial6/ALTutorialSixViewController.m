@@ -142,13 +142,10 @@
         [_player play];
     };
     
-    // TODO #review this one is just FYI
     [_alService setProperty:ALPropertyNames.kAudioDeviceEnabled
                       value:@"0"
                   responder:[ALResponder responderWithBlock:onDisableAudio]];
 }
-
-
 
 - (void) initAddLive
 {
@@ -158,6 +155,7 @@
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
     initOptions.applicationId = Consts.APP_ID;
     initOptions.apiKey = Consts.API_KEY;
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                        responder:responder];
     _stateLbl.text = @"Platform init";
@@ -207,12 +205,11 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    // TODO #review please remove this one.
-    return @"AddLiveSuperSecret";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID {
-    return @"ADL_iOS";
+    return @"iOS";
 }
 
 @end

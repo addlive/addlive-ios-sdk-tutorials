@@ -9,6 +9,20 @@
 #import "ALTutorialFiveViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+#define kEventInfo @"eventInfo"
+
+// iPad dimensions
+#define kiPadRemoteVVWidth 480
+#define kiPadRemoteVVHeight 512
+#define kiPadRemoteVVLeft 144
+#define kiPadScreenWidth 768
+
+// iPhone dimensions
+#define kiPhoneRemoteVVWidth 227
+#define kiPhoneRemoteVVHeight 261
+#define kiPhoneRemoteVVLeft 46
+#define kiPhoneScreenWidth 320
+
 /**
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
@@ -28,13 +42,7 @@
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*)event;
-
 - (void) onMediaStreamEvent:(ALUserStateChangedEvent *)event;
-
-- (void) onConnectionLost:(ALConnectionLostEvent *)event;
-
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
@@ -56,6 +64,7 @@
     int                       _remoteVideoHeight;
     int                       _remoteVideoMargin;
     int                       _screenWidth;
+    BOOL                      _micFunctional;
 }
 @end
 
@@ -70,17 +79,17 @@
      */
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        _remoteVideoWidth = 480;
-        _remoteVideoHeight = 512;
-        _remoteVideoMargin = 144;
-        _screenWidth = 768;
+        _remoteVideoWidth = kiPadRemoteVVWidth;
+        _remoteVideoHeight = kiPadRemoteVVHeight;
+        _remoteVideoMargin = kiPadRemoteVVLeft;
+        _screenWidth = kiPadScreenWidth;
     }
     else
     {
-        _remoteVideoWidth = 227;
-        _remoteVideoHeight = 261;
-        _remoteVideoMargin = 46;
-        _screenWidth = 320;
+        _remoteVideoWidth = kiPhoneRemoteVVWidth;
+        _remoteVideoHeight = kiPhoneRemoteVVHeight;
+        _remoteVideoMargin = kiPhoneRemoteVVLeft;
+        _screenWidth = kiPhoneScreenWidth;
     }
     
 	_alUserIdToVideoView = [[NSMutableDictionary alloc] init];
@@ -96,35 +105,219 @@
     self.pageControl.currentPage = 0;
     self.scrollView.delegate = self;
     
-    // Notification triggered when an user join the session
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onUserJoined:)
-                                                 name:@"onUserJoined"
-                                               object:nil];
+    NSDictionary* mapping = @{@"onUserJoined":[NSValue valueWithPointer:@selector(onUserJoined:)],
+                              @"onUserDisjoined":[NSValue valueWithPointer:@selector(onUserDisjoined:)],
+                              @"onMediaStreamEvent":[NSValue valueWithPointer:@selector(onMediaStreamEvent:)],
+                              @"applicationPause":[NSValue valueWithPointer:@selector(applicationPause:)],
+                              @"applicationResume":[NSValue valueWithPointer:@selector(applicationResume:)]};
     
-    // Notification triggered when an user disjoin the session
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onUserDisjoined:)
-                                                 name:@"onUserDisjoined"
-                                               object:nil];
+    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:[obj pointerValue]
+                                                     name:key
+                                                   object:nil];
+    }];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/**
+ * Button action to start the connection.
+ */
+- (IBAction)connect:(id)sender
+{
+    if(_connecting)
+    {
+        return;
+    }
+    _connecting = YES;
+    _stateLbl.text = @"Connecting...";
+    ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
+    descr.scopeId = Consts.SCOPE_ID;
     
-    // Notification triggering the media stream event.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onMediaStreamEvent:)
-                                                 name:@"onMediaStreamEvent"
-                                               object:nil];
+    // Setting the audio according to the mic access.
+    if(_micFunctional) {
+        NSLog(@"Mic. is enabled.");
+        descr.autopublishAudio = YES;
+    } else {
+        NSLog(@"Mic. is disabled.");
+        descr.autopublishAudio = NO;
+    }
     
-    // Notification triggered when the app will resign to be active
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationPause:)
-                                                 name:@"applicationPause"
-                                               object:nil];
+    descr.autopublishVideo = YES;
+    descr.authDetails.userId = rand() % 1000;
+    descr.authDetails.expires = time(0) + (60 * 60);
+    descr.authDetails.salt = @"Super random string";
     
-    // Notification triggered when the app will enter foreground
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationResume:)
-                                                 name:@"applicationResume"
-                                               object:nil];
+    ResultBlock onConn = ^(ALError* err, id nothing) {
+        _connecting = NO;
+        if([self handleErrorMaybe:err where:@"Connect"])
+        {
+            return;
+        }
+        NSLog(@"Successfully connected");
+        _stateLbl.text = @"Connected";
+        _connectBtn.hidden = YES;
+        _disconnectBtn.hidden = NO;
+    };
+    [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
+}
+
+/**
+ * Button action to start disconnecting.
+ */
+- (IBAction)disconnect:(id)sender
+{
+    ResultBlock onDisconn = ^(ALError* err, id nothing) {
+        if([self handleErrorMaybe:err where:@"onDisconn:"])
+        {
+            return;
+        }
+        NSLog(@"Successfully disconnected");
+        _stateLbl.text = @"Disconnected";
+        _connectBtn.hidden = NO;
+        _disconnectBtn.hidden = YES;
+        self.pageControl.numberOfPages = 0;
+        self.pageControl.currentPage = 0;
+        for (ALVideoView* videoView in [_alUserIdToVideoView allValues])
+		{
+			[videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
+                                                       withObject:self]];
+			[videoView removeFromSuperview];
+		}
+        [_alUserIdToVideoView removeAllObjects];
+        [self.scrollView setContentSize:self.scrollView.bounds.size];
+    };
+    [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
+}
+
+/**
+ * Initializes the AddLive SDK.
+ * For a more detailed explanation about the initialization please check Tutorial 1.
+ */
+- (void) initAddLive
+{
+    _alService = [ALService alloc];
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
+                                                       withObject:self];
+    
+    ALInitOptions* initOptions = [[ALInitOptions alloc] init];
+    initOptions.applicationId = Consts.APP_ID;
+    initOptions.apiKey = Consts.API_KEY;
+    initOptions.logInteractions = YES;
+    [_alService initPlatform:initOptions
+                   responder:responder];
+    
+    _stateLbl.text = @"Platform init";
+}
+
+/**
+ * Called by platform when the initialization is complete.
+ */
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
+{
+    NSLog(@"Got platform ready");
+    if([self handleErrorMaybe:err where:@"onPlatformReady:withInitResult:"])
+    {
+        return;
+    }
+    
+    _micFunctional = initResult.micFunctional;
+    
+    _settingCam = YES;
+    [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+                                                           withObject:self]];
+    [_alService addServiceListener:_listener responder:nil];
+}
+
+/**
+ * Responder method called when the local video starts
+ */
+- (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
+{
+    if([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
+    {
+        return;
+    }
+    NSLog(@"Got local video started. Will render using sink: %@",sinkId);
+    [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
+    [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
+    _localVideoSinkId = [sinkId copy];
+    _settingCam = NO;
+}
+
+/**
+ * Responder method called when the local render starts
+ */
+- (void) onRenderStarted:(ALError*) err
+{
+    if([self handleErrorMaybe:err where:@"onRenderStarted:"])
+    {
+        return;
+    }
+    else
+    {
+        NSLog(@"Rendering started");
+        _localPreviewStarted = YES;
+        _stateLbl.text = @"Platform Ready";
+        if(!_paused){
+            _connectBtn.hidden = NO;
+        } else {
+            _paused = NO;
+        }
+    }
+}
+
+/**
+ * Responder method called when the remote render stops
+ */
+- (void) onRemoteRenderStarted:(ALError*) err
+{
+    if([self handleErrorMaybe:err where:@"onRemoteRenderStarted:"])
+    {
+        return;
+    }
+    else
+    {
+        NSLog(@"Remote Rendering started");
+    }
+}
+
+/**
+ * Responder method called when the remote render stops
+ */
+- (void) onRemoteRenderStopped:(ALError*) err
+{
+    if([self handleErrorMaybe:err where:@"onRemoteRenderStopped:"])
+    {
+        return;
+    }
+    else
+    {
+        NSLog(@"Remote Rendering stopped");
+    }
+}
+
+/**
+ * Handles the possible error coming from the sdk
+ */
+- (BOOL) handleErrorMaybe:(ALError*)err where:(NSString*)where
+{
+    if(!err)
+    {
+        return NO;
+    }
+    NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
+                     where, err.err_message, err.err_code];
+    NSLog(@"%@", msg);
+    self.errorLbl.hidden = NO;
+    self.errorContentLbl.text = msg;
+    self.errorContentLbl.hidden = NO;
+    return YES;
 }
 
 /**
@@ -146,7 +339,7 @@
     NSDictionary *userInfo = notification.userInfo;
     
     // 1. Details of the event sent by the event onUserEvent defined in the ALServiceListener
-    ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:@"event"];
+    ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:kEventInfo];
     
     // 2. etting userId of the user joining the session from the ALUserStateChangedEvent
     NSNumber* userIdNumber = [NSNumber numberWithLongLong:eventDetails.userId];
@@ -189,7 +382,7 @@
     NSDictionary *userInfo = notification.userInfo;
     
     // 1. We get the details of the event sent by the event onUserEvent defined in the ALServiceListener
-    ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:@"event"];
+    ALUserStateChangedEvent* eventDetails = [userInfo objectForKey:kEventInfo];
     
     // 2. Getting userId of the user joining the session from the ALUserStateChangedEvent
     NSNumber* userIdNumber = [NSNumber numberWithLongLong:eventDetails.userId];
@@ -231,7 +424,7 @@
     NSDictionary *userInfo = notification.userInfo;
     
     // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener.
-    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
     
     NSLog(@"Got media stream event %lld videoPublished %d", event.userId, event.videoPublished);
     
@@ -272,7 +465,20 @@
  */
 - (void) applicationPause:(NSNotification *)notification
 {
-    [self pause];
+    NSLog(@"Application will pause");
+    
+    ResultBlock onUnpublishVideo = ^(ALError* err, id nothing){
+        if([self handleErrorMaybe:err where:@"onUnpublishVideo:"]) {
+            return;
+        }
+    };
+    [_alService unpublish:Consts.SCOPE_ID
+                     what:ALMediaType.kVideo
+                responder:[ALResponder responderWithBlock:onUnpublishVideo]];
+    
+    [self.localPreviewVV stop:nil];
+    [_alService stopLocalVideo:nil];
+    _paused = YES;
     
     for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
         [videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
@@ -285,46 +491,7 @@
  */
 - (void) applicationResume:(NSNotification *)notification
 {
-    [self resume];
     
-    // TODO #review - check here if the view has a sink id. This will log errors when you try to start not initialised
-    // views
-    for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
-        [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
-                                                    withObject:self]];
-    }
-}
-
-// TODO #review merge these two pairs of methods . It does not make sense to have applicationPause and pause - semantic
-// is the same and the pause method is used only in applicationPause
-
-/**
- * Stops the render.
- */
-- (void) pause
-{
-    NSLog(@"Application will pause");
-    
-    ResultBlock onUnpublishVideo = ^(ALError* err, id nothing){
-        if(err) {
-            NSLog(@"Got an error unpublishing video: %@ (%d)", err.err_message, err.err_code);
-            return;
-        }
-    };
-    [_alService unpublish:Consts.SCOPE_ID
-                     what:ALMediaType.kVideo
-                responder:[ALResponder responderWithBlock:onUnpublishVideo]];
-    
-    [self.localPreviewVV stop:nil];
-    [_alService stopLocalVideo:nil];
-    _paused = YES;
-}
-
-/**
- * Starts the render.
- */
-- (void) resume
-{
     if(!_paused)
     {
         return;
@@ -332,8 +499,7 @@
     NSLog(@"Application will resume");
     
     ResultBlock onPublishVideo = ^(ALError* err, id nothing){
-        if(err) {
-            NSLog(@"Got an error publishing video: %@ (%d)", err.err_message, err.err_code);
+        if([self handleErrorMaybe:err where:@"onPublishVideo:"]) {
             return;
         }
     };
@@ -344,6 +510,13 @@
     [_alService startLocalVideo:[[ALResponder alloc]
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                  withObject:self]];
+    
+    for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
+        if(![videoView.sinkId isEqualToString:@""]){
+            [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                        withObject:self]];
+        }
+    }
 }
 
 /**
@@ -359,257 +532,6 @@
     return frame;
 }
 
-/**
- * Button action to start the connection.
- */
-- (IBAction)connect:(id)sender
-{
-    if(_connecting)
-    {
-        return;
-    }
-    _connecting = YES;
-    _stateLbl.text = @"Connecting...";
-    ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
-    descr.scopeId = Consts.SCOPE_ID;
-    
-    // Setting the audio according to the mic access.
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
-        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            if (granted) {
-                NSLog(@"Mic. is enabled.");
-                descr.autopublishAudio = YES;
-            }
-            else {
-                NSLog(@"Mic. is disabled.");
-                descr.autopublishAudio = NO;
-            }
-        }];
-    }
-    
-    descr.autopublishVideo = YES;
-    descr.authDetails.userId = rand() % 1000;
-    descr.authDetails.expires = time(0) + (60 * 60);
-    descr.authDetails.salt = @"Super random string";
-    
-    ResultBlock onConn = ^(ALError* err, id nothing) {
-        _connecting = NO;
-        if([self handleErrorMaybe:err where:@"Connect"])
-        {
-            return;
-        }
-        NSLog(@"Successfully connected");
-        _stateLbl.text = @"Connected";
-        _connectBtn.hidden = YES;
-        _disconnectBtn.hidden = NO;
-    };
-    [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
-}
-
-/**
- * Button action to start disconnecting.
- */
-- (IBAction)disconnect:(id)sender
-{
-    ResultBlock onDisconn = ^(ALError* err, id nothing) {
-        NSLog(@"Successfully disconnected");
-        _stateLbl.text = @"Disconnected";
-        _connectBtn.hidden = NO;
-        _disconnectBtn.hidden = YES;
-        self.pageControl.numberOfPages = 0;
-        self.pageControl.currentPage = 0;
-        for (ALVideoView* videoView in [_alUserIdToVideoView allValues])
-		{
-			[videoView stop:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStopped:)
-                                                       withObject:self]];
-			[videoView removeFromSuperview];
-		}
-        [_alUserIdToVideoView removeAllObjects];
-        [self.scrollView setContentSize:self.scrollView.bounds.size];
-    };
-    [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
-}
-
-/**
- * Initializes the AddLive SDK.
- */
-- (void) initAddLive
-{
-    // 1. Allocate the ALService
-    _alService = [ALService alloc];
-    
-    // 2. Prepare the responder
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
-                                                       withObject:self];
-    
-    // 3. Prepare the init Options. Make sure to init the options.
-    ALInitOptions* initOptions = [[ALInitOptions alloc] init];
-    
-    // Configure the application id
-    initOptions.applicationId = Consts.APP_ID;
-    
-    // Set the apiKey to let the SDK automatically authenticate all connection requests.
-    // Please note that such an approach reduces slightly the security. It is always a good idea
-    // not to pass the API key to the client side and implement a server side component that
-    // generates the signature when needed.
-    initOptions.apiKey = Consts.API_KEY;
-    
-    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
-    [_alService initPlatform:initOptions
-                   responder:responder];
-    
-    _stateLbl.text = @"Platform init";
-}
-
-/**
- * Called by platform when the initialization is complete.
- */
-- (void) onPlatformReady:(ALError*) err
-{
-    NSLog(@"Got platform ready");
-    if(err)
-    {
-        [self handleErrorMaybe:err where:@"platformInit"];
-        return;
-    }
-    // TODO #review remove this - since there are no buttons for toggling the cam, use the SDK defaults
-    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
-                                            initWithSelector:@selector(onCams:devs:)
-                                            withObject:self]];
-    [_alService addServiceListener:_listener responder:nil];
-}
-
-/**
- * Responder method called when getting the devices
- */
-- (void) onCams:(ALError*)err devs:(NSArray*)devs
-{
-    if (err)
-    {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    NSLog(@"Got camera devices");
-    
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:1];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    
-    // Block called when setting a cam
-    ResultBlock onCamSet = ^(ALError* err, id nothing)
-    {
-        NSLog(@"Video device set");
-        _settingCam = YES;
-        [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                                               withObject:self]];
-    };
-    
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[ALResponder responderWithBlock:onCamSet]];
-}
-
-/**
- * Responder method called when the local video starts
- */
-- (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    NSLog(@"Got local video started. Will render using sink: %@",sinkId);
-    [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
-    [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
-    _localVideoSinkId = [sinkId copy];
-    _settingCam = NO;
-}
-
-/**
- * Responder method called when the local render starts
- */
-- (void) onRenderStarted:(ALError*) err
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    else
-    {
-        NSLog(@"Rendering started");
-        _localPreviewStarted = YES;
-        _stateLbl.text = @"Platform Ready";
-        if(!_paused){
-            _connectBtn.hidden = NO;
-        } else {
-            _paused = NO;
-        }
-    }
-}
-
-/**
- * Responder method called when the remote render stops
- */
-- (void) onRemoteRenderStarted:(ALError*) err
-{
-    if(err)
-    {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    else
-    {
-        NSLog(@"Remote Rendering started");
-    }
-}
-
-/**
- * Responder method called when the remote render stops
- */
-- (void) onRemoteRenderStopped:(ALError*) err
-{
-    if(err)
-    {
-        NSLog(@"Failed to stop the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    else
-    {
-        NSLog(@"Remote Rendering stopped");
-    }
-}
-
-/**
- * Handles the possible error coming from the sdk
- */
-- (BOOL) handleErrorMaybe:(ALError*)err where:(NSString*)where
-{
-    if(!err)
-    {
-        return NO;
-    }
-    NSString* msg = [NSString stringWithFormat:@"Got an error with %@: %@ (%d)",
-                     where, err.err_message, err.err_code];
-    NSLog(@"%@", msg);
-    self.errorLbl.hidden = NO;
-    self.errorContentLbl.text = msg;
-    self.errorContentLbl.hidden = NO;
-    return YES;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
 
 @implementation Consts
@@ -623,12 +545,12 @@
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"AddLiveSuperSecret";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"ADL_iOS";
+    return @"iOS";
 }
 
 @end
@@ -645,25 +567,16 @@
     {
         NSLog(@"Got user connected: %@", event);
         NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-        [userInfo setValue:event forKey:@"event"];
+        [userInfo setValue:event forKey:kEventInfo];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserJoined" object:self userInfo:userInfo];
     }
     else
     {
         NSLog(@"Got user disconnected: %@", event);
         NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-        [userInfo setValue:event forKey:@"event"];
+        [userInfo setValue:event forKey:kEventInfo];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserDisjoined" object:self userInfo:userInfo];
     }
-}
-
-// TODO #review remove this one - it does not add any value to the tutorial
-/**
- * Event describing a change of a resolution in a video feed produced by given video sink.
- */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*)event
-{
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
 }
 
 /**
@@ -672,26 +585,8 @@
 - (void) onMediaStreamEvent:(ALUserStateChangedEvent *)event
 {
     NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    [userInfo setValue:event forKey:@"event"];
+    [userInfo setValue:event forKey:kEventInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
-}
-
-// TODO #review remove these. We'll have to add tutorial covering connectivity issues.
-
-/**
- * Event describing a lost connection.
- */
-- (void) onConnectionLost:(ALConnectionLostEvent *)event
-{
-    NSLog(@"Got connection lost");
-}
-
-/**
- * Event describing a reconnection.
- */
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
-{
-    NSLog(@"On Session reconnected");
 }
 
 @end
