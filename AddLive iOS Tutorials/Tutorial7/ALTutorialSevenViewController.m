@@ -142,13 +142,7 @@ int _remoteVideoWidth, _remoteVideoHeight, _remoteVideoLeft;
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
-    if(_micFunctional) {
-        NSLog(@"Mic. is enabled.");
-        descr.autopublishAudio = YES;
-    } else {
-        NSLog(@"Mic. is disabled.");
-        descr.autopublishAudio = NO;
-    }
+    descr.autopublishAudio = _micFunctional;
     
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;

@@ -8,6 +8,9 @@
 
 #import "ALTutorialTwoOneViewController.h"
 
+#define IPAD_FRAME CGRectMake(164.0, 112.0, 441.0, 582.0);
+#define IPHONE_FRAME CGRectMake(40.0, 82.0, 239.0, 320.0);
+
 /**
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
@@ -48,12 +51,12 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         // setting frame.
-        frame = CGRectMake(164.0, 112.0, 441.0, 582.0);
+        frame = IPAD_FRAME;
     }
     else
     {
         // setting frame.
-        frame = CGRectMake(40.0, 82.0, 239.0, 320.0);
+        frame = IPHONE_FRAME;
     }
     
     // ALVideoView alloc.

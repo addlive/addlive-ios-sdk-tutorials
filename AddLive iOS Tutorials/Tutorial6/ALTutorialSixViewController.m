@@ -41,6 +41,7 @@
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
     BOOL                      _connecting;
+    BOOL                      _micFunctional;
 
     
     AVAudioPlayer*            _player;
@@ -84,19 +85,7 @@
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
-        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            if (granted) {
-                NSLog(@"Mic. is enabled.");
-                descr.autopublishAudio = YES;
-            }
-            else {
-                NSLog(@"Mic. is disabled.");
-                descr.autopublishAudio = NO;
-            }
-        }];
-    }
+    descr.autopublishAudio = _micFunctional;
     
     descr.autopublishVideo = NO;
     descr.authDetails.userId = rand() % 1000;
@@ -150,7 +139,7 @@
 - (void) initAddLive
 {
     _alService = [ALService alloc];
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
     initOptions.applicationId = Consts.APP_ID;
@@ -161,7 +150,7 @@
     _stateLbl.text = @"Platform init";
 }
 
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
     NSLog(@"Got platform ready");
     if(err)
@@ -169,6 +158,7 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    _micFunctional = initResult.micFunctional;
     _connectBtn.hidden = NO;
     _playbackCompleteDelegate.service = _alService;
 }
