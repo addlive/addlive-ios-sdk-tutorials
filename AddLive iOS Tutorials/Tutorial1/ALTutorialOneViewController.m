@@ -38,6 +38,11 @@
     [self initAddLive];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 /**
  * Initializes the AddLive SDK.
@@ -62,6 +67,12 @@
     // not to pass the API key to the client side and implement a server side component that
     // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
+    
+    // Property that enables logging of all application <> SDK interactions using NSLog.
+    initOptions.logInteractions = YES;
+    
+    // TODO #review new thing - please add a call to initOptions.logInteractions to show everyone that we have
+    // sucn an API in stable
     
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
     [_alService initPlatform:initOptions
@@ -97,7 +108,6 @@
     self.versionLbl.text = version;
     self.versionLbl.textColor = GREEN;
     [self performSelector:@selector(disposePlatform) withObject:nil afterDelay:2.0];
-
 }
 
 /**
@@ -127,11 +137,6 @@
     self.errorLbl.hidden = NO;
     self.errorContentLbl.text = msg;
     self.errorContentLbl.hidden = NO;
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

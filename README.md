@@ -24,6 +24,12 @@ The sample application implemented, initializes the platform, sets up camera
 devices, starts local video and renders it using ALVideoView components
 provided.
 
+## Tutorial 2.1 - ALVideoView lifecycle
+
+This tutorial covers the steps mentioned in the past tutorial and it is mainly
+focused to show the ALVideoView lifecycle by allowing the user to start and stop
+the rendering.
+
 ## Tutorial 3 - Basic connectivity
 
 This tutorial covers basic connectivity features of the AddLive platform.
@@ -31,6 +37,16 @@ This tutorial covers basic connectivity features of the AddLive platform.
 The sample application implemented, initializes the platform and sets up local
 preview as per Tutorial 2. It allows also user to connect to a media scope with
 a hardcoded id.
+
+## Tutorial 3.1 - External video feed
+
+The sample application related to this tutorial will show you how to implement
+the SDK with an external video feed.
+
+## Tutorial 3.2 - Two remote renders at the same time
+
+The sample application related to this tutorial will show you the basics of
+rendering two remote feeds at the same time and in the same view.
 
 ## Tutorial 4 - Speakers' activity
 
@@ -52,6 +68,12 @@ to swipe between the video feed in the session.
 
 This tutorial shows how to use AVFoundation AVAudioPlayer class in the presence
 of the AddLive SDK.
+
+## Tutorial 6.1 - Toggling output source
+
+This tutorial will show you how to toggle the audio output source between the
+front and loudspeakers using AVAudioSession. Please keep in mind that this is
+an iPhone only tutorial.
 
 ## Tutorial 7 - Screen Sharing
 

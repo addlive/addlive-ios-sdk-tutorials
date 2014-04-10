@@ -8,7 +8,7 @@
 
 #import "ALTutorialSixViewController.h"
 #import <AVFoundation/AVFoundation.h>
-//#import <AudioToolbox/AudioToolbox.h>
+
 /**
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
@@ -31,9 +31,7 @@
 
 @end
 
-
 @interface ALTutorialSixViewController ()
-
 {
     ALService*                _alService;
     NSArray*                  _cams;
@@ -43,6 +41,7 @@
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
     BOOL                      _connecting;
+    BOOL                      _micFunctional;
 
     
     AVAudioPlayer*            _player;
@@ -84,7 +83,10 @@
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
-    descr.autopublishAudio = YES;
+    
+    // Setting the audio according to the mic access.
+    descr.autopublishAudio = _micFunctional;
+    
     descr.autopublishVideo = NO;
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);
@@ -116,7 +118,9 @@
 
 - (IBAction) playSnd:(id)sender {
     NSLog(@"Playing sound");
-    ResultBlock onUnpublished = ^(ALError* err, id nothing) {
+    
+    ResultBlock onDisableAudio = ^(ALError* err, id nothing) {
+        
         // Change the AVAudioSession configuration to allow sound playback.
         // After the playback is complete, it will be restored by
         // the PlaybackCompleteDelegate
@@ -126,27 +130,27 @@
         
         [_player play];
     };
-    [_alService unpublish:Consts.SCOPE_ID
-                     what:ALMediaType.kAudio
-                responder:[ALResponder responderWithBlock:onUnpublished]];
+    
+    [_alService setProperty:ALPropertyNames.kAudioDeviceEnabled
+                      value:@"0"
+                  responder:[ALResponder responderWithBlock:onDisableAudio]];
 }
-
-
 
 - (void) initAddLive
 {
     _alService = [ALService alloc];
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
     initOptions.applicationId = Consts.APP_ID;
     initOptions.apiKey = Consts.API_KEY;
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                        responder:responder];
     _stateLbl.text = @"Platform init";
 }
 
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
     NSLog(@"Got platform ready");
     if(err)
@@ -154,6 +158,7 @@
         [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    _micFunctional = initResult.micFunctional;
     _connectBtn.hidden = NO;
     _playbackCompleteDelegate.service = _alService;
 }
@@ -208,7 +213,7 @@
     [session setMode:AVAudioSessionModeVoiceChat error:nil];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [_service setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
-    [_service publish:Consts.SCOPE_ID what:ALMediaType.kAudio options:nil responder:nil];
+    [_service setProperty:ALPropertyNames.kAudioDeviceEnabled value:@"1" responder:nil];
 }
 
 @end

@@ -7,6 +7,19 @@
 //
 
 #import "ALTutorialSevenViewController.h"
+#import <AVFoundation/AVFoundation.h>
+
+#define kEventInfo @"eventInfo"
+
+// iPad dimensions
+#define kiPadRemoteVVWidth 728
+#define kiPadRemoteVVHeight 584
+#define kiPadRemoteVVLeft 20
+
+// iPhone dimensions
+#define kiPhoneRemoteVVWidth 300
+#define kiPhoneRemoteVVHeight 225
+#define kiPhoneRemoteVVLeft 10
 
 /**
  * Interface defining application constants. In our case it is just the
@@ -23,17 +36,29 @@
 
 @end
 
-@interface MyServiceListener : NSObject <ALServiceListener>
+@interface RemotePeer : NSObject
 
-- (id) initWithRemoteVideoView:(ALVideoView*) view;
+- (id)init;
+
+- (void)applyDelta:(ALUserStateChangedEvent*)event;
+
+- (void)toggleFromCurrentSink:(NSString*)sink;
+
+@property(nonatomic)BOOL                isPublishingVideo;
+@property(nonatomic, strong)NSString*   videoSinkId;
+@property(nonatomic)BOOL                isPublishingScreen;
+@property(nonatomic, strong)NSString*   screenSinkId;
+@property(nonatomic, strong)NSString*   currentSinkId;
+
+@end
+
+@interface MyServiceListener : NSObject <ALServiceListener>
 
 - (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
 
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
-
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
@@ -47,13 +72,16 @@
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
     MyServiceListener*        _listener;
+    RemotePeer*               _remotePeer;
     BOOL                      _connecting;
-    UIView*                   _container;
-	NSMutableDictionary*      _alUserIdToVideoView;
+    BOOL                      _micFunctional;
 }
 @end
 
 @implementation ALTutorialSevenViewController
+
+// Variables holding the Default max. ALVideoView frame dimensions
+int _remoteVideoWidth, _remoteVideoHeight, _remoteVideoLeft;
 
 - (void)viewDidLoad
 {
@@ -61,10 +89,42 @@
     
     _paused = NO;
     _settingCam = NO;
-    [super viewDidLoad];
-    _listener = [[MyServiceListener alloc] initWithRemoteVideoView:_remoteVV];
+    _listener = [[MyServiceListener alloc] init];
+    _remotePeer = [[RemotePeer alloc] init];
     [self initAddLive];
     _connecting = NO;
+    
+    // Defining values to set the VideoView size properly
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        _remoteVideoWidth = kiPadRemoteVVWidth;
+        _remoteVideoHeight = kiPadRemoteVVHeight;
+        _remoteVideoLeft = kiPadRemoteVVLeft;
+    }
+    else
+    {
+        _remoteVideoWidth = kiPhoneRemoteVVWidth;
+        _remoteVideoHeight = kiPhoneRemoteVVHeight;
+        _remoteVideoLeft = kiPhoneRemoteVVLeft;
+    }
+    
+    NSDictionary* mapping = @{@"onUserEvent":[NSValue valueWithPointer:@selector(onUserEvent:)],
+                              @"onMediaStreamEvent":[NSValue valueWithPointer:@selector(onMediaStreamEvent:)],
+                              @"onVideoFrameSizeChanged":[NSValue valueWithPointer:@selector(onVideoFrameSizeChanged:)],
+                              @"onConnectionLost":[NSValue valueWithPointer:@selector(onConnectionLost:)]};
+    
+    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:[obj pointerValue]
+                                                     name:key
+                                                   object:nil];
+    }];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /**
@@ -80,7 +140,10 @@
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
-    descr.autopublishAudio = YES;
+    
+    // Setting the audio according to the mic access.
+    descr.autopublishAudio = _micFunctional;
+    
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);
@@ -88,8 +151,7 @@
     
     ResultBlock onConn = ^(ALError* err, id nothing) {
         _connecting = NO;
-        if([self handleErrorMaybe:err where:@"Connect"])
-        {
+        if([self handleErrorMaybe:err where:@"Connect"]) {
             return;
         }
         NSLog(@"Successfully connected");
@@ -106,6 +168,10 @@
 - (IBAction)disconnect:(id)sender
 {
     ResultBlock onDisconn = ^(ALError* err, id nothing) {
+        if([self handleErrorMaybe:err where:@"onDisconn:"])
+        {
+            return;
+        }
         NSLog(@"Successfully disconnected");
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
@@ -116,30 +182,35 @@
 }
 
 /**
+ * Button to toggle feed.
+ */
+- (IBAction)toggleFeed:(id)sender
+{
+    [_remotePeer toggleFromCurrentSink:_remotePeer.currentSinkId];
+    
+    ResultBlock onStopped = ^(ALError* err, id nothing){
+        
+        [_remoteVV setSinkId:_remotePeer.currentSinkId];
+        [_remoteVV start:nil];
+    };
+    [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
+    
+}
+
+/**
  * Initializes the AddLive SDK.
+ * For a more detailed explanation about the initialization please check Tutorial 1.
  */
 - (void) initAddLive
 {
-    // 1. Allocate the ALService
     _alService = [ALService alloc];
-    
-    // 2. Prepare the responder
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     
-    // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
-    
-    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
-    
-    // Set the apiKey to let the SDK automatically authenticate all connection requests.
-    // Please note that such an approach reduces slightly the security. It is always a good idea
-    // not to pass the API key to the client side and implement a server side component that
-    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
-    
-    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                    responder:responder];
     
@@ -149,51 +220,22 @@
 /**
  * Called by platform when the initialization is complete.
  */
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
     NSLog(@"Got platform ready");
-    if(err)
+    if([self handleErrorMaybe:err where:@"onPlatformReady:initResult:"])
     {
-        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
-    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
-                                            initWithSelector:@selector(onCams:devs:)
-                                            withObject:self]];
-    [_alService addServiceListener:_listener responder:nil];
-    [_remoteVV setupWithService:_alService withSink:@""];
-}
-
-/**
- * Responder method called when getting the devices
- */
-- (void) onCams:(ALError*)err devs:(NSArray*)devs
-{
-    if (err)
-    {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    NSLog(@"Got camera devices");
     
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:1];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
-                                                                 withObject:self]];
-}
-
-/**
- * Responder method called when setting a cam
- */
-- (void) onCamSet:(ALError*) err
-{
-    NSLog(@"Video device set");
+    _micFunctional = initResult.micFunctional;
+    
     _settingCam = YES;
     [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                                            withObject:self]];
+    
+    [_alService addServiceListener:_listener responder:nil];
+    [_remoteVV setupWithService:_alService withSink:@""];
 }
 
 /**
@@ -201,7 +243,7 @@
  */
 - (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
 {
-    if(err)
+    if([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
     {
         NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
               err.err_message, err.err_code);
@@ -219,10 +261,8 @@
  */
 - (void) onRenderStarted:(ALError*) err
 {
-    if(err)
+    if([self handleErrorMaybe:err where:@"onRenderStarted:"])
     {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     else
@@ -252,188 +292,15 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-
-@implementation Consts
-
-+ (NSNumber*) APP_ID
-{
-    // TODO update this to use some real value
-    return @1;
-}
-
-+ (NSString*) API_KEY
-{
-    // TODO update this to use some real value
-    return @"";
-}
-
-+ (NSString*) SCOPE_ID
-{
-    return @"";
-}
-
-@end
-
-
-@implementation MyServiceListener
-{
-    // Remote video object
-    ALVideoView*    _videoView;
-    
-    // New event flag
-    BOOL            _newScreen;
-    
-    // Remote video width before setting properly the dimensions
-    int             _remoteVideoWidth;
-    
-    // Remote video height before setting properly the dimensions
-    int             _remoteVideoHeight;
-    
-    // Remote video left before setting properly the dimensions
-    int             _remoteVideoLeft;
-    
-    // Remote video width after setting properly the dimensions
-    float           _videoWidth;
-    
-    // Remote video height after setting properly the dimensions
-    float           _videoHeight;
-    
-    // Remote video left after setting properly the dimensions
-    float           _left;
-}
-
-/**
- * Method to init the remote view within it's view.
- */
-- (id) initWithRemoteVideoView:(ALVideoView*) view
-{
-    self = [super init];
-    if(self) {
-        _videoView = view;
-    }
-    return self;
-}
-
-/**
- * Listener to capture an user event. (user joining media scope, user leaving media scope,
- * user publishing or stop publishing any of possible media streams.)
- */
-
-- (void) onUserEvent:(ALUserStateChangedEvent *)event
-{
-    NSLog(@"Got user event: %@", event);
-    
-    // If the coming event is screen sharing or video
-    if(event.isConnected || event.screenPublished)
-    {
-        NSString *sinkId;
-        
-        // Get the correct sinkId for each case
-        if(event.screenPublished){
-            sinkId = event.screenSinkId;
-        }
-        else{
-            sinkId = event.videoSinkId;
-        }
-        
-        // Stop the previous one and start the new one
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:sinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
-    }
-    else
-    {
-        [_videoView stop:nil];
-    }
-}
-
-/**
- * Notifies about media streaming status change for given remote user.
- */
-- (void) onMediaStreamEvent:(ALUserStateChangedEvent*) event
-{
-    NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
-    
-    // If the coming event is either video or screensharing
-    if(event.screenPublished || event.videoPublished){
-        
-        // Set to yes the new event flag
-        _newScreen = YES;
-    }
-    
-    /**
-     * Defining values to set the scrollview content size properly
-     */
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        _remoteVideoWidth = 728;
-        _remoteVideoHeight = 584;
-        _remoteVideoLeft = 20;
-    }
-    else
-    {
-        _remoteVideoWidth = 300;
-        _remoteVideoHeight = 225;
-        _remoteVideoLeft = 10;
-    }
-}
-
-/**
- * Event describing a change of a resolution in a video feed produced by given video sink.
- */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
-{
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
-    
-    // If it is a new event
-    if(_newScreen)
-    {
-        // Get and set the correct dimensions
-        [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
-        _videoView.frame = CGRectMake(_remoteVideoLeft + _left, _videoView.frame.origin.y, _videoWidth, _videoHeight);
-        
-        // Stop the previous one and start the new one
-        ResultBlock onStopped = ^(ALError* err, id nothing){
-            [_videoView setSinkId:event.sinkId];
-            [_videoView start:nil];
-        };
-        [_videoView stop:[ALResponder responderWithBlock:onStopped]];
-        
-        // Set to no the new event flag
-        _newScreen = NO;
-    }
-}
-
-/**
- * Event describing a lost connection.
- */
-- (void) onConnectionLost:(ALConnectionLostEvent *)event
-{
-    NSLog(@"Got connection lost");
-}
-
-/**
- * Event describing a reconnection.
- */
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
-{
-    NSLog(@"On Session reconnected");
-}
-
 /**
  * Method to get the current dimensions from the coming width and height onVideoFrameSizeChanged
  */
-- (void)fitDimensions:(int)srcW and:(int)srcH to:(int)targetW and:(int)targetH
+- (CGRect)fitDimensions:(int)srcW and:(int)srcH to:(int)targetW and:(int)targetH
 {
+    float _videoWidth = 0;
+    float _videoHeight = 0;
+    float _left = 0;
+    
     float srcAR = srcW / srcH;
     float targetAR = targetW / targetH;
     float width = 0.0;
@@ -454,6 +321,231 @@
         _videoHeight = targetW * srcH / srcW;
         _left = 0;
     }
+    return CGRectMake(_remoteVideoLeft + _left, _remoteVV.frame.origin.y, _videoWidth, _videoHeight);
+}
+
+
+/**
+ * Receives the notification when a frame size event occurs
+ */
+- (void) onConnectionLost:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onVideoFrameSizeChanged defined in the ALServiceListener
+    ALConnectionLostEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    NSLog(@"Got connection lost. Error msg: %@, willReconnect: %hhd", event.errMessage, event.willReconnect);
+    
+    [_remoteVV stop:nil];
+}
+
+/**
+ * Receives the notification when an user event occurs
+ */
+- (void) onUserEvent:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onUserEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    // New user connected
+    if(event.isConnected)
+    {
+        // Update remote peer info.
+        [_remotePeer applyDelta:event];
+        
+        ResultBlock onStopped = ^(ALError* err, id nothing){
+            
+            [_remoteVV setSinkId:_remotePeer.currentSinkId];
+            [_remoteVV start:nil];
+        };
+        [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
+    }
+    else
+    {
+        [_remoteVV stop:nil];
+    }
+    
+    // Setting the toggle button visibility
+    if(event.screenPublished && event.videoPublished)
+    {
+        _toggleBtn.hidden = NO;
+    }
+    else if(event.screenPublished || event.videoPublished)
+    {
+        _toggleBtn.hidden = YES;
+    }
+}
+
+/**
+ * Receives the notification when a media event occurs
+ */
+- (void) onMediaStreamEvent:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    // Update remote peer info.
+    [_remotePeer applyDelta:event];
+    
+    ResultBlock onStopped = ^(ALError* err, id nothing){
+        
+        [_remoteVV setSinkId:_remotePeer.currentSinkId];
+        [_remoteVV start:nil];
+    };
+    [_remoteVV stop:[ALResponder responderWithBlock:onStopped]];
+    
+    // Setting the toggle button visibility
+    if(event.screenPublished && event.videoPublished)
+    {
+        _toggleBtn.hidden = NO;
+    }
+    else if(event.screenPublished || event.videoPublished)
+    {
+        _toggleBtn.hidden = YES;
+    }
+}
+
+/**
+ * Receives the notification when a frame size event occurs
+ */
+- (void) onVideoFrameSizeChanged:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onVideoFrameSizeChanged defined in the ALServiceListener
+    ALVideoFrameSizeChangedEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
+    
+    // If it's not local video feed.
+    if(![event.sinkId isEqualToString:@"AddLiveRenderer1"]){
+        
+        // Get and set the correct dimensions
+        _remoteVV.frame = [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
+    }
+}
+
+@end
+
+@implementation Consts
+
++ (NSNumber*) APP_ID
+{
+    // TODO update this to use some real value
+    return @1;
+}
+
++ (NSString*) API_KEY
+{
+    // TODO update this to use some real value
+    return @"";
+}
+
++ (NSString*) SCOPE_ID
+{
+    return @"iOS";
+}
+
+@end
+
+@implementation RemotePeer
+
+- (id)init
+{
+    self = [super init];
+    if(!self) {
+        return nil;
+    }
+    return self;
+}
+
+- (void)applyDelta:(ALUserStateChangedEvent*)event
+{
+    self.isPublishingVideo = event.videoPublished;
+    self.isPublishingScreen = event.screenPublished;
+    
+    if(event.screenPublished){
+        if(![event.screenSinkId isEqualToString:@""]){
+            self.screenSinkId = event.screenSinkId;
+        }
+    }
+    
+    if(event.videoPublished){
+        if(![event.videoSinkId isEqualToString:@""]){
+            self.videoSinkId = event.videoSinkId;
+        }
+    }
+    
+    if(self.isPublishingVideo && self.isPublishingScreen){
+        self.currentSinkId = self.screenSinkId;
+    } else if(self.isPublishingVideo && !self.isPublishingScreen) {
+        self.currentSinkId = self.videoSinkId;
+    } else if (!self.isPublishingVideo && self.isPublishingScreen){
+        self.currentSinkId = self.screenSinkId;
+    } else {
+        self.currentSinkId = @"";
+    }
+}
+
+- (void)toggleFromCurrentSink:(NSString*)sink
+{
+    if([self.videoSinkId isEqualToString:sink]){
+        self.currentSinkId = self.screenSinkId;
+    } else {
+        self.currentSinkId = self.videoSinkId;
+    }
+}
+
+@end
+
+
+@implementation MyServiceListener
+
+/**
+ * Listener to capture an user event. (user joining media scope, user leaving media scope,
+ * user publishing or stop publishing any of possible media streams.)
+ */
+
+- (void) onUserEvent:(ALUserStateChangedEvent *)event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:kEventInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserEvent" object:self userInfo:userInfo];
+}
+
+/**
+ * Notifies about media streaming status change for given remote user.
+ */
+- (void) onMediaStreamEvent:(ALUserStateChangedEvent*) event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:kEventInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
+}
+
+/**
+ * Event describing a change of a resolution in a video feed produced by given video sink.
+ */
+- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:kEventInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onVideoFrameSizeChanged" object:self userInfo:userInfo];
+}
+
+/**
+ * Event describing a lost connection.
+ */
+- (void) onConnectionLost:(ALConnectionLostEvent *)event
+{
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:kEventInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onConnectionLost" object:self userInfo:userInfo];
 }
 
 @end

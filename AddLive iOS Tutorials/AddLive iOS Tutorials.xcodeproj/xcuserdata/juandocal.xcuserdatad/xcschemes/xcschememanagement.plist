@@ -9,40 +9,60 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Tutorial2.1.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Tutorial2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Tutorial3.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Tutorial4.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>Tutorial5.xcscheme</key>
+		<key>Tutorial3.1.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>Tutorial6.xcscheme</key>
+		<key>Tutorial3.2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>Tutorial7.xcscheme</key>
+		<key>Tutorial3.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Tutorial4.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>Tutorial8.xcscheme</key>
+		<key>Tutorial5.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>7</integer>
+		</dict>
+		<key>Tutorial6.1.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Tutorial6.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>Tutorial7.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>Tutorial8.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -57,12 +77,52 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AA1308F318D6FE1700AA3338</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA13091218D6FE1700AA3338</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA5684A718DA2D0100BF818F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA5684C618DA2D0100BF818F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AA578E1218A692C80063E390</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>AA578E3118A692C90063E390</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA80D01418EEC7F500A7F7A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA80D03318EEC7F500A7F7A8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAAEE11318E1A6CF00AEAEDB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAAEE13218E1A6CF00AEAEDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -93,6 +153,16 @@
 			<true/>
 		</dict>
 		<key>AADDB31018A431BF00298780</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAEC239E18DC705E00D01246</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAEC23BD18DC705E00D01246</key>
 		<dict>
 			<key>primary</key>
 			<true/>
