@@ -34,6 +34,7 @@
     BOOL                      _localPreviewStarted;
     BOOL                      _connecting;
     BOOL                      _outputState;
+    BOOL                      _micFunctional;
 }
 @end
 
@@ -47,6 +48,12 @@
     [super viewDidLoad];
     [self initAddLive];
     _connecting = NO;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /**
@@ -63,19 +70,7 @@
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
-        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            if (granted) {
-                NSLog(@"Mic. is enabled.");
-                descr.autopublishAudio = YES;
-            }
-            else {
-                NSLog(@"Mic. is disabled.");
-                descr.autopublishAudio = NO;
-            }
-        }];
-    }
+    descr.autopublishAudio = _micFunctional;
     
     descr.autopublishVideo = NO;
     descr.authDetails.userId = rand() % 1000;
@@ -101,6 +96,10 @@
 - (IBAction)disconnect:(id)sender
 {
     ResultBlock onDisconn = ^(ALError* err, id nothing) {
+        if([self handleErrorMaybe:err where:@"onDisconn:"])
+        {
+            return;
+        }
         NSLog(@"Successfully disconnected");
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
@@ -115,59 +114,29 @@
  */
 - (IBAction)toggle:(id)sender
 {
-    // TODO #review this is plain wrong. Use our API.
-    // [_alService setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
-    // [_alService setAudioOutputDevice:ALAudioOutputDevice.kFrontSpeaker responder:nil];
-    
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    NSError *setCategoryError = nil;
-    
     if(_outputState){
-        if (![session setCategory:AVAudioSessionCategoryPlayAndRecord
-                      withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
-                            error:&setCategoryError]) {
-        
-            NSLog(@"There was an issue toggling to loudspeakers");
-        } else {
-            _outputState = false;
-        }
+        [_alService setAudioOutputDevice:ALAudioOutputDevice.kLoudSpeaker responder:nil];
+        _outputState = false;
     } else {
-        if (![session setCategory:AVAudioSessionCategoryPlayAndRecord
-                      withOptions:kAudioSessionOverrideAudioRoute_None
-                            error:&setCategoryError]) {
-            
-            NSLog(@"There was an issue toggling the frontspeakers");
-        } else {
-            _outputState = true;
-        }
+        [_alService setAudioOutputDevice:ALAudioOutputDevice.kFrontSpeaker responder:nil];
+        _outputState = true;
     }
 }
 
 /**
  * Initializes the AddLive SDK.
+ * For a more detailed explanation about the initialization please check Tutorial 1.
  */
 - (void) initAddLive
 {
-    // 1. Allocate the ALService
     _alService = [ALService alloc];
-    
-    // 2. Prepare the responder
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     
-    // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
-    
-    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
-    
-    // Set the apiKey to let the SDK automatically authenticate all connection requests.
-    // Please note that such an approach reduces slightly the security. It is always a good idea
-    // not to pass the API key to the client side and implement a server side component that
-    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
-    
-    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                    responder:responder];
     
@@ -177,14 +146,16 @@
 /**
  * Called by platform when the initialization is complete.
  */
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
     NSLog(@"Got platform ready");
-    if(err)
+    if([self handleErrorMaybe:err where:@"onPlatformReady:withInitResult:"])
     {
-        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
+    
+    _micFunctional = initResult.micFunctional;
+    
     _connectBtn.hidden = NO;
 }
 
@@ -205,12 +176,6 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
 
 @implementation Consts
@@ -222,12 +187,11 @@
 
 + (NSString*) API_KEY {
     // TODO update this to use some real value
-    // TODO #review remove this one.
-    return @"AddLiveSuperSecret";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID {
-    return @"ADL_iOS";
+    return @"iOS";
 }
 
 @end

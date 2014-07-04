@@ -9,6 +9,21 @@
 #import "ALTutorialEightViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+#define kEventInfo @"eventInfo"
+#define kCheckActivity 15
+
+// iPad dimensions
+#define kiPadRemoteVVWidth 480
+#define kiPadRemoteVVHeight 640
+#define kiPadRemoteVVLeft 205
+#define kiPadRemoteVVTop 86
+
+// iPhone dimensions
+#define kiPhoneRemoteVVWidth 239
+#define kiPhoneRemoteVVHeight 320
+#define kiPhoneRemoteVVLeft 73
+#define kiPhoneRemoteVVTop 107
+
 /**
  * Interface defining application constants. In our case it is just the
  * Application id and API key.
@@ -25,15 +40,11 @@
 
 @interface MyServiceListener : NSObject <ALServiceListener>
 
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event;
-
 - (void) onUserEvent:(ALUserStateChangedEvent *)event;
 
 - (void) onSpeechActivity:(ALSpeechActivityEvent *)event;
 
 - (void) onConnectionLost:(ALConnectionLostEvent *)event;
-
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event;
 
 @end
 
@@ -50,6 +61,7 @@
     BOOL                      _settingCam;
     BOOL                      _localPreviewStarted;
     BOOL                      _connecting;
+    BOOL                      _micFunctional;
     MyServiceListener*        _listener;
     ALVideoView*              _remoteVV;
     NSMutableDictionary*      _videoSinkIdDictionary;
@@ -74,21 +86,20 @@
     _settingCam = NO;
     [super viewDidLoad];
     
-    // TODO #review pull number values to constants
     // Defining values to set the VideoView size properly
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        _remoteVideoWidth = 480;
-        _remoteVideoHeight = 640;
-        _remoteVideoLeft = 205;
-        _remoteVideoTop = 86;
+        _remoteVideoWidth = kiPadRemoteVVWidth;
+        _remoteVideoHeight = kiPadRemoteVVHeight;
+        _remoteVideoLeft = kiPadRemoteVVLeft;
+        _remoteVideoTop = kiPadRemoteVVTop;
     }
     else
     {
-        _remoteVideoWidth = 239;
-        _remoteVideoHeight = 320;
-        _remoteVideoLeft = 73;
-        _remoteVideoTop = 107;
+        _remoteVideoWidth = kiPhoneRemoteVVWidth;
+        _remoteVideoHeight = kiPhoneRemoteVVHeight;
+        _remoteVideoLeft = kiPhoneRemoteVVLeft;
+        _remoteVideoTop = kiPhoneRemoteVVTop;
     }
     
     _listener = [[MyServiceListener alloc] init];
@@ -108,215 +119,23 @@
     
     [self.view addSubview:_remoteVV];
     
-    // TODO #review maybe try to improve this by sth like:
-//    NSDictionary* mapping = @{@"onUserEvent":@selector(onUserEvent:)}
-//    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self
-//                                                 selector:obj
-//                                                     name:key
-//                                                   object:nil];
-//    }];
-    // avoid repetition
+    NSDictionary* mapping = @{@"onUserEvent":[NSValue valueWithPointer:@selector(onUserEvent:)],
+                              @"onSpeechActivity":[NSValue valueWithPointer:@selector(onSpeechActivity:)],
+                              @"onMediaStreamEvent":[NSValue valueWithPointer:@selector(onMediaStreamEvent:)],
+                              @"onConnectionLost":[NSValue valueWithPointer:@selector(onConnectionLost:)]};
     
-    // Notification triggered when an user join the session.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onUserEvent:)
-                                                 name:@"onUserEvent"
-                                               object:nil];
-    
-    // Notification triggering the speech activity.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onSpeechActivity:)
-                                                 name:@"onSpeechActivity"
-                                               object:nil];
-    
-    // Notification triggered when a frame size event is triggered
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onVideoFrameSizeChanged:)
-                                                 name:@"onVideoFrameSizeChanged"
-                                               object:nil];
-    
-    // Notification triggering the media stream event.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onMediaStreamEvent:)
-                                                 name:@"onMediaStreamEvent"
-                                               object:nil];
-    
-    // Notification triggered when a frame size event is triggered
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onConnectionLost:)
-                                                 name:@"onConnectionLost"
-                                               object:nil];
+    [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:[obj pointerValue]
+                                                     name:key
+                                                   object:nil];
+    }];
 }
 
-/**
- * Receives the notification when an user event occurs
- */
-- (void) onUserEvent:(NSNotification *)notification
+- (void)didReceiveMemoryWarning
 {
-    NSDictionary *userInfo = notification.userInfo;
-    
-    // Details of the event sent by the event onUserEvent defined in the ALServiceListener
-    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
-    
-    NSLog(@"Got user event: %@", event);
-    
-    // New user connected
-    if(event.isConnected)
-    {
-        // Add the new user videoSinkId to the historical so we can set it up as a video feeder when speaking.
-        [_videoSinkIdDictionary setObject:event.videoSinkId forKey:[NSString stringWithFormat:@"%lld", event.userId]];
-        
-        // If it's the first time.
-        if(!_currentVideoUserId)
-        {
-            // Getting the videoId.
-            if(event.videoPublished)
-            {
-                _currentVideoSinkId = event.videoSinkId;
-            }
-            
-            // Getting the userId.
-            _currentVideoUserId = event.userId;
-            
-            // Start the video.
-            [_remoteVV setupWithService:_alService withSink:_currentVideoSinkId];
-            [_remoteVV start:[ALResponder responderWithSelector:@selector(onRemoteRenderStarted:) object:self]];
-        }
-    }
-    else
-    {
-        // If the user disconnected was the one feeding.
-        if(_currentVideoUserId == event.userId)
-        {
-            _currentVideoSinkId = @"";
-            [self updateAllowedSenders];
-            [self startVideoWithTheCurrentSpeaker];
-        }
-    }
-}
-
-/**
- * Receives the notification when a frame size event occurs.
- */
-- (void) onVideoFrameSizeChanged:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    
-    // Details of the event sent by the event onVideoFrameSizeChanged defined in the ALServiceListener.
-    ALVideoFrameSizeChangedEvent* event = [userInfo objectForKey:@"event"];
-    
-    NSLog(@"Got video frame size changed. Sink id: %@, dims: %dx%d", event.sinkId,event.width,event.height);
-    
-    // TODO #review - question here, why adjusting dims?
-    // If its the current sink feeding.
-    if([event.sinkId isEqualToString:_currentVideoSinkId])
-    {
-        // Get and set the correct dimensions.
-        [self fitDimensions:event.width and:event.height to:_remoteVideoWidth and:_remoteVideoHeight];
-        _remoteVV.frame = CGRectMake(_remoteVideoLeft + _left, _remoteVV.frame.origin.y, _videoWidth, _videoHeight);
-    }
-}
-
-
-/**
- * Receives the notification when a frame size event occurs.
- */
-- (void) onSpeechActivity:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    
-    // Details of the event sent by the event onSpeechActivity defined in the ALServiceListener.
-    ALSpeechActivityEvent* event = [userInfo objectForKey:@"event"];
-    
-    // Getting the values for each user.
-    // TODO #review maybe fast foreach here? Probably not required performance wise, but definitely helps with
-    // readability
-    for(int index = 0; index < [event.activeSpeakers count]; index++)
-    {
-        // If it's not myself.
-        if([event.activeSpeakers[index] integerValue] != -1)
-        {
-            // Get the previous activity value.
-            int activityValue = [[_speakersActivityDictionary objectForKey:event.activeSpeakers[index]] integerValue];
-            
-            // Accumulate the activity to set the video of the user with more activity (restarted it each 2 seconds).
-            activityValue++;
-            
-            // Save the values.
-            [_speakersActivityDictionary setObject:[NSNumber numberWithInt:activityValue] forKey:event.activeSpeakers[index]];
-            [_speechUserIdDictionary setObject:event.activeSpeakers[index] forKey:[NSString stringWithFormat:@"%d", activityValue]];
-        }
-    }
-    
-    _checkTimer++;
-    
-    // If there is some activity.
-    // TODO #review pull 15 to constants
-    if(_checkTimer >= 15 && [_speakersActivityDictionary count] > 0)
-    {
-        [self performSelectorOnMainThread:@selector(checkActivity) withObject:nil waitUntilDone:NO];
-    }
-}
-
-/**
- * Receives the notification when a media event occurs.
- */
-- (void) onMediaStreamEvent:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    
-    // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener.
-    ALUserStateChangedEvent* event = [userInfo objectForKey:@"event"];
-    
-    NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
-    
-    if([event.mediaType isEqualToString:ALMediaType.kVideo])
-    {
-        // Update the user video sink id.
-        [_videoSinkIdDictionary setObject:event.videoSinkId forKey:[NSString stringWithFormat:@"%lld", event.userId]];
-        
-        if(event.videoPublished)
-        {
-            // If it's the current user feeding video.
-            if(_currentVideoUserId == event.userId)
-            {
-                // Update the current sink Id
-                _currentVideoSinkId = [_videoSinkIdDictionary objectForKey:[NSString stringWithFormat:@"%lld", _currentVideoUserId]];
-                
-                // Change video feed calling the method in the main thread.
-                [self updateAllowedSenders];
-                [self startVideoWithTheCurrentSpeaker];
-            }
-        }
-        else
-        {
-            // If it's the current user feeding video.
-            if(_currentVideoUserId == event.userId)
-            {
-                _currentVideoSinkId = @"";
-                
-                // Change video feed calling the method in the main thread.
-                [self updateAllowedSenders];
-                [self startVideoWithTheCurrentSpeaker];
-            }
-        }
-    }
-}
-
-/**
- * Receives the notification when a connection lost occurs.
- */
-- (void) onConnectionLost:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    
-    // Details of the event sent by the event onConnectionLost defined in the ALServiceListener.
-    ALConnectionLostEvent* event = [userInfo objectForKey:@"event"];
-    
-    NSLog(@"Got connection lost. Error msg: %@, willReconnect: %hhd", event.errMessage, event.willReconnect);
-    
-    [_remoteVV stop:nil];
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /**
@@ -375,19 +194,7 @@
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
-        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            if (granted) {
-                NSLog(@"Mic. is enabled.");
-                descr.autopublishAudio = YES;
-            }
-            else {
-                NSLog(@"Mic. is disabled.");
-                descr.autopublishAudio = NO;
-            }
-        }];
-    }
+    descr.autopublishAudio = _micFunctional;
     
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;
@@ -443,29 +250,18 @@
 
 /**
  * Initializes the AddLive SDK.
+ * For a more detailed explanation about the initialization please check Tutorial 1.
  */
 - (void) initAddLive
 {
-    // 1. Allocate the ALService
     _alService = [ALService alloc];
-    
-    // 2. Prepare the responder
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     
-    // 3. Prepare the init Options. Make sure to init the options.
     ALInitOptions* initOptions = [[ALInitOptions alloc] init];
-    
-    // Configure the application id
     initOptions.applicationId = Consts.APP_ID;
-    
-    // Set the apiKey to let the SDK automatically authenticate all connection requests.
-    // Please note that such an approach reduces slightly the security. It is always a good idea
-    // not to pass the API key to the client side and implement a server side component that
-    // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
-    
-    // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
+    initOptions.logInteractions = YES;
     [_alService initPlatform:initOptions
                    responder:responder];
     
@@ -475,50 +271,21 @@
 /**
  * Called by platform when the initialization is complete.
  */
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
     NSLog(@"Got platform ready");
-    if(err)
+    if([self handleErrorMaybe:err where:@"onPlatformReady:withInitResult:"])
     {
-        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
-    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
-                                            initWithSelector:@selector(onCams:devs:)
-                                            withObject:self]];
-    [_alService addServiceListener:_listener responder:nil];
-}
-
-/**
- * Responder method called when getting the devices.
- */
-- (void) onCams:(ALError*)err devs:(NSArray*)devs
-{
-    if (err)
-    {
-        NSLog(@"Got an error with getVideoCaptureDeviceNames due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
-        return;
-    }
-    NSLog(@"Got camera devices");
     
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:1];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
-                                                                 withObject:self]];
-}
-
-/**
- * Responder method called when setting a cam.
- */
-- (void) onCamSet:(ALError*) err
-{
-    NSLog(@"Video device set");
+    _micFunctional = initResult.micFunctional;
+    
     _settingCam = YES;
     [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                                            withObject:self]];
+    
+    [_alService addServiceListener:_listener responder:nil];
 }
 
 /**
@@ -526,10 +293,8 @@
  */
 - (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
 {
-    if(err)
+    if([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
     {
-        NSLog(@"Failed to start the local video due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
@@ -544,10 +309,8 @@
  */
 - (void) onRenderStarted:(ALError*) err
 {
-    if(err)
+    if([self handleErrorMaybe:err where:@"onRenderStarted:"])
     {
-        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     else
@@ -564,10 +327,8 @@
  */
 - (void) onRemoteRenderStarted:(ALError*) err
 {
-    if(err)
+    if([self handleErrorMaybe:err where:@"onRemoteRenderStarted:"])
     {
-        NSLog(@"Failed to start the remote rendering due to: %@ (ERR_CODE:%d)",
-              err.err_message, err.err_code);
         return;
     }
     else
@@ -654,36 +415,146 @@
 }
 
 /**
- * Method to get the current dimensions from the coming width and height onVideoFrameSizeChanged.
+ * Receives the notification when an user event occurs
  */
-- (void)fitDimensions:(int)srcW and:(int)srcH to:(int)targetW and:(int)targetH
+- (void) onUserEvent:(NSNotification *)notification
 {
-    float srcAR = srcW / srcH;
-    float targetAR = targetW / targetH;
-    float width = 0.0;
+    NSDictionary *userInfo = notification.userInfo;
     
-    if (srcW < targetW && srcH < targetH) {
-        _videoWidth = srcW;
-        _videoHeight = srcH;
-        _left = (targetW - srcW) / 2;
+    // Details of the event sent by the event onUserEvent defined in the ALServiceListener
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    NSLog(@"Got user event: %@", event);
+    
+    // New user connected
+    if(event.isConnected)
+    {
+        // Add the new user videoSinkId to the historical so we can set it up as a video feeder when speaking.
+        [_videoSinkIdDictionary setObject:event.videoSinkId forKey:[NSString stringWithFormat:@"%lld", event.userId]];
+        
+        // If it's the first time.
+        if(!_currentVideoUserId)
+        {
+            // Getting the videoId.
+            if(event.videoPublished)
+            {
+                _currentVideoSinkId = event.videoSinkId;
+            }
+            
+            // Getting the userId.
+            _currentVideoUserId = event.userId;
+            
+            // Start the video.
+            [_remoteVV setupWithService:_alService withSink:_currentVideoSinkId];
+            [_remoteVV start:[ALResponder responderWithSelector:@selector(onRemoteRenderStarted:) object:self]];
+        }
     }
-    if (srcAR < targetAR) {
-        // match height
-        _videoWidth = srcW * targetH / srcH;
-        _videoHeight = targetH;
-        _left = (targetW - width) / 4;
-    } else {
-        // match width
-        _videoWidth = targetW;
-        _videoHeight = targetW * srcH / srcW;
-        _left = 0;
+    else
+    {
+        // If the user disconnected was the one feeding.
+        if(_currentVideoUserId == event.userId)
+        {
+            _currentVideoSinkId = @"";
+            [self updateAllowedSenders];
+            [self startVideoWithTheCurrentSpeaker];
+        }
     }
 }
 
-- (void)didReceiveMemoryWarning
+/**
+ * Receives the notification when a frame size event occurs.
+ */
+- (void) onSpeechActivity:(NSNotification *)notification
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onSpeechActivity defined in the ALServiceListener.
+    ALSpeechActivityEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    // Getting the values for each user.
+    for(id user in event.activeSpeakers)
+    {
+        if([user longLongValue] != -1)
+        {
+            // Get the previous activity value.
+            int activityValue = [[_speakersActivityDictionary objectForKey:user] integerValue];
+            
+            // Accumulate the activity to set the video of the user with more activity (restarted it each 2 seconds).
+            activityValue++;
+            
+            // Save the values.
+            [_speakersActivityDictionary setObject:[NSNumber numberWithInt:activityValue] forKey:user];
+            [_speechUserIdDictionary setObject:user forKey:[NSString stringWithFormat:@"%d", activityValue]];
+        }
+    }
+    
+    _checkTimer++;
+    
+    // If there is some activity.
+    if(_checkTimer >= kCheckActivity && [_speakersActivityDictionary count] > 0)
+    {
+        [self performSelectorOnMainThread:@selector(checkActivity) withObject:nil waitUntilDone:NO];
+    }
+}
+
+/**
+ * Receives the notification when a media event occurs.
+ */
+- (void) onMediaStreamEvent:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onMediaStreamEvent defined in the ALServiceListener.
+    ALUserStateChangedEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    NSLog(@"Got media stream event %lld screenPublished %d videoPublished %d", event.userId, event.screenPublished, event.videoPublished);
+    
+    if([event.mediaType isEqualToString:ALMediaType.kVideo])
+    {
+        // Update the user video sink id.
+        [_videoSinkIdDictionary setObject:event.videoSinkId forKey:[NSString stringWithFormat:@"%lld", event.userId]];
+        
+        if(event.videoPublished)
+        {
+            // If it's the current user feeding video.
+            if(_currentVideoUserId == event.userId)
+            {
+                // Update the current sink Id
+                _currentVideoSinkId = [_videoSinkIdDictionary objectForKey:[NSString stringWithFormat:@"%lld", _currentVideoUserId]];
+                
+                // Change video feed calling the method in the main thread.
+                [self updateAllowedSenders];
+                [self startVideoWithTheCurrentSpeaker];
+            }
+        }
+        else
+        {
+            // If it's the current user feeding video.
+            if(_currentVideoUserId == event.userId)
+            {
+                _currentVideoSinkId = @"";
+                
+                // Change video feed calling the method in the main thread.
+                [self updateAllowedSenders];
+                [self startVideoWithTheCurrentSpeaker];
+            }
+        }
+    }
+}
+
+/**
+ * Receives the notification when a connection lost occurs.
+ */
+- (void) onConnectionLost:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    // Details of the event sent by the event onConnectionLost defined in the ALServiceListener.
+    ALConnectionLostEvent* event = [userInfo objectForKey:kEventInfo];
+    
+    NSLog(@"Got connection lost. Error msg: %@, willReconnect: %hhd", event.errMessage, event.willReconnect);
+    
+    [_remoteVV stop:nil];
 }
 
 @end
@@ -699,12 +570,12 @@
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value.
-    return @"AddLiveSuperSecret";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    return @"ADL_iOS";
+    return @"iOS";
 }
 
 @end
@@ -719,7 +590,7 @@
 - (void) onUserEvent:(ALUserStateChangedEvent *)event
 {
     NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    [userInfo setObject:event forKey:@"event"];
+    [userInfo setObject:event forKey:kEventInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"onUserEvent" object:self userInfo:userInfo];
 }
 
@@ -729,7 +600,7 @@
 - (void) onSpeechActivity:(ALSpeechActivityEvent *)event
 {
     NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    [userInfo setValue:event forKey:@"event"];
+    [userInfo setValue:event forKey:kEventInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"onSpeechActivity" object:self userInfo:userInfo];
 }
 
@@ -739,18 +610,8 @@
 - (void) onMediaStreamEvent:(ALUserStateChangedEvent *)event
 {
     NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    [userInfo setValue:event forKey:@"event"];
+    [userInfo setValue:event forKey:kEventInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"onMediaStreamEvent" object:self userInfo:userInfo];
-}
-
-/**
- * Event describing a change of a resolution in a video feed produced by given video sink.
- */
-- (void) onVideoFrameSizeChanged:(ALVideoFrameSizeChangedEvent*) event
-{
-    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
-    [userInfo setValue:event forKey:@"event"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"onVideoFrameSizeChanged" object:self userInfo:userInfo];
 }
 
 /**
@@ -758,15 +619,9 @@
  */
 - (void) onConnectionLost:(ALConnectionLostEvent *)event
 {
-    NSLog(@"Got connection lost");
-}
-
-/**
- * Event describing a reconnection.
- */
-- (void) onSessionReconnected:(ALSessionReconnectedEvent *)event
-{
-    NSLog(@"On Session reconnected");
+    NSDictionary *userInfo = [[NSMutableDictionary alloc] init];
+    [userInfo setValue:event forKey:kEventInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"onConnectionLost" object:self userInfo:userInfo];
 }
 
 @end

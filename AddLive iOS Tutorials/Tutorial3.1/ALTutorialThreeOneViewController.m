@@ -40,10 +40,13 @@
 {
     ALService*                _alService;
     NSArray*                  _cams;
+    NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
     BOOL                      _settingCam;
     MyServiceListener*        _listener;
+    ALVideoView*              _localPreviewVV;
     BOOL                      _connecting;
+    BOOL                      _micFunctional;
 }
 
 @property(nonatomic,retain) ALCamera* externalCamera;
@@ -70,25 +73,17 @@
     {
         return;
     }
+    // External camera.
+    self.externalCamera = [[ALCamera alloc] initWithService:_alService];
+    [self.externalCamera start];
+    
     _connecting = YES;
     _stateLbl.text = @"Connecting...";
     ALConnectionDescriptor* descr = [[ALConnectionDescriptor alloc] init];
     descr.scopeId = Consts.SCOPE_ID;
     
     // Setting the audio according to the mic access.
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    if ([session respondsToSelector:@selector(requestRecordPermission:)]) {
-        [session performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
-            if (granted) {
-                NSLog(@"Mic. is enabled.");
-                descr.autopublishAudio = YES;
-            }
-            else {
-                NSLog(@"Mic. is disabled.");
-                descr.autopublishAudio = NO;
-            }
-        }];
-    }
+    descr.autopublishAudio = _micFunctional;
     
     descr.autopublishVideo = YES;
     descr.authDetails.userId = rand() % 1000;
@@ -115,6 +110,10 @@
 - (IBAction)disconnect:(id)sender
 {
     ResultBlock onDisconn = ^(ALError* err, id nothing) {
+        if([self handleErrorMaybe:err where:@"onDisconn"])
+        {
+            return;
+        }
         NSLog(@"Successfully disconnected");
         _stateLbl.text = @"Disconnected";
         _connectBtn.hidden = NO;
@@ -134,7 +133,7 @@
     _alService = [ALService alloc];
     
     // 2. Prepare the responder
-    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:)
+    ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     
     // 3. Prepare the init Options. Make sure to init the options.
@@ -149,14 +148,11 @@
     // generates the signature when needed.
     initOptions.apiKey = Consts.API_KEY;
     
-    // TODO #review this is slightly not true, the startLocalVideo will be working even with the external camera capture
-    // interface. I'll fix this in the SDK documentation
-    
-    // Flag to enable/disable external video input. When the external video input is enabled,
-    // the AddLive SDK will not process any requests related to video devices configuration
-    //(e.g. setVideoCaptureDevice, startLocalVideo)
+    // Flag to enable/disable external video input.
     initOptions.externalVideoInput = YES;
     
+    // Property that enables logging of all application <> SDK interactions using NSLog.
+    initOptions.logInteractions = YES;
     
     // Allowing one to skip the devices initialisation phase. By default, the platform will try
     // to setup the devices to sane default values. With this flag set to NO, the devices init phase
@@ -175,28 +171,87 @@
 /**
  * Called by platform when the initialization is complete.
  */
-- (void) onPlatformReady:(ALError*) err
+- (void) onPlatformReady:(ALError*) err withInitResult:(ALInitResult*)initResult
 {
-    // TODO #review add here calls required to make this tutorial functional even though they are due to the SDK
-    // limitation
-    
     NSLog(@"Got platform ready");
-    if(err)
+    if([self handleErrorMaybe:err where:@"onPlatformReady:withInitResult:"])
     {
-        [self handleErrorMaybe:err where:@"platformInit"];
         return;
     }
-    
-    [_alService addServiceListener:_listener responder:nil];
-    
-    // TODO #review this one is misplaced - why to have the camera running if it's not used. Move it to before connect 
-    self.externalCamera = [[ALCamera alloc] initWithService:_alService];
-    [self.externalCamera start];
-    
     _stateLbl.text = @"Platform Ready";
     _connectBtn.hidden = NO;
     
+    _micFunctional = initResult.micFunctional;
+    
+    [_alService getVideoCaptureDeviceNames:[[ALResponder alloc]
+                                            initWithSelector:@selector(onCams:devs:)
+                                            withObject:self]];
+    
+    [_alService addServiceListener:_listener responder:nil];
     [_remoteVV setupWithService:_alService withSink:@""];
+}
+
+/**
+ * Responder method called when getting the devices
+ */
+- (void) onCams:(ALError*)err devs:(NSArray*)devs
+{
+    if ([self handleErrorMaybe:err where:@"onCams:devs:"])
+    {
+        return;
+    }
+    NSLog(@"Got camera devices");
+    
+    _cams = [devs copy];
+    _selectedCam  = [NSNumber numberWithInt:0];
+    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
+    
+    // Block called when setting a cam
+    ResultBlock onCamSet = ^(ALError* err, id nothing)
+    {
+        NSLog(@"Video device set");
+        _settingCam = YES;
+        [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+                                                               withObject:self]];
+    };
+    
+    [_alService setVideoCaptureDevice:dev.id
+                            responder:[ALResponder responderWithBlock:onCamSet]];
+}
+
+/**
+ * Responder method called when the local video starts
+ */
+- (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
+{
+    if([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
+    {
+        return;
+    }
+    NSLog(@"Got local video started. Will render using sink: %@",sinkId);
+    [_localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
+    [_localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
+    _localVideoSinkId = [sinkId copy];
+    _settingCam = NO;
+}
+
+/**
+ * Responder method called when the render starts
+ */
+- (void) onRenderStarted:(ALError*) err
+{
+    if(err)
+    {
+        NSLog(@"Failed to start the rendering due to: %@ (ERR_CODE:%d)",
+              err.err_message, err.err_code);
+        return;
+    }
+    else
+    {
+        NSLog(@"Rendering started");
+        _stateLbl.text = @"Platform Ready";
+        _connectBtn.hidden = NO;
+    }
 }
 
 /**
@@ -224,21 +279,19 @@
 + (NSNumber*) APP_ID
 {
     // TODO update this to use some real value
-    // TODO #review Remove this
-    return @486;
+    return @1;
 }
 
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    // TODO #review Remove this
-    return @"ADL_M0QLrBEfSMR4w3cb2kwZtKgPumKGkbozk2k4SaHgqaOabexm8OmZ5uM";
+    return @"";
 }
 
 + (NSString*) SCOPE_ID
 {
-    // TODO #review put something better here, like iOS
-    return @"MOmJ";
+    // TODO
+    return @"iOS";
 }
 
 @end

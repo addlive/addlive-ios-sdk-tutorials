@@ -1,12 +1,12 @@
 //
-//  ALTutorialFiveViewController.m
-//  Tutorial5
+//  ALTutorialFiveOneViewController.m
+//  Tutorial5.1
 //
-//  Created by Juan Docal on 05.02.14.
+//  Created by Juan Docal on 02.07.14.
 //  Copyright (c) 2014 AddLive. All rights reserved.
 //
 
-#import "ALTutorialFiveViewController.h"
+#import "ALTutorialFiveOneViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
 #define kEventInfo @"eventInfo"
@@ -46,10 +46,9 @@
 
 @end
 
-@interface ALTutorialFiveViewController () <UIScrollViewDelegate>
+@interface ALTutorialFiveOneViewController () <UIScrollViewDelegate>
 
 {
-    ALService*                _alService;
     NSArray*                  _cams;
     NSNumber*                 _selectedCam;
     NSString*                 _localVideoSinkId;
@@ -68,7 +67,7 @@
 }
 @end
 
-@implementation ALTutorialFiveViewController
+@implementation ALTutorialFiveOneViewController
 
 - (void)viewDidLoad
 {
@@ -158,7 +157,7 @@
         _connectBtn.hidden = YES;
         _disconnectBtn.hidden = NO;
     };
-    [_alService connect:descr responder:[ALResponder responderWithBlock:onConn]];
+    [[ALService sharedInstance] connect:descr responder:[ALResponder responderWithBlock:onConn]];
 }
 
 /**
@@ -186,7 +185,7 @@
         [_alUserIdToVideoView removeAllObjects];
         [self.scrollView setContentSize:self.scrollView.bounds.size];
     };
-    [_alService disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
+    [[ALService sharedInstance] disconnect:Consts.SCOPE_ID responder:[ALResponder responderWithBlock:onDisconn]];
 }
 
 /**
@@ -195,7 +194,6 @@
  */
 - (void) initAddLive
 {
-    _alService = [ALService alloc];
     ALResponder* responder =[[ALResponder alloc] initWithSelector:@selector(onPlatformReady:withInitResult:)
                                                        withObject:self];
     
@@ -203,8 +201,7 @@
     initOptions.applicationId = Consts.APP_ID;
     initOptions.apiKey = Consts.API_KEY;
     initOptions.logInteractions = YES;
-    [_alService initPlatform:initOptions
-                   responder:responder];
+    [ALService initPlatform:initOptions responder:responder];
     
     _stateLbl.text = @"Platform init";
 }
@@ -223,9 +220,9 @@
     _micFunctional = initResult.micFunctional;
     
     _settingCam = YES;
-    [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+    [[ALService sharedInstance] startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                                            withObject:self]];
-    [_alService addServiceListener:_listener responder:nil];
+    [[ALService sharedInstance] addServiceListener:_listener responder:nil];
 }
 
 /**
@@ -238,7 +235,7 @@
         return;
     }
     NSLog(@"Got local video started. Will render using sink: %@",sinkId);
-    [self.localPreviewVV setupWithService:_alService withSink:sinkId withMirror:YES];
+    [self.localPreviewVV setupWithService:[ALService sharedInstance] withSink:sinkId withMirror:YES];
     [self.localPreviewVV start:[ALResponder responderWithSelector:@selector(onRenderStarted:) object:self]];
     _localVideoSinkId = [sinkId copy];
     _settingCam = NO;
@@ -343,7 +340,7 @@
     videoView.backgroundColor = [UIColor grayColor];
     
     // 4. Setting up the ALVideoView with the service and the videoSinkId of the user joining
-    [videoView setupWithService:_alService withSink:eventDetails.videoSinkId withMirror:NO];
+    [videoView setupWithService:[ALService sharedInstance] withSink:eventDetails.videoSinkId withMirror:NO];
     
     // 5. Starting the chat and setting the responder
     [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
@@ -433,7 +430,7 @@
             ALVideoView* videoView = [_alUserIdToVideoView objectForKey:userIdNumber];
             
             // 3. Setting up the ALVideoView with the service and the videoSinkId of the user joining
-            [videoView setupWithService:_alService withSink:event.videoSinkId withMirror:NO];
+            [videoView setupWithService:[ALService sharedInstance] withSink:event.videoSinkId withMirror:NO];
             
             // 4. Starting the chat and setting the responder
             [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
@@ -466,12 +463,12 @@
             return;
         }
     };
-    [_alService unpublish:Consts.SCOPE_ID
+    [[ALService sharedInstance] unpublish:Consts.SCOPE_ID
                      what:ALMediaType.kVideo
                 responder:[ALResponder responderWithBlock:onUnpublishVideo]];
     
     [self.localPreviewVV stop:nil];
-    [_alService stopLocalVideo:nil];
+    [[ALService sharedInstance] stopLocalVideo:nil];
     _paused = YES;
     
     for (ALVideoView* videoView in [_alUserIdToVideoView allValues]){
@@ -497,11 +494,11 @@
             return;
         }
     };
-    [_alService publish:Consts.SCOPE_ID
+    [[ALService sharedInstance] publish:Consts.SCOPE_ID
                    what:ALMediaType.kVideo options:nil
               responder:[ALResponder responderWithBlock:onPublishVideo]];
     
-    [_alService startLocalVideo:[[ALResponder alloc]
+    [[ALService sharedInstance] startLocalVideo:[[ALResponder alloc]
                                  initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
                                  withObject:self]];
     
