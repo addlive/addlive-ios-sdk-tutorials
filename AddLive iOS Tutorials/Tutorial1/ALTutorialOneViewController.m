@@ -71,12 +71,8 @@
     // Property that enables logging of all application <> SDK interactions using NSLog.
     initOptions.logInteractions = YES;
     
-    // TODO #review new thing - please add a call to initOptions.logInteractions to show everyone that we have
-    // sucn an API in stable
-    
     // 4. Request the platform to initialize itself. Once it's done, the onPlatformReady will be called.
-    [_alService initPlatform:initOptions
-                   responder:responder];
+    [_alService initPlatform:initOptions responder:responder];
 }
 
 /**
