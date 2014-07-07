@@ -55,6 +55,7 @@
     int                       _remoteVideoMargin;
     int                       _screenWidth;
     BOOL                      _micFunctional;
+    NSNotificationCenter*     _notificationCenter;
 }
 @end
 
@@ -86,13 +87,16 @@
     
     _paused = NO;
     _settingCam = NO;
-    [super viewDidLoad];
-    [self initAddLive];
     _connecting = NO;
     
     self.pageControl.numberOfPages = 0;
     self.pageControl.currentPage = 0;
     self.scrollView.delegate = self;
+    
+    // Defining the NSNotificationCenter to use when receiving the events.
+    _notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    [self initAddLive];
     
     NSDictionary* mapping = @{@"onUserEvent":[NSValue valueWithPointer:@selector(onUserEvent:)],
                               @"onMediaStreamEvent":[NSValue valueWithPointer:@selector(onMediaStreamEvent:)],
@@ -101,7 +105,7 @@
                               @"applicationResume":[NSValue valueWithPointer:@selector(applicationResume:)]};
     
     [mapping enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
+        [_notificationCenter addObserver:self
                                                  selector:[obj pointerValue]
                                                      name:key
                                                    object:nil];
@@ -192,8 +196,8 @@
     initOptions.apiKey = Consts.API_KEY;
     initOptions.logInteractions = YES;
     
-    // Enabling the flag to receive the notifications via NSNotificationCenter
-    initOptions.notificationCenter = YES;
+    // Specifying the notification center to use when dispatching events.
+    initOptions.notificationCenter = _notificationCenter;
 
     [ALService initPlatform:initOptions responder:responder];
     
