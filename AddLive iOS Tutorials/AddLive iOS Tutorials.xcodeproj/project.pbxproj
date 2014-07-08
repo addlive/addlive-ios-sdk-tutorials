@@ -19,20 +19,43 @@
 		583ADC1919669EBB0042A1BF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
 		583ADC1A19669EC10042A1BF /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
 		583ADC1B19669EC60042A1BF /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
-		583ADC2D1966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC2E1966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC2F1966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC301966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC311966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC321966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC331966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC341966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC351966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC361966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC371966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC381966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC391966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
-		583ADC3A1966A3E10042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADC2C1966A3E10042A1BF /* AddLive.framework */; };
+		583ADC95196C23BD0042A1BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
+		583ADC96196C23BD0042A1BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
+		583ADC97196C23BD0042A1BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
+		583ADC9D196C23BD0042A1BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 583ADC9B196C23BD0042A1BF /* InfoPlist.strings */; };
+		583ADC9F196C23BD0042A1BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 583ADC9E196C23BD0042A1BF /* main.m */; };
+		583ADCA3196C23BD0042A1BF /* ALAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 583ADCA2196C23BD0042A1BF /* ALAppDelegate.m */; };
+		583ADCA6196C23BD0042A1BF /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 583ADCA4196C23BD0042A1BF /* Main_iPhone.storyboard */; };
+		583ADCA9196C23BD0042A1BF /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 583ADCA7196C23BD0042A1BF /* Main_iPad.storyboard */; };
+		583ADCAE196C23BD0042A1BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 583ADCAD196C23BD0042A1BF /* Images.xcassets */; };
+		583ADCC9196C24B20042A1BF /* ALTutorialFiveThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583ADCC8196C24B20042A1BF /* ALTutorialFiveThreeViewController.m */; };
+		583ADCCB196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCCC196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCCD196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCCE196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCCF196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD0196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD1196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD2196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD3196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD4196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD5196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD6196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD7196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD8196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCD9196C2D150042A1BF /* AddLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583ADCCA196C2D150042A1BF /* AddLive.framework */; };
+		583ADCDA196C3FA50042A1BF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA01871F86900273A80 /* Security.framework */; };
+		583ADCDB196C3FAD0042A1BF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA91871F8BE00273A80 /* SystemConfiguration.framework */; };
+		583ADCDC196C41A00042A1BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA81871F8BE00273A80 /* QuartzCore.framework */; };
+		583ADCDD196C41A60042A1BF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA71871F8BE00273A80 /* OpenGLES.framework */; };
+		583ADCDE196C41AD0042A1BF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA61871F8BE00273A80 /* MessageUI.framework */; };
+		583ADCDF196C41B50042A1BF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA51871F8BE00273A80 /* CoreVideo.framework */; };
+		583ADCE0196C41BE0042A1BF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA41871F8BE00273A80 /* CoreMedia.framework */; };
+		583ADCE1196C41C50042A1BF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA31871F8BE00273A80 /* AVFoundation.framework */; };
+		583ADCE2196C41CC0042A1BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAA21871F8BE00273A80 /* AudioToolbox.framework */; };
+		583ADCE3196C41D40042A1BF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD01872068200273A80 /* libz.dylib */; };
+		583ADCE4196C41DB0042A1BF /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDAD21872068D00273A80 /* libresolv.dylib */; };
+		583ADCE5196C41E20042A1BF /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F28731DF188D3D8E006803C6 /* libc++.dylib */; };
 		58F99497196471CD00DA19F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA2F1871F70300273A80 /* Foundation.framework */; };
 		58F99498196471CD00DA19F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA311871F70300273A80 /* CoreGraphics.framework */; };
 		58F99499196471CD00DA19F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F27EDA331871F70300273A80 /* UIKit.framework */; };
@@ -346,7 +369,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		583ADC2C1966A3E10042A1BF /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
+		583ADC94196C23BD0042A1BF /* Tutorial5.3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial5.3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		583ADC9A196C23BD0042A1BF /* Tutorial5.3-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial5.3-Info.plist"; sourceTree = "<group>"; };
+		583ADC9C196C23BD0042A1BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		583ADC9E196C23BD0042A1BF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		583ADCA0196C23BD0042A1BF /* Tutorial5.3-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tutorial5.3-Prefix.pch"; sourceTree = "<group>"; };
+		583ADCA1196C23BD0042A1BF /* ALAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALAppDelegate.h; sourceTree = "<group>"; };
+		583ADCA2196C23BD0042A1BF /* ALAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALAppDelegate.m; sourceTree = "<group>"; };
+		583ADCA5196C23BD0042A1BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		583ADCA8196C23BD0042A1BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		583ADCAD196C23BD0042A1BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		583ADCBB196C23BD0042A1BF /* Tutorial5.3Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial5.3Tests-Info.plist"; sourceTree = "<group>"; };
+		583ADCBD196C23BD0042A1BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		583ADCBF196C23BD0042A1BF /* Tutorial5_3Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tutorial5_3Tests.m; sourceTree = "<group>"; };
+		583ADCC7196C24B20042A1BF /* ALTutorialFiveThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTutorialFiveThreeViewController.h; sourceTree = "<group>"; };
+		583ADCC8196C24B20042A1BF /* ALTutorialFiveThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTutorialFiveThreeViewController.m; sourceTree = "<group>"; };
+		583ADCCA196C2D150042A1BF /* AddLive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AddLive.framework; sourceTree = "<group>"; };
 		58F99496196471CD00DA19F9 /* Tutorial5.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tutorial5.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F9949C196471CD00DA19F9 /* Tutorial5.1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tutorial5.1-Info.plist"; sourceTree = "<group>"; };
 		58F9949E196471CD00DA19F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -540,6 +578,29 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		583ADC91196C23BD0042A1BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583ADCE5196C41E20042A1BF /* libc++.dylib in Frameworks */,
+				583ADCE4196C41DB0042A1BF /* libresolv.dylib in Frameworks */,
+				583ADCE3196C41D40042A1BF /* libz.dylib in Frameworks */,
+				583ADCE2196C41CC0042A1BF /* AudioToolbox.framework in Frameworks */,
+				583ADCE1196C41C50042A1BF /* AVFoundation.framework in Frameworks */,
+				583ADCE0196C41BE0042A1BF /* CoreMedia.framework in Frameworks */,
+				583ADCDF196C41B50042A1BF /* CoreVideo.framework in Frameworks */,
+				583ADCDE196C41AD0042A1BF /* MessageUI.framework in Frameworks */,
+				583ADCDD196C41A60042A1BF /* OpenGLES.framework in Frameworks */,
+				583ADCDC196C41A00042A1BF /* QuartzCore.framework in Frameworks */,
+				583ADCDB196C3FAD0042A1BF /* SystemConfiguration.framework in Frameworks */,
+				583ADCDA196C3FA50042A1BF /* Security.framework in Frameworks */,
+				583ADC96196C23BD0042A1BF /* CoreGraphics.framework in Frameworks */,
+				583ADC97196C23BD0042A1BF /* UIKit.framework in Frameworks */,
+				583ADCD5196C2D150042A1BF /* AddLive.framework in Frameworks */,
+				583ADC95196C23BD0042A1BF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58F99493196471CD00DA19F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,7 +611,7 @@
 				58F994D61964735F00DA19F9 /* AudioToolbox.framework in Frameworks */,
 				58F994D51964735A00DA19F9 /* AVFoundation.framework in Frameworks */,
 				58F994D41964735500DA19F9 /* CoreMedia.framework in Frameworks */,
-				583ADC351966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD3196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				58F994D11964734800DA19F9 /* CoreVideo.framework in Frameworks */,
 				58F994D01964734000DA19F9 /* MessageUI.framework in Frameworks */,
 				58F994CF1964733900DA19F9 /* OpenGLES.framework in Frameworks */,
@@ -573,7 +634,7 @@
 				583ADC1819669EB60042A1BF /* AudioToolbox.framework in Frameworks */,
 				583ADC1719669EB20042A1BF /* AVFoundation.framework in Frameworks */,
 				583ADC1619669EAD0042A1BF /* CoreMedia.framework in Frameworks */,
-				583ADC361966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD4196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				583ADC1519669EA70042A1BF /* CoreVideo.framework in Frameworks */,
 				583ADC1419669EA20042A1BF /* MessageUI.framework in Frameworks */,
 				583ADC1319669E9C0042A1BF /* OpenGLES.framework in Frameworks */,
@@ -598,7 +659,7 @@
 				AA11362218A1C6E2001BFA6A /* CoreVideo.framework in Frameworks */,
 				AAE039B618C5179D001CDB2E /* AddLive.framework in Frameworks */,
 				AA11362118A1C6D6001BFA6A /* CoreMedia.framework in Frameworks */,
-				583ADC341966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD2196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AA11362018A1C6CF001BFA6A /* AVFoundation.framework in Frameworks */,
 				AA11361F18A1C6BF001BFA6A /* AudioToolbox.framework in Frameworks */,
 				AA11361E18A1C6A2001BFA6A /* libz.dylib in Frameworks */,
@@ -622,7 +683,7 @@
 				AA13093318D70BA500AA3338 /* CoreMedia.framework in Frameworks */,
 				AA13093218D70B9E00AA3338 /* AddLive.framework in Frameworks */,
 				AA13093118D70B8F00AA3338 /* CoreVideo.framework in Frameworks */,
-				583ADC381966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD7196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AA13093018D70B8800AA3338 /* MessageUI.framework in Frameworks */,
 				AA13092F18D70B8000AA3338 /* OpenGLES.framework in Frameworks */,
 				AA13092E18D70B7B00AA3338 /* QuartzCore.framework in Frameworks */,
@@ -646,7 +707,7 @@
 				AA5684E218DA305700BF818F /* CoreMedia.framework in Frameworks */,
 				AA5684E118DA304F00BF818F /* AddLive.framework in Frameworks */,
 				AA5684E018DA304500BF818F /* CoreVideo.framework in Frameworks */,
-				583ADC2F1966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCCD196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AA5684DF18DA303F00BF818F /* MessageUI.framework in Frameworks */,
 				AA5684DE18DA303800BF818F /* OpenGLES.framework in Frameworks */,
 				AA5684DD18DA303000BF818F /* QuartzCore.framework in Frameworks */,
@@ -668,7 +729,7 @@
 				AA578E5618A6939F0063E390 /* libz.dylib in Frameworks */,
 				AA578E5518A693970063E390 /* AudioToolbox.framework in Frameworks */,
 				AA578E5418A6938E0063E390 /* AVFoundation.framework in Frameworks */,
-				583ADC3A1966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD9196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AA578E5318A693890063E390 /* CoreMedia.framework in Frameworks */,
 				AA578E5218A693810063E390 /* CoreVideo.framework in Frameworks */,
 				AA578E5118A693780063E390 /* MessageUI.framework in Frameworks */,
@@ -693,7 +754,7 @@
 				AA80D04F18EEC86900A7F7A8 /* CoreMedia.framework in Frameworks */,
 				AA80D04E18EEC86200A7F7A8 /* AddLive.framework in Frameworks */,
 				AA80D04D18EEC85600A7F7A8 /* CoreVideo.framework in Frameworks */,
-				583ADC321966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD0196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AA80D04C18EEC84E00A7F7A8 /* MessageUI.framework in Frameworks */,
 				AA80D04B18EEC84700A7F7A8 /* OpenGLES.framework in Frameworks */,
 				AA80D04A18EEC84300A7F7A8 /* QuartzCore.framework in Frameworks */,
@@ -717,7 +778,7 @@
 				AAAEE15118E1BB8C00AEAEDB /* CoreMedia.framework in Frameworks */,
 				AAAEE15018E1BB8700AEAEDB /* AddLive.framework in Frameworks */,
 				AAAEE14F18E1BB7D00AEAEDB /* CoreVideo.framework in Frameworks */,
-				583ADC311966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCCF196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AAAEE14E18E1BB7900AEAEDB /* MessageUI.framework in Frameworks */,
 				AAAEE14D18E1BB7200AEAEDB /* OpenGLES.framework in Frameworks */,
 				AAAEE14C18E1BB6F00AEAEDB /* QuartzCore.framework in Frameworks */,
@@ -741,7 +802,7 @@
 				AACB24B018B7EA4000F64D3A /* CoreVideo.framework in Frameworks */,
 				AAE039B718C5179D001CDB2E /* AddLive.framework in Frameworks */,
 				AACB24AE18B7EA2800F64D3A /* CoreMedia.framework in Frameworks */,
-				583ADC371966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD6196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AACB24AD18B7EA2100F64D3A /* AVFoundation.framework in Frameworks */,
 				AACB24AC18B7EA1C00F64D3A /* AudioToolbox.framework in Frameworks */,
 				AACB24AB18B7EA1700F64D3A /* libz.dylib in Frameworks */,
@@ -765,7 +826,7 @@
 				AADDB33918A4328700298780 /* CoreMedia.framework in Frameworks */,
 				AAE039B818C5179D001CDB2E /* AddLive.framework in Frameworks */,
 				AADDB33818A4327A00298780 /* CoreVideo.framework in Frameworks */,
-				583ADC391966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD8196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				AADDB33718A4327400298780 /* MessageUI.framework in Frameworks */,
 				AADDB33618A4326B00298780 /* OpenGLES.framework in Frameworks */,
 				AADDB33518A4326600298780 /* QuartzCore.framework in Frameworks */,
@@ -789,7 +850,7 @@
 				F23FFAEB18721A7500F30444 /* CoreMedia.framework in Frameworks */,
 				AAE039B518C5179C001CDB2E /* AddLive.framework in Frameworks */,
 				F23FFAEC18721A7500F30444 /* CoreVideo.framework in Frameworks */,
-				583ADC331966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCD1196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				F23FFAED18721A7500F30444 /* MessageUI.framework in Frameworks */,
 				F23FFAEE18721A7500F30444 /* OpenGLES.framework in Frameworks */,
 				F23FFAEF18721A7500F30444 /* QuartzCore.framework in Frameworks */,
@@ -813,7 +874,7 @@
 				F27EDAAC1871F8BE00273A80 /* CoreMedia.framework in Frameworks */,
 				AAE039B218C5179C001CDB2E /* AddLive.framework in Frameworks */,
 				F27EDAAD1871F8BE00273A80 /* CoreVideo.framework in Frameworks */,
-				583ADC2D1966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCCB196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				F27EDAAE1871F8BE00273A80 /* MessageUI.framework in Frameworks */,
 				F27EDAAF1871F8BE00273A80 /* OpenGLES.framework in Frameworks */,
 				F27EDAB01871F8BE00273A80 /* QuartzCore.framework in Frameworks */,
@@ -837,7 +898,7 @@
 				F27EDB101872078B00273A80 /* CoreMedia.framework in Frameworks */,
 				AAE039B318C5179C001CDB2E /* AddLive.framework in Frameworks */,
 				F27EDB111872078B00273A80 /* CoreVideo.framework in Frameworks */,
-				583ADC2E1966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCCC196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				F27EDB121872078B00273A80 /* MessageUI.framework in Frameworks */,
 				F27EDB131872078B00273A80 /* OpenGLES.framework in Frameworks */,
 				F27EDB141872078B00273A80 /* QuartzCore.framework in Frameworks */,
@@ -861,7 +922,7 @@
 				F27EDB5418720A7600273A80 /* CoreMedia.framework in Frameworks */,
 				AAE039B418C5179C001CDB2E /* AddLive.framework in Frameworks */,
 				F27EDB5518720A7600273A80 /* CoreVideo.framework in Frameworks */,
-				583ADC301966A3E10042A1BF /* AddLive.framework in Frameworks */,
+				583ADCCE196C2D150042A1BF /* AddLive.framework in Frameworks */,
 				F27EDB5618720A7600273A80 /* MessageUI.framework in Frameworks */,
 				F27EDB5718720A7600273A80 /* OpenGLES.framework in Frameworks */,
 				F27EDB5818720A7600273A80 /* QuartzCore.framework in Frameworks */,
@@ -876,6 +937,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		583ADC98196C23BD0042A1BF /* Tutorial5.3 */ = {
+			isa = PBXGroup;
+			children = (
+				583ADCA1196C23BD0042A1BF /* ALAppDelegate.h */,
+				583ADCA2196C23BD0042A1BF /* ALAppDelegate.m */,
+				583ADCA4196C23BD0042A1BF /* Main_iPhone.storyboard */,
+				583ADCA7196C23BD0042A1BF /* Main_iPad.storyboard */,
+				583ADCC7196C24B20042A1BF /* ALTutorialFiveThreeViewController.h */,
+				583ADCC8196C24B20042A1BF /* ALTutorialFiveThreeViewController.m */,
+				583ADCAD196C23BD0042A1BF /* Images.xcassets */,
+				583ADC99196C23BD0042A1BF /* Supporting Files */,
+			);
+			path = Tutorial5.3;
+			sourceTree = "<group>";
+		};
+		583ADC99196C23BD0042A1BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				583ADC9A196C23BD0042A1BF /* Tutorial5.3-Info.plist */,
+				583ADC9B196C23BD0042A1BF /* InfoPlist.strings */,
+				583ADC9E196C23BD0042A1BF /* main.m */,
+				583ADCA0196C23BD0042A1BF /* Tutorial5.3-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		583ADCB9196C23BD0042A1BF /* Tutorial5.3Tests */ = {
+			isa = PBXGroup;
+			children = (
+				583ADCBF196C23BD0042A1BF /* Tutorial5_3Tests.m */,
+				583ADCBA196C23BD0042A1BF /* Supporting Files */,
+			);
+			path = Tutorial5.3Tests;
+			sourceTree = "<group>";
+		};
+		583ADCBA196C23BD0042A1BF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				583ADCBB196C23BD0042A1BF /* Tutorial5.3Tests-Info.plist */,
+				583ADCBC196C23BD0042A1BF /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		58F9949A196471CD00DA19F9 /* Tutorial5.1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1170,10 +1275,12 @@
 				AA1135E418A1B922001BFA6A /* Tutorial5 */,
 				58F9949A196471CD00DA19F9 /* Tutorial5.1 */,
 				58F994E319669BA300DA19F9 /* Tutorial5.2 */,
+				583ADC98196C23BD0042A1BF /* Tutorial5.3 */,
 				AACB247718B7E81600F64D3A /* Tutorial6 */,
 				AA1308F818D6FE1700AA3338 /* Tutorial6.1 */,
 				AADDB2F618A431BF00298780 /* Tutorial7 */,
 				AA578E1718A692C80063E390 /* Tutorial8 */,
+				583ADCB9196C23BD0042A1BF /* Tutorial5.3Tests */,
 				F27EDA2E1871F70300273A80 /* Frameworks */,
 				F27EDA2D1871F70300273A80 /* Products */,
 			);
@@ -1196,6 +1303,7 @@
 				AA80D01518EEC7F500A7F7A8 /* Tutorial3.2.app */,
 				58F99496196471CD00DA19F9 /* Tutorial5.1.app */,
 				58F994DF19669BA300DA19F9 /* Tutorial5.2.app */,
+				583ADC94196C23BD0042A1BF /* Tutorial5.3.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1203,7 +1311,7 @@
 		F27EDA2E1871F70300273A80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				583ADC2C1966A3E10042A1BF /* AddLive.framework */,
+				583ADCCA196C2D150042A1BF /* AddLive.framework */,
 				F28731DF188D3D8E006803C6 /* libc++.dylib */,
 				F28731DD188D3D53006803C6 /* libstdc++.dylib */,
 				F27EDAD21872068D00273A80 /* libresolv.dylib */,
@@ -1308,6 +1416,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		583ADC93196C23BD0042A1BF /* Tutorial5.3 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 583ADCC5196C23BD0042A1BF /* Build configuration list for PBXNativeTarget "Tutorial5.3" */;
+			buildPhases = (
+				583ADC90196C23BD0042A1BF /* Sources */,
+				583ADC91196C23BD0042A1BF /* Frameworks */,
+				583ADC92196C23BD0042A1BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tutorial5.3;
+			productName = Tutorial5.3;
+			productReference = 583ADC94196C23BD0042A1BF /* Tutorial5.3.app */;
+			productType = "com.apple.product-type.application";
+		};
 		58F99495196471CD00DA19F9 /* Tutorial5.1 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58F994C7196471CD00DA19F9 /* Build configuration list for PBXNativeTarget "Tutorial5.1" */;
@@ -1579,6 +1704,7 @@
 				AA1135DF18A1B922001BFA6A /* Tutorial5 */,
 				58F99495196471CD00DA19F9 /* Tutorial5.1 */,
 				58F994DE19669BA300DA19F9 /* Tutorial5.2 */,
+				583ADC93196C23BD0042A1BF /* Tutorial5.3 */,
 				AACB247218B7E81500F64D3A /* Tutorial6 */,
 				AA1308F318D6FE1700AA3338 /* Tutorial6.1 */,
 				AADDB2F118A431BF00298780 /* Tutorial7 */,
@@ -1588,6 +1714,17 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		583ADC92196C23BD0042A1BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583ADCA9196C23BD0042A1BF /* Main_iPad.storyboard in Resources */,
+				583ADCAE196C23BD0042A1BF /* Images.xcassets in Resources */,
+				583ADCA6196C23BD0042A1BF /* Main_iPhone.storyboard in Resources */,
+				583ADC9D196C23BD0042A1BF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58F99494196471CD00DA19F9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1747,6 +1884,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		583ADC90196C23BD0042A1BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				583ADCC9196C24B20042A1BF /* ALTutorialFiveThreeViewController.m in Sources */,
+				583ADC9F196C23BD0042A1BF /* main.m in Sources */,
+				583ADCA3196C23BD0042A1BF /* ALAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		58F99492196471CD00DA19F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1891,6 +2038,38 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		583ADC9B196C23BD0042A1BF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				583ADC9C196C23BD0042A1BF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		583ADCA4196C23BD0042A1BF /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				583ADCA5196C23BD0042A1BF /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		583ADCA7196C23BD0042A1BF /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				583ADCA8196C23BD0042A1BF /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		583ADCBC196C23BD0042A1BF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				583ADCBD196C23BD0042A1BF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		58F9949D196471CD00DA19F9 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2230,6 +2409,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		583ADCC1196C23BD0042A1BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial5.3/Tutorial5.3-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tutorial5.3/Tutorial5.3-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		583ADCC2196C23BD0042A1BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tutorial5.3/Tutorial5.3-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "Tutorial5.3/Tutorial5.3-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		58F994C3196471CD00DA19F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2945,6 +3166,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		583ADCC5196C23BD0042A1BF /* Build configuration list for PBXNativeTarget "Tutorial5.3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				583ADCC1196C23BD0042A1BF /* Debug */,
+				583ADCC2196C23BD0042A1BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		58F994C7196471CD00DA19F9 /* Build configuration list for PBXNativeTarget "Tutorial5.1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
