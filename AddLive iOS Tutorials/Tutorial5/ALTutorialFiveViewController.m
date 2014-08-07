@@ -96,7 +96,6 @@
     
     _paused = NO;
     _settingCam = NO;
-    [super viewDidLoad];
     _listener = [[MyServiceListener alloc] init];
     [self initAddLive];
     _connecting = NO;
@@ -231,7 +230,7 @@
 /**
  * Responder method called when the local video starts
  */
-- (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*) sinkId
+- (void) onLocalVideoStarted:(ALError*)err withSinkId:(NSString*)sinkId
 {
     if([self handleErrorMaybe:err where:@"onLocalVideoStarted:withSinkId:"])
     {

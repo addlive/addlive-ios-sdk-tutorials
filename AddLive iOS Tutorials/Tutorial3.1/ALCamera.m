@@ -44,45 +44,46 @@
 
 - (void) configure
 {
-    self.session = [[AVCaptureSession alloc] init];
-    
-    [self.session beginConfiguration];
-    
-    self.session.sessionPreset = AVCaptureSessionPreset640x480;
-    
-    AVCaptureDevice* device =
-    [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]
-     objectAtIndex:0];
-    
-    AVCaptureDeviceInput* input =
-    [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
-    
-    AVCaptureVideoDataOutput* output = [[AVCaptureVideoDataOutput alloc] init];
-    [output setAlwaysDiscardsLateVideoFrames:YES];
-    output.videoSettings =
-    [NSDictionary dictionaryWithObject:
-     [NSNumber numberWithInt:
-      kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
-                                forKey:(id)kCVPixelBufferPixelFormatTypeKey];
-    
-    dispatch_queue_t queue = dispatch_queue_create("com.addlive.externalCamQ", NULL);
-    [output setSampleBufferDelegate:self queue:queue];
-    
-    [self.session addInput:input];
-    [self.session addOutput:output];
-    
-    AVCaptureConnection* conn =
-    [output connectionWithMediaType:AVMediaTypeVideo];
-    if (conn.supportsVideoMinFrameDuration){
-        conn.videoMinFrameDuration = CMTimeMake(1, 15);
+    if ([[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] count] > 0)
+    {
+        self.session = [[AVCaptureSession alloc] init];
+        [self.session beginConfiguration];
+        self.session.sessionPreset = AVCaptureSessionPreset640x480;
+        
+        AVCaptureDevice* device =
+        [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]
+         objectAtIndex:0];
+        
+        AVCaptureDeviceInput* input =
+        [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        
+        AVCaptureVideoDataOutput* output = [[AVCaptureVideoDataOutput alloc] init];
+        [output setAlwaysDiscardsLateVideoFrames:YES];
+        output.videoSettings =
+        [NSDictionary dictionaryWithObject:
+         [NSNumber numberWithInt:
+          kCVPixelFormatType_420YpCbCr8BiPlanarFullRange]
+                                    forKey:(id)kCVPixelBufferPixelFormatTypeKey];
+        
+        dispatch_queue_t queue = dispatch_queue_create("com.addlive.externalCamQ", NULL);
+        [output setSampleBufferDelegate:self queue:queue];
+        
+        [self.session addInput:input];
+        [self.session addOutput:output];
+        
+        AVCaptureConnection* conn =
+        [output connectionWithMediaType:AVMediaTypeVideo];
+        if (conn.supportsVideoMinFrameDuration){
+            conn.videoMinFrameDuration = CMTimeMake(1, 15);
+        }
+        if (conn.supportsVideoMaxFrameDuration){
+            conn.videoMaxFrameDuration = CMTimeMake(1, 15);
+        }
+        conn.videoMirrored = NO;
+        conn.videoOrientation = AVCaptureVideoOrientationPortrait;
+        
+        [self.session commitConfiguration];
     }
-    if (conn.supportsVideoMaxFrameDuration){
-        conn.videoMaxFrameDuration = CMTimeMake(1, 15);
-    }
-    conn.videoMirrored = NO;
-    conn.videoOrientation = AVCaptureVideoOrientationPortrait;
-    
-    [self.session commitConfiguration];
 }
 
 - (void) start
