@@ -64,6 +64,32 @@ AddLive SDK.
 The sample application renders each new user within a scroll view allowing you
 to swipe between the video feed in the session.
 
+## Tutorial 5.1 - Conference App & ALService singleton
+
+This tutorial covers implementation of more advanced video configuration
+application using the singleton pattern with ALService.
+
+The sample application renders each new user within a scroll view allowing you
+to swipe between the video feed in the session.
+
+## Tutorial 5.2 - Conference App & Events via NSNotificationCenter
+
+This tutorial besides of implementing the singleton pattern with ALService, will
+show you how to receive the event notifications via NSNotificationCenter by enabling
+the "notificationCenter" flag within the ALInitOptions.
+
+The sample application renders each new user within a scroll view allowing you
+to swipe between the video feed in the session.
+
+## Tutorial 5.3 - Conference App & Deferred Disconnect
+
+This tutorial implements the singleton pattern with ALService, receive the
+event notifications via NSNotificationCenter and show you how to implement
+the deferred disconnect API.
+
+The sample application renders each new user within a scroll view allowing you
+to swipe between the video feed in the session.
+
 ## Tutorial 6 - AVAudioPlayer
 
 This tutorial shows how to use AVFoundation AVAudioPlayer class in the presence

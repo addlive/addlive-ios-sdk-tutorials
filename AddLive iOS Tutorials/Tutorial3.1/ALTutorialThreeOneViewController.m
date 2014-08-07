@@ -200,23 +200,26 @@
     {
         return;
     }
-    NSLog(@"Got camera devices");
+    NSLog(@"Got camera devices %@",devs);
     
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:0];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    
-    // Block called when setting a cam
-    ResultBlock onCamSet = ^(ALError* err, id nothing)
+    if (devs.count > 0)
     {
-        NSLog(@"Video device set");
-        _settingCam = YES;
-        [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
-                                                               withObject:self]];
-    };
-    
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[ALResponder responderWithBlock:onCamSet]];
+        _cams = [devs copy];
+        _selectedCam  = [NSNumber numberWithInt:0];
+        ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
+        
+        // Block called when setting a cam
+        ResultBlock onCamSet = ^(ALError* err, id nothing)
+        {
+            NSLog(@"Video device set");
+            _settingCam = YES;
+            [_alService startLocalVideo:[[ALResponder alloc] initWithSelector:@selector(onLocalVideoStarted:withSinkId:)
+                                                                   withObject:self]];
+        };
+        
+        [_alService setVideoCaptureDevice:dev.id
+                                responder:[ALResponder responderWithBlock:onCamSet]];
+    }
 }
 
 /**

@@ -66,13 +66,16 @@
     {
         return;
     }
-    unsigned int nextIdx = (_selectedCam.unsignedIntValue + 1) % _cams.count;
-    ALDevice* dev =[_cams objectAtIndex:nextIdx];
-    _selectedCam = [NSNumber numberWithUnsignedInt:nextIdx];
-    _settingCam = YES;
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCameraToggled)
-                                                                 withObject:self]];
+    if (_cams.count > 0)
+    {
+        unsigned int nextIdx = (_selectedCam.unsignedIntValue + 1) % _cams.count;
+        ALDevice* dev =[_cams objectAtIndex:nextIdx];
+        _selectedCam = [NSNumber numberWithUnsignedInt:nextIdx];
+        _settingCam = YES;
+        [_alService setVideoCaptureDevice:dev.id
+                                responder:[[ALResponder alloc] initWithSelector:@selector(onCameraToggled)
+                                                                     withObject:self]];
+    }
 }
 
 /**
@@ -149,12 +152,15 @@
     }
     NSLog(@"Got camera devices");
     
-    _cams = [devs copy];
-    _selectedCam  = [NSNumber numberWithInt:0];
-    ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
-    [_alService setVideoCaptureDevice:dev.id
-                            responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
-                                                                 withObject:self]];
+    if (devs.count > 0)
+    {
+        _cams = [devs copy];
+        _selectedCam  = [NSNumber numberWithInt:0];
+        ALDevice* dev =[_cams objectAtIndex:_selectedCam.unsignedIntValue];
+        [_alService setVideoCaptureDevice:dev.id
+                                responder:[[ALResponder alloc] initWithSelector:@selector(onCamSet:)
+                                                                     withObject:self]];
+    }
 }
 
 /**
