@@ -345,8 +345,10 @@
     [videoView setupWithService:_alService withSink:eventDetails.videoSinkId withMirror:NO];
     
     // 5. Starting the chat and setting the responder
-    [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
-                                                withObject:self]];
+    if (eventDetails.videoPublished || eventDetails.screenPublished) {
+        [videoView start:[[ALResponder alloc] initWithSelector:@selector(onRemoteRenderStarted:)
+                                                    withObject:self]];
+    }
     
     // 6. Adding the ALVideoView we created to the scrollView object
     [self.scrollView addSubview: videoView];
