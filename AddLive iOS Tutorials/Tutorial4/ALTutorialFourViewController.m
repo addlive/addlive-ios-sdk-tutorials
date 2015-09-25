@@ -86,12 +86,16 @@
     
     // Setting the audio according to the mic access.
     descr.autopublishAudio = _micFunctional;
-    
+
+
+
     descr.autopublishVideo = YES;
+
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);
     descr.authDetails.salt = @"Super random string";
-    
+    descr.authDetails.signature = [ALAuthDetails signDetails:@1 scopeId:descr.scopeId userId:descr.authDetails.userId salt:descr.authDetails.salt expires:descr.authDetails.expires secretKey:Consts.API_KEY];
+
     ResultBlock onConn = ^(ALError* err, id nothing) {
         _connecting = NO;
         if([self handleErrorMaybe:err where:@"Connect"]) {
@@ -256,7 +260,7 @@
 + (NSString*) API_KEY
 {
     // TODO update this to use some real value
-    return @"";
+    return @"AddLiveSuperSecret";
 }
 
 + (NSString*) SCOPE_ID

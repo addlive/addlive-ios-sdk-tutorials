@@ -91,7 +91,10 @@
     descr.authDetails.userId = rand() % 1000;
     descr.authDetails.expires = time(0) + (60 * 60);
     descr.authDetails.salt = @"Super random string";
-    
+
+    descr.authDetails.signature = [ALAuthDetails signDetails:@1 scopeId:descr.scopeId userId:descr.authDetails.userId salt:descr.authDetails.salt expires:descr.authDetails.expires secretKey:Consts.API_KEY];
+
+
     ResultBlock onConn = ^(ALError* err, id nothing) {
         _connecting = NO;
         if([self handleErrorMaybe:err where:@"onConn"])
